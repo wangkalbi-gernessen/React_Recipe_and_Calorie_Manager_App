@@ -18,7 +18,6 @@ const registerProfile = () => {
       <Container>
         
       </Container>
-      <DynamicComponent/>
     </Container>
   );
 }
