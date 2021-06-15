@@ -1,6 +1,7 @@
 import { Container, makeStyles } from '@material-ui/core';
-import SignUp from './components/SignUp/SignUp';
 import './App.css';
+import Application from './components/Application/Application';
+import UserProvider from './components/Providers/UserProvider';
 
 const useStyle = makeStyles({
   content: {
@@ -14,7 +15,9 @@ function App() {
   const classes = useStyle();
   return (
     <Container className={classes.content}>
-      <SignUp />
+      <UserProvider>
+        <Application/>
+      </UserProvider>
     </Container>
   );
 }

@@ -1,6 +1,4 @@
 import { Grid, Container, makeStyles, Typography } from "@material-ui/core";
-import Link from 'next/link';
-import Image from 'next/image';
 
 const useStyles = makeStyles({
   content: {
@@ -35,9 +33,6 @@ const Footer = () => {
         </Grid>
         { buttonImages.map((buttonImage) => (
         <Grid item xs={2}>
-          <Link href={buttonImage.to}>
-            <Image src={buttonImage.image} width={60} height={60} />
-          </Link>
         </Grid>
         ))}
       </Grid>
@@ -45,4 +40,4 @@ const Footer = () => {
   );
 }
 
-export default Footer
+export default Footer;

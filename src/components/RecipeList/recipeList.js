@@ -1,10 +1,6 @@
-const { Typography, Container, makeStyles, TableBody, TableRow, TableCell } = require("@material-ui/core");
-import dynamic from 'next/dynamic';
+import { Typography, Container, makeStyles, TableBody, TableRow, TableCell } from"@material-ui/core";
 import NavigateNextIcon from '@material-ui/icons/NavigateNext';
 import { NavLink } from 'react-router-dom';
-
-
-const DynamicComponent = dynamic(() => import('../../components/Footer/index'));
 
 const useStyles = makeStyles({
   content: {

@@ -1,7 +1,4 @@
-const { Typography, Container, makeStyles } = require("@material-ui/core");
-import dynamic from 'next/dynamic';
-
-const DynamicComponent = dynamic(() => import('../Footer/index'));
+import { Typography, Container, makeStyles } from "@material-ui/core";
 
 const useStyles = makeStyles({
   content: {
@@ -25,4 +22,5 @@ const registerProfile = () => {
     </Container>
   );
 }
+
 export default registerProfile;

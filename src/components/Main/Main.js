@@ -1,6 +1,8 @@
-import Image from 'next/image';
 import { Container, Grid, makeStyles, TextField, Typography } from "@material-ui/core";
-import Footer from '../Footer';
+import React, { useContext } from "react";
+import { auth } from "../Firebase/initFirebase";
+import Footer from '../Footer/Footer';
+import { UserContext } from '../Providers/UserProvider';
 
 const useStyles = makeStyles({
   content: {
@@ -28,22 +30,27 @@ const buttonImages = [
 
 
 const Main = () => {
-  let classes = useStyles();
+  const classes = useStyles();
+  const user = useContext(UserContext);
+  const {name, email} = user;
+  console.log(user);
+
   return (
     <Container className={classes.content}>
       <Typography align="left" variant="h4" style={{color:"#008b8b"}}>Add New Recipe</Typography>
       <Container>
+        <h1>{name}, {email}</h1>
         <form noValidate autoComplete="off" className={classes.form}>
           <TextField  placeholder="Chicken Adobo" variant="outlined" style={{background: "white", margin: "0 30px"}} size="small" />
           <Grid container spacing={12} justify="space-evenly" alignItems="center" style={{margin: "30px 0"}}>
             { buttonImages.map ((buttonImage) => (
             <Grid item xs={6} sm={3} md={2} lg={2}>
-              <Image src={buttonImage.image} width={60} height={60} />
               <Typography>{buttonImage.type}</Typography>
             </Grid>
             ))}
           </Grid>
         </form>
+        <button onClick={() => {auth.signOut()}}>Log out</button>
       </Container>
       <Footer />
      </Container>
