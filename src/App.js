@@ -1,7 +1,7 @@
 import { Container, makeStyles } from '@material-ui/core';
 import './App.css';
 import Application from './components/Application/Application';
-import UserProvider from './components/Providers/UserProvider';
+import UserProvider from './Providers/UserProvider';
 
 const useStyle = makeStyles({
   content: {

@@ -1,5 +1,5 @@
 import { Container,  makeStyles, Typography } from "@material-ui/core";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { auth, generateUserDocument, signInWithGoogle } from "../Firebase/initFirebase";
 import { Link } from "react-router-dom";
 
@@ -45,6 +45,7 @@ const SignUp = () => {
     try {
       const {user} = await auth.createUserWithEmailAndPassword(email, password);
       generateUserDocument(user, {name, birthday});
+      console.log(user);
     } catch(error) {
       setError('Error Signing up with email and password');
     }
@@ -60,6 +61,9 @@ const SignUp = () => {
     <Container className={classes.content}>
       <Typography variant="h4" align="center" gutterBottom="true" style={{color: "white"}}>Register your account</Typography>
       <Container className={classes.formArea}>
+        {error !== null && (
+          <Typography variant="h5" align="center" gutterBottom="true" style={{color: "red"}}>{error}</Typography>
+        )}
         <form style={{width:"100%", height: "100%", margin: "auto", textAlign: "center"}}>
           <div>
             <label for="name">Name: 

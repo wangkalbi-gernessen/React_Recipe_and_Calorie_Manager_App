@@ -1,8 +1,8 @@
 import React, { useState, useContext } from "react";
-import { UserContext } from "../Providers/UserProvider";
+import { UserContext } from "../../Providers/UserProvider";
 import { Typography, Container, makeStyles } from "@material-ui/core";
 import { auth } from "../Firebase/initFirebase";
-import vietnamese from '../../img/LoginSignUp/background-menu.jpeg';
+// import vietnamese from '../../img/LoginSignUp/background-menu.jpeg';
 import { Link } from "react-router-dom";
 
 const useStyles = makeStyles({
@@ -11,9 +11,10 @@ const useStyles = makeStyles({
     height: "100vh",
     margin: 0,
     padding: 0,
-    backgroundImage: `url(${vietnamese})`,
-    backgroundRepeat: "no-repeat",
-    backgroundSize: "cover"
+    // backgroundImage: `url(${vietnamese})`,
+    // backgroundRepeat: "no-repeat",
+    // backgroundSize: "cover"
+    background: "red"
   },
   formArea: {
     background: "white",

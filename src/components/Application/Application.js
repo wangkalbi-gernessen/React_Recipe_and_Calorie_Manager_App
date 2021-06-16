@@ -5,8 +5,7 @@ import SignUp from '../SignUp/SignUp';
 import Login from '../Login/Login';
 import PasswordReset from '../PasswordReset/PasswordReset';
 import { Container, makeStyles } from '@material-ui/core';
-import { UserContext } from '../Providers/UserProvider';
-import UserProvider from '../Providers/UserProvider';
+import { UserContext } from '../../Providers/UserProvider';
 
 const useStyle = makeStyles({
   content: {
@@ -28,11 +27,14 @@ const Application = () => {
     <Container className={classes.content}>
       <BrowserRouter>
         <Switch>
-          <Route path="/SignUp/SignUp" component={SignUp}>
+          <Route path="/SignUp/SignUp">
+            <SignUp/>
           </Route>
-          <Route path="/" component={Login}>
+          <Route exact path="/">
+            <Login/>
           </Route>
-          <Route path="/PasswordReset/PasswordReset" component={PasswordReset}>
+          <Route path="/PasswordReset/PasswordReset">
+            <PasswordReset/>
           </Route>
         </Switch>
       </BrowserRouter>

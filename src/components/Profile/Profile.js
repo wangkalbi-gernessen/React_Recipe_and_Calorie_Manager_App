@@ -10,7 +10,7 @@ const useStyles = makeStyles({
   },
 });
 
-const registerProfile = () => {
+const Profile = () => {
   const classes = useStyles();
   return(
     <Container className={classes.content}>
@@ -22,4 +22,4 @@ const registerProfile = () => {
   );
 }
 
-export default registerProfile;
+export default Profile;
