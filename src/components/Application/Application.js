@@ -1,11 +1,10 @@
-import React, { useContext } from 'react';
+import { Container, makeStyles } from '@material-ui/core';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
-import Main from '../Main/Main';
 import SignUp from '../SignUp/SignUp';
 import Login from '../Login/Login';
 import PasswordReset from '../PasswordReset/PasswordReset';
-import { Container, makeStyles } from '@material-ui/core';
-import { UserContext } from '../../Providers/UserProvider';
+// import React, { useContext } from 'react';
+// import { UserContext } from '../../providers/UserProvider';
 
 const useStyle = makeStyles({
   content: {
@@ -16,27 +15,16 @@ const useStyle = makeStyles({
 });
 
 const Application = () => {
-  const user = useContext(UserContext);
   const classes = useStyle();
-  return(
-    user ? 
-    <Container className={classes.content}>
-      <Main />
-    </Container>
-    : 
+  // const user = useContext(UserContext);
+  return (
     <Container className={classes.content}>
       <BrowserRouter>
         <Switch>
-          <Route path="/SignUp/SignUp">
-            <SignUp/>
-          </Route>
-          <Route exact path="/">
-            <Login/>
-          </Route>
-          <Route path="/PasswordReset/PasswordReset">
-            <PasswordReset/>
-          </Route>
-        </Switch>
+          <Route path="/SignUp/SignUp" component={SignUp}/>
+          <Route exact path="/" component={Login}/>
+          <Route path="/PasswordReset/PasswordReset" component={PasswordReset} />
+          </Switch>
       </BrowserRouter>
     </Container>
   );

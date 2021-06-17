@@ -2,7 +2,8 @@ import { Container,  makeStyles, Typography } from "@material-ui/core";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import vietnamese from '../../img/LoginSignUp/background-menu.jpeg';
-import { auth, signInWithGoogle } from '../Firebase/initFirebase';
+import { auth, provider } from '../../firebase/initFirebase';
+import { login } from '../Auth/Auth';
 
 const useStyles = makeStyles({
   content: {
@@ -25,40 +26,46 @@ const useStyles = makeStyles({
 });
 
 const Login = () => {
-  const [email, setEmail] = useState('');  
-  const [password, setPassword] = useState('');
-  const [error, setError] = useState(null);
+  const classes = useStyles();
 
-  const signInWithEmailAndPasswordHandler = (event, email, password) => {
-    event.preventDefault();
-    auth.signInWithEmailAndPassword(email, password).catch(error => {
-    setError("Error signing in with password and email!");
-      console.error("Error signing in with password and email", error);
-    });
+  const [form, setForm] = useState({
+    email: '',
+    password: '',
+  });
+
+  const handleSubmit = async(e) => {
+    e.preventDefault();
+    await login(form);
   };
 
-  const classes = useStyles();
+
+  // Sign in with google
+  const signInWithGoogle = () => {
+    auth.signInWithPopup(provider).catch(alert);
+  }  
+
+
   return(
     <Container className={classes.content}>
       <Typography variant="h4" align="center" gutterBottom="true" style={{color: "white"}}>Login</Typography>
       <Container className={classes.formArea}>
-        <form style={{width:"100%", height: "100%", margin: "auto", textAlign: "center"}}>
+        <form style={{width:"100%", height: "100%", margin: "auto", textAlign: "center"}} onSubmit={handleSubmit}>
           <div >
             <label for="email">Email: 
-              <input type="email" id="email" placeholder="Enter Email.." value={email} onChange={event => setEmail(event.target.value)} required/>
+              <input type="email" id="email" placeholder="Enter Email.." onChange={(e) => setForm({...form, email: e.target.value})} required/>
             </label>
           </div>
             <div>
             <label for="password">Password: 
-              <input type="password" id="password" placeholder="Enter Password.." value={password} onChange={event => setPassword(event.target.value)} required/>
+              <input type="password" id="password" placeholder="Enter Password.." onChange={(e) => setForm({...form, password: e.target.value})} required/>
             </label>
           </div>
           <div>
-            <button onClick={(event) => {signInWithEmailAndPasswordHandler(event, email, password)}}>Log in</button>
+            <button type="submit">Log in</button>
           </div>
         </form>
         <p>or</p>
-        <button onClick={() => signInWithGoogle()}>Sign in with Google</button>
+        <button onClick={signInWithGoogle}>Sign in with Google</button>
         <p>
           Don't have an account?{" "}
           <Link to="/SignUp/SignUp">

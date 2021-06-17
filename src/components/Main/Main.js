@@ -1,8 +1,8 @@
 import { Container, Grid, makeStyles, TextField, Typography } from "@material-ui/core";
-import React, { useContext } from "react";
-import { auth } from "../Firebase/initFirebase";
+// import React, { useContext } from "react";
+import { auth } from "../../firebase/initFirebase";
 import Footer from '../Footer/Footer';
-import { UserContext } from '../../Providers/UserProvider';
+// import { UserContext } from '../../providers/UserProvider';
 
 const useStyles = makeStyles({
   content: {
@@ -30,20 +30,23 @@ const buttonImages = [
 
 const Main = () => {
   const classes = useStyles();
-  const user = useContext(UserContext);
-  const {name, email, birthday} = user;
-  console.log(user);
-  console.log(name);
-  console.log(email);
-  console.log(birthday);
+  // const user = useContext(UserContext);
+  // const {name, email, birthday} = user;
+  // console.log(user);
+  // console.log(name);
+  // console.log(email);
+  // console.log(birthday);
+
+  const logout = () => {
+    auth.signOut();
+  }
 
   return (
     <Container className={classes.content}>
       <Typography align="left" variant="h4" style={{color:"#008b8b"}}>Add New Recipe</Typography>
       <Container>
-        <Typography>{email}</Typography>
-        <Typography>{name}</Typography>
-        <Typography>{birthday}</Typography>
+        <Typography>{auth.currentUser.email}</Typography>
+        <Typography>{auth.currentUser.displayName}</Typography>
         <form noValidate autoComplete="off" className={classes.form}>
           <TextField  placeholder="Chicken Adobo" variant="outlined" style={{background: "white", margin: "0 30px"}} size="small" />
           <Grid container spacing={12} justify="space-evenly" alignItems="center" style={{margin: "30px 0"}}>
@@ -54,7 +57,7 @@ const Main = () => {
             ))}
           </Grid>
         </form>
-        <button onClick={() => {auth.signOut()}}>Log out</button>
+        <button onClick={logout}>Log out</button>
       </Container>
       <Footer />
      </Container>

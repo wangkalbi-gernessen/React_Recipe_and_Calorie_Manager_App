@@ -1,7 +1,8 @@
 import { Container,  makeStyles, Typography } from "@material-ui/core";
-import React, { useContext, useState } from "react";
-import { auth, generateUserDocument, signInWithGoogle } from "../Firebase/initFirebase";
+import React, { useState } from "react";
+import { auth, provider } from "../../firebase/initFirebase";
 import { Link } from "react-router-dom";
+import { register } from '../Auth/Auth';
 
 const useStyles = makeStyles({
   content: {
@@ -26,63 +27,49 @@ const useStyles = makeStyles({
 const SignUp = () => {
   const classes = useStyles();
 
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');  
-  const [password, setPassword] = useState('');  
-  const [birthday, setBirthday] = useState(''); 
-  const [message, setMessage] = useState('');
-  const [error, setError] = useState(null);
+  const [form, setForm] = useState({
+    email: '',
+    password: '',
+    displayName: '',
+    birthday: ''
+  });
 
-  const addUser = async(event, email, password) => {
-    event.preventDefault();
-    // const userInfo = {
-    //   name: name,
-    //   email: email,
-    //   password: password,
-    //   birthday: birthday
-    // };
-    // firebase.firestore().collection('users').add(userInfo);
-    try {
-      const {user} = await auth.createUserWithEmailAndPassword(email, password);
-      generateUserDocument(user, {name, birthday});
-      console.log(user);
-    } catch(error) {
-      setError('Error Signing up with email and password');
-    }
+  const handleSubmit = async(e) => {
+    e.preventDefault();
+    await register(form);
+  };
 
-    setName("");
-    setEmail("");
-    setPassword("");
-    setBirthday("");
-    setMessage('Your account was registered.');
-  }
+  // Sign in with google
+  const signInWithGoogle = () => {
+    auth.signInWithPopup(provider).catch(alert);
+  };
 
   return(
     <Container className={classes.content}>
       <Typography variant="h4" align="center" gutterBottom="true" style={{color: "white"}}>Register your account</Typography>
       <Container className={classes.formArea}>
-        {error !== null && (
-          <Typography variant="h5" align="center" gutterBottom="true" style={{color: "red"}}>{error}</Typography>
-        )}
-        <form style={{width:"100%", height: "100%", margin: "auto", textAlign: "center"}}>
+        {/* {error !== null && (
+          <Typography variant="h5" align="center" gutterBottom="true" style={{color: "red"}}>{error}</Typography> */}
+        {/* )} */}
+        <form style={{width:"100%", height: "100%", margin: "auto", textAlign: "center"}} onSubmit={handleSubmit}>
           <div>
             <label for="name">Name: 
-              <input type="text" id="name" placeholder="Enter your name.." value={name} onChange={event => setName(event.target.value)} required/>
+              <input type="text" id="name" placeholder="Enter your name.." onChange={(e) => setForm({...form, displayName: e.target.value})} required/>
             </label>
           </div>
           <div>
             <label for="email">Email: 
-              <input type="email" id="email" placeholder="Enter Email.." value={email} onChange={event => setEmail(event.target.value)} required/>
+              <input type="email" id="email" placeholder="Enter Email.." onChange={(e) => setForm({...form, email: e.target.value})} required/>
             </label>
           </div>
           <div>
             <label for="password">Password: 
-              <input type="password" id="password" placeholder="Enter Password.." value={password} onChange={event => setPassword(event.target.value)} required/>
+              <input type="password" id="password" placeholder="Enter Password.." onChange={(e) => setForm({...form, password: e.target.value})} required/>
             </label>
           </div>
           <div>
             <label for="birthday">Birthday: 
-              <input type="date" id="birthday" value={birthday} onChange={event => setBirthday(event.target.value)} required/>
+              <input type="date" id="birthday" onChange={(e) => setForm({...form, birthday: e.target.value})} required/>
             </label>
           </div>
           {/* <div>
@@ -93,17 +80,10 @@ const SignUp = () => {
               </select>
             </label>
           </div> */}
-          <button type="submit" onClick={event => {addUser(event, email, password)}}>Register</button>
-          <Typography variant="h5" align="center" style={{color:"red"}}>{message}</Typography>
+          <button type="submit">Register</button>
         </form>
         <p>or</p>
-        <button onClick={() => {
-          try {
-            signInWithGoogle();
-          } catch(error) {
-            console.error("Error signing in with Google", error);
-          }
-        }}>Sign in with Google</button>
+        <button onClick={signInWithGoogle}>Sign in with Google</button> 
         <p>
           Already have an account?{" "}
           <Link to="/">

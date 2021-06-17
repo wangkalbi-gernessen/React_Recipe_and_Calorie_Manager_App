@@ -1,7 +1,7 @@
-import React, { useState, useContext } from "react";
-import { UserContext } from "../../Providers/UserProvider";
+import React, { useState } from "react";
+// import { UserContext } from "../../providers/UserProvider";
 import { Typography, Container, makeStyles } from "@material-ui/core";
-import { auth } from "../Firebase/initFirebase";
+import { auth } from "../../firebase/initFirebase";
 // import vietnamese from '../../img/LoginSignUp/background-menu.jpeg';
 import { Link } from "react-router-dom";
 
