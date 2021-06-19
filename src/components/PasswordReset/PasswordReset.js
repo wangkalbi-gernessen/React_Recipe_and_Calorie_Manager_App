@@ -2,7 +2,7 @@ import React, { useState } from "react";
 // import { UserContext } from "../../providers/UserProvider";
 import { Typography, Container, makeStyles } from "@material-ui/core";
 import { auth } from "../../firebase/initFirebase";
-// import vietnamese from '../../img/LoginSignUp/background-menu.jpeg';
+import vietnamese from '../../img/LoginSignUp/background-menu.jpeg';
 import { Link } from "react-router-dom";
 
 const useStyles = makeStyles({
@@ -11,10 +11,9 @@ const useStyles = makeStyles({
     height: "100vh",
     margin: 0,
     padding: 0,
-    // backgroundImage: `url(${vietnamese})`,
-    // backgroundRepeat: "no-repeat",
-    // backgroundSize: "cover"
-    background: "red"
+    backgroundImage: `url(${vietnamese})`,
+    backgroundRepeat: "no-repeat",
+    backgroundSize: "cover"
   },
   formArea: {
     background: "white",
@@ -39,7 +38,7 @@ const PasswordReset = () => {
       setEmailHasBeenSent(true);
       setTimeout(() => {setEmailHasBeenSent(false)}, 3000);
     }).catch(() => {
-      setError('Error resetting password');
+      setError('The email address does not exist.');
     });
   };
 

@@ -1,6 +1,7 @@
 import { Typography, Container, makeStyles, TableBody, TableRow, TableCell } from"@material-ui/core";
-import NavigateNextIcon from '@material-ui/icons/NavigateNext';
-import { NavLink } from 'react-router-dom';
+// import NavigateNextIcon from '@material-ui/icons/NavigateNext';
+import { Link } from 'react-router-dom';
+import Footer from '../Footer/Footer';
 
 const useStyles = makeStyles({
   content: {
@@ -34,15 +35,11 @@ const RecipeList = () => {
           <TableRow>
             <TableCell>{meal.meal}</TableCell>
             <TableCell>
-              <NavLink to="./menuTotalCalorieDetail">
-                <NavigateNextIcon size="large"></NavigateNextIcon>
-              </NavLink>
             </TableCell>
           </TableRow>
           ))}
         </TableBody>
-      </Container>  
-      <DynamicComponent />
+      </Container> 
     </Container>
   );
 }

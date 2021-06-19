@@ -1,8 +1,9 @@
-import { Container,  makeStyles, Typography } from "@material-ui/core";
+import { Container,  Grid,  makeStyles, Typography } from "@material-ui/core";
 import React, { useState } from "react";
 import { auth, provider } from "../../firebase/initFirebase";
 import { Link } from "react-router-dom";
 import { register } from '../Auth/Auth';
+import japanese from '../../img/LoginSignUp/japanese-cuisine.jpeg';
 
 const useStyles = makeStyles({
   content: {
@@ -10,15 +11,15 @@ const useStyles = makeStyles({
     height: "100vh",
     margin: 0,
     padding: 0,
-    backgroundImage: "url(../../img/Login/background-menu.jpeg)",
+    backgroundImage: `url(${japanese})`,
     backgroundRepeat: "no-repeat",
     backgroundSize: "cover"
   },
   formArea: {
     background: "white",
-    height: "70%",
+    height: "50%",
     width: "70%",
-    margin: "auto",
+    margin: "auto auto",
     padding: "auto",
     opacity: "0.9"
   }
@@ -30,8 +31,6 @@ const SignUp = () => {
   const [form, setForm] = useState({
     email: '',
     password: '',
-    displayName: '',
-    birthday: ''
   });
 
   const handleSubmit = async(e) => {
@@ -46,41 +45,28 @@ const SignUp = () => {
 
   return(
     <Container className={classes.content}>
-      <Typography variant="h4" align="center" gutterBottom="true" style={{color: "white"}}>Register your account</Typography>
       <Container className={classes.formArea}>
+        <Typography variant="h4" align="center" gutterBottom="true" style={{color: "black", fontWeight: "bold"}}>Register your account</Typography>
         {/* {error !== null && (
           <Typography variant="h5" align="center" gutterBottom="true" style={{color: "red"}}>{error}</Typography> */}
         {/* )} */}
+        
         <form style={{width:"100%", height: "100%", margin: "auto", textAlign: "center"}} onSubmit={handleSubmit}>
-          <div>
-            <label for="name">Name: 
-              <input type="text" id="name" placeholder="Enter your name.." onChange={(e) => setForm({...form, displayName: e.target.value})} required/>
-            </label>
-          </div>
-          <div>
-            <label for="email">Email: 
-              <input type="email" id="email" placeholder="Enter Email.." onChange={(e) => setForm({...form, email: e.target.value})} required/>
-            </label>
-          </div>
-          <div>
-            <label for="password">Password: 
-              <input type="password" id="password" placeholder="Enter Password.." onChange={(e) => setForm({...form, password: e.target.value})} required/>
-            </label>
-          </div>
-          <div>
-            <label for="birthday">Birthday: 
-              <input type="date" id="birthday" onChange={(e) => setForm({...form, birthday: e.target.value})} required/>
-            </label>
-          </div>
-          {/* <div>
-            <label for="sex">Sex: 
-              <select id="sex">
-                <option value="male">Male</option>
-                <option value="female">Female</option>
-              </select>
-            </label>
-          </div> */}
-          <button type="submit">Register</button>
+          <Grid container direction="column" style={{width: "70%", margin: "30px auto 10px", textAlign: "left", fontSize: "20px"}} justify="center"   alignItems="center" xs={16}>
+            <Grid item xs={12} sm={12}>
+              <label for="email">Email: 
+                <input type="email" id="email" placeholder="Enter Email.." onChange={(e) => setForm({...form, email: e.target.value})} required/>
+              </label>
+            </Grid>
+            <Grid item xs={12} sm={12}>
+              <label for="password">Password: 
+                <input type="password" id="password" placeholder="Enter Password.." onChange={(e) => setForm({...form, password: e.target.value})} required/>
+              </label>
+            </Grid>
+            <Grid item xs={12} sm={12}>
+              <button type="submit">Register</button>
+            </Grid>
+          </Grid>
         </form>
         <p>or</p>
         <button onClick={signInWithGoogle}>Sign in with Google</button> 

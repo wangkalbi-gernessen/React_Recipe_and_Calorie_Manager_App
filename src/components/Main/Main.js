@@ -1,8 +1,10 @@
-import { Container, Grid, makeStyles, TextField, Typography } from "@material-ui/core";
-// import React, { useContext } from "react";
+/* eslint-disable jsx-a11y/alt-text */
+import { Container, FormControl, Grid, makeStyles, TextField, Button, Typography } from "@material-ui/core";
 import { auth } from "../../firebase/initFirebase";
-import Footer from '../Footer/Footer';
-// import { UserContext } from '../../providers/UserProvider';
+import friedEgg from "../../img/Main/fried-egg.png";
+import sandwich from "../../img/Main/sandwich.png";
+import food from "../../img/Main/food.png";
+import steak from "../../img/Main/steak.png";
 
 const useStyles = makeStyles({
   content: {
@@ -14,52 +16,53 @@ const useStyles = makeStyles({
   },
   form: {
     width: "100%",
-    height: "100%",
-    margin: "50px auto",
+    margin: "30px auto",
     padding: 0,
     textAlign: "center"
+  },
+  btn: {
+    cursor: "pointer",
+    // transition: "0.2s all",
+    "&: hover" : {
+      transform: "scale(2, 1.5)",
+      background: "yellow"
+    }
   }
 });
 
 const buttonImages = [
-  {id: 1, image: "/Main/fried-egg.png", type: "Breakfast"},
-  {id: 2, image: "/Main/sandwich.png", type: "Lunch"},
-  {id: 3, image: "/Main/food.png", type: "Snack"},
-  {id: 4, image: "/Main/steak.png", type: "Dinner"}
+  {id: 1, image: friedEgg, type: "Breakfast"},
+  {id: 2, image: sandwich, type: "Lunch"},
+  {id: 3, image: food, type: "Snack"},
+  {id: 4, image: steak, type: "Dinner"}
 ];
 
 const Main = () => {
   const classes = useStyles();
-  // const user = useContext(UserContext);
-  // const {name, email, birthday} = user;
-  // console.log(user);
-  // console.log(name);
-  // console.log(email);
-  // console.log(birthday);
-
   const logout = () => {
     auth.signOut();
   }
 
   return (
     <Container className={classes.content}>
-      <Typography align="left" variant="h4" style={{color:"#008b8b"}}>Add New Recipe</Typography>
-      <Container>
-        <Typography>{auth.currentUser.email}</Typography>
-        <Typography>{auth.currentUser.displayName}</Typography>
-        <form noValidate autoComplete="off" className={classes.form}>
+      <Typography align="center" variant="h4" style={{color:"#008b8b", paddingTop: "30px"}}>Add New Recipe</Typography>
+      <Typography>Welcome, {auth.currentUser.uid}</Typography>
+      <FormControl noValidate   autoComplete="off" className={classes.form}>
+        <Container >
           <TextField  placeholder="Chicken Adobo" variant="outlined" style={{background: "white", margin: "0 30px"}} size="small" />
           <Grid container spacing={12} justify="space-evenly" alignItems="center" style={{margin: "30px 0"}}>
             { buttonImages.map ((buttonImage) => (
             <Grid item xs={6} sm={3} md={2} lg={2}>
+              <Button>
+                <img src={buttonImage.image} style={{height: "100%", width: "100%"}} className={classes.btn} /> 
+              </Button>
               <Typography>{buttonImage.type}</Typography>
             </Grid>
             ))}
           </Grid>
-        </form>
-        <button onClick={logout}>Log out</button>
-      </Container>
-      <Footer />
+        </Container>
+      </FormControl>
+      <Button onClick={logout}>Log out</Button>
      </Container>
   );
 }
