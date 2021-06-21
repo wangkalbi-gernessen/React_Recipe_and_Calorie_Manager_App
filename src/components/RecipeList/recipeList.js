@@ -1,7 +1,5 @@
 import { Typography, Container, makeStyles, TableBody, TableRow, TableCell } from"@material-ui/core";
 // import NavigateNextIcon from '@material-ui/icons/NavigateNext';
-import { Link } from 'react-router-dom';
-import Footer from '../Footer/Footer';
 
 const useStyles = makeStyles({
   content: {

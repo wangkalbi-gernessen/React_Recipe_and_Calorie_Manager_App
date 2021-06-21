@@ -1,6 +1,5 @@
 import React, { useState } from "react";
-// import { UserContext } from "../../providers/UserProvider";
-import { Typography, Container, makeStyles } from "@material-ui/core";
+import { Grid, Container, TextField, Typography, Paper, makeStyles, FormControl, Button } from "@material-ui/core";
 import { auth } from "../../firebase/initFirebase";
 import vietnamese from '../../img/LoginSignUp/background-menu.jpeg';
 import { Link } from "react-router-dom";
@@ -8,20 +7,20 @@ import { Link } from "react-router-dom";
 const useStyles = makeStyles({
   content: {
     width: "100%",
-    height: "100vh",
+    minHeight: "100vh",
     margin: 0,
     padding: 0,
     backgroundImage: `url(${vietnamese})`,
     backgroundRepeat: "no-repeat",
-    backgroundSize: "cover"
+    backgroundSize: "cover",
   },
   formArea: {
     background: "white",
-    height: "70%",
-    width: "70%",
-    margin: "auto",
+    width: "100%",
+    height: "100%",
+    margin: 0,
     padding: "auto",
-    opacity: "0.9"
+    opacity: "0.9",
   }
 });
 
@@ -43,26 +42,34 @@ const PasswordReset = () => {
   };
 
   return(
-    <Container className={classes.content}>
-      <Typography var iant="h5" align="center" gutterBottom="true" style={{color: "white"}}>Reset your password</Typography>
-      <Container className={classes.formArea}>
-        <form style={{width:"100%", height: "100%", margin: "auto", textAlign: "center"}} >
-          {emailHasBeenSent && (
-            <div>An email has been sent to you!</div>
-          )}
-          {error !== null && (
-            <div>{error}</div>
-          )}
-          <div>
-            <label for="email">Email: 
-              <input type="email" id="email" placeholder="Enter Email.." value={email} onChange={event => setEmail(event.target.value)} required/>
-            </label>
-          </div>
-          <button onClick={event => {sendResetEmail(event)}}>Send a reset link</button>
-        </form>
-        <Link to="/">Back to sign in page</Link>
-      </Container>
-    </Container>
+    <Grid container spacing={0}direction="column" alignItems="center" justify="center" className={classes.content}>
+      <Grid item xs={11}>
+        <Paper elevation={3}>
+          <Typography variant="h4" align="center" gutterBottom="true" style={{fontFamily: "monospace", padding: "15px"}}>Reset your password</Typography>
+          <FormControl noValidate autoComplete="off" style={{width: "100%", margin: "auto", padding: "20px", textAlign: "center"}}>
+           {emailHasBeenSent && (
+             <Typography variant="h6" color="secondary">An email has been sent to you!</Typography>
+             )} 
+            {error !== null && (
+              <Typography variant="h6" color="secondary">{error}</Typography>
+            )}
+            <Container className={classes.formArea}>
+              <Container>
+                <TextField id="my-input" type="email" label="Email Address" helperText="*I never share your email." variant="outlined" value={email} onChange={event => setEmail(event.target.value)}/>
+              </Container>
+              <Container style={{paddingTop:"10px"}}>
+                <Button variant="contained" size="medium" color="primary" style={{cursor: "pointer"}} onClick={event => {sendResetEmail(event)}}>Send a reset link</Button> 
+              </Container>
+            </Container>
+          </FormControl>
+          <Container style={{width: "100%", margin: "auto", textAlign: "center", padding: "10px"}}>
+            <Link to="/" style={{textDecoration: "none"}}>
+              <Button variant="contained" size="medium" color="secondary">Back to sign in page</Button>
+            </Link>
+          </Container>
+        </Paper>
+      </Grid>
+    </Grid>
   );
 }
 

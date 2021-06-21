@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-// import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import Main from '../Main/Main';
 import RecipeList from '../RecipeList/RecipeList';
 import Profile from '../Profile/Profile';
@@ -8,16 +7,22 @@ import { TabPanel, TabContext, TabList } from '@material-ui/lab';
 import menu from '../../img/Footer/menu.png';
 import cooking from '../../img/Footer/cooking.png';
 import person from '../../img/Footer/person.png';
+import { auth } from "../../firebase/initFirebase";
+
 
 const useStyle = makeStyles({
   content: {
     margin: 0,
     padding: 0,
-    // width: "100%",
+    width: "100%",
     flexGrow: 1,
   },
   root: {
     padding: 0
+  },
+  avatarSize: {
+    width: "30%",
+    height: "10%"
   }
 });
 
@@ -29,14 +34,19 @@ const UnderTab = () => {
     setValue(newValue);
   }
 
+  const logout = () => {
+    auth.signOut();
+  }
+
   return(
     <Container className={classes.content}>
       <TabContext value={value}>
         <AppBar position="static">
           <TabList onChange={handleChange} aria-label="simple tabs example">
-            <Tab icon={<Avatar src={menu}/>} value="1" />
-            <Tab icon={<Avatar src={cooking}/>} value="2" />
-            <Tab icon={<Avatar src={person}/>} value="3" />
+            <Tab icon={<Avatar src={menu} className={classes.avatarSize}/>} value="1" />
+            <Tab icon={<Avatar src={cooking} className={classes.avatarSize}/>} value="2" />
+            <Tab icon={<Avatar src={person} className={classes.avatarSize}/>} value="3" />
+            <Tab label="Log out" onClick={logout} value="4" style={{}}/>
           </TabList>
         </AppBar>
         <TabPanel value="1" className={classes.root}>

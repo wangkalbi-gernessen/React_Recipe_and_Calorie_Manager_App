@@ -1,5 +1,5 @@
 import { Typography, Container, makeStyles } from "@material-ui/core";
-import Footer from '../Footer/Footer';
+import { auth } from "../../firebase/initFirebase";
 
 const useStyles = makeStyles({
   content: {
@@ -17,7 +17,7 @@ const Profile = () => {
     <Container className={classes.content}>
       <Typography align="center" variant="h4" style={{color: "#008b8b", paddingTop: "50px"}}>Register Your Profile</Typography>
       <Container>
-      
+        <Typography variant="h5">Account ID: {auth.currentUser.uid}</Typography>
       </Container>
     </Container>
   );

@@ -1,4 +1,4 @@
-import { Container,  Grid,  makeStyles, Typography } from "@material-ui/core";
+import { Container,  Grid,  Button,makeStyles, Paper, TextField, Typography } from "@material-ui/core";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import vietnamese from '../../img/LoginSignUp/background-menu.jpeg';
@@ -8,7 +8,7 @@ import { login } from '../Auth/Auth'
 const useStyles = makeStyles({
   content: {
     width: "100%",
-    height: "100vh",  
+    minHeight: "100vh",  
     margin: 0,
     padding: 0,
     backgroundImage: `url(${vietnamese})`,
@@ -17,10 +17,11 @@ const useStyles = makeStyles({
   },
   formArea: {
     background: "white",
-    width: "70%",
-    margin: "5% auto",
+    width: "100%",
+    height: "100%",
+    margin: 0,
     padding: "auto",
-    opacity: "0.9"
+    opacity: "0.9",
   }
 });
 
@@ -43,39 +44,40 @@ const Login = () => {
   }  
 
   return(
-    <Container className={classes.content}>
-      <Typography variant="h3" align="center" gutterBottom="true" style={{color: "white", fontFamily: "cursive",}}>Welcome to Recipe and Calorie Manager!!</Typography>
-      <Container className={classes.formArea}>
-        <Typography variant="h4" align="center" gutterBottom="true" style={{color: "black", fontWeight: "bold"}}>Please log in here.</Typography>
-        <form style={{width:"100%", margin: "auto", textAlign: "center", }} onSubmit={handleSubmit}>
-          <Grid container direction="column" style={{width: "70%", margin: "30px auto 10px", textAlign: "left", fontSize: "20px"}} justify="center"   alignItems="center" xs={16}>
-            <Grid item xs={12} sm={12}>
-              <label for="email">Email: </label>
-              <input type="email" id="email" placeholder="Enter Email.." onChange={(e) => setForm({...form, email: e.target.value})} style={{fontSize:"13px"}} required/>
-            </Grid>
-            <Grid item xs={12} sm={12}>
-              <label for="password">Password: </label>
-              <input type="password" id="password" placeholder="Enter Password.." onChange={(e) => setForm({...form, password: e.target.value})} style={{fontSize:"13px"}}  required/>
-            </Grid>
-            <Grid item xs={12} sm={12}>
-              <button type="submit">Log in</button>
-            </Grid>
-          </Grid>
-        </form>
-        <Typography variant="h6" align="center">OR</Typography>
-        <Container style={{textAlign:"center", marginTop: "10px"}}>
-          <button onClick={signInWithGoogle}>Sign in with Google</button>
-          <Typography variant="h6">Don't have an account?</Typography>
-          <Container style={{background: "orange", width: "60%"}}>
-            <Link to="/SignUp/SignUp" style={{textDecoration: "none", color: "white"}}>Sign up here</Link>
+    <Grid container spacing={0}direction="column" alignItems="center" justify="center" className={classes.content}>
+      {/* <Typography variant="h3" align="center" gutterBottom="true" style={{color: "white", fontFamily: "cursive"}}>Welcome to Recipe and Calorie Manager!!</Typography> */}
+      <Grid item xs={11}>
+        <Paper elevation={3}>
+          <Typography variant="h4" align="center" gutterBottom="true" style={{fontFamily: "monospace", padding: "15px"}}>Log in here</Typography>
+          <form noValidate autoComplete="off" style={{width: "100%", margin: "auto", padding: "20px", textAlign: "center"}} onSubmit={handleSubmit}>
+            <Container className={classes.formArea}>
+              <TextField id="my-email" type="email" label="Email Address" variant="outlined" onChange={(e) => setForm({...form, email: e.target.value})}/>
+            </Container>
+            <Container style={{paddingTop:"10px"}}>
+              <TextField id="my-password" type="password" label="Password" variant="outlined" onChange={(e) => setForm({...form, password: e.target.value})} />
+            </Container>
+            <Container style={{paddingTop:"10px"}}>
+              <Button type="submit" variant="contained" size="medium" color="primary" style={{cursor: "pointer"}} >Log in</Button>
+            </Container>
+          </form>
+          <Typography variant="h6" align="center">OR</Typography>
+          <Container style={{textAlign:"center", marginTop: "10px"}}>
+            <Button variant="contained" size="medium" color="success" onClick={signInWithGoogle} style={{cursor:"pointer"}}>Sign in with Google</Button>
+            <Typography align="center" style={{paddingTop: "20px", fontWeight: "bold"}}>Already have an account?</Typography>
+            <Container style={{width: "100%", margin: "auto", textAlign: "center", padding: "10px"}}>
+              <Link to="/SignUp/SignUp" style={{textDecoration: "none", color: "white"}}>
+                <Button variant="contained" size="medium" color="primary">Sign up here</Button>
+              </Link>
+            </Container>
+            <Container style={{width: "100%", margin: "auto", textAlign: "center", padding: "10px"}}>
+              <Link to="/PasswordReset/PasswordReset" style={{textDecoration: "none", color: "white"}}>
+                <Button variant="contained" size="medium" color="inherit">Forgot Password?</Button>
+              </Link>
+            </Container>
           </Container>
-          <br />
-          <Container style={{background: "green", width: "60%"}}>
-            <Link to="/PasswordReset/PasswordReset" style={{textDecoration: "none", color: "white"}}>Forgot Password?</Link>
-          </Container>
-        </Container>
-      </Container>
-    </Container>
+        </Paper>
+      </Grid>
+    </Grid>
   );
 }
 
