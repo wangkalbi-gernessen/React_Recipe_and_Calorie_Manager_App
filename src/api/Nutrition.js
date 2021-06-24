@@ -1,19 +1,32 @@
-// import React from 'react';
+import React from 'react';
 
-// class Nutrition extends React.Component {
+class Nutrition extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      error: null,
+      isLoaded: true,
+      items: []
+    };
+  }
+  
+  componentDidMount() {
+    fetch("https://calorieninjas.com/api")
+      .then(res => res.json())
+      .then(
+        (result) => {
+          this.setState({
+            isLoaded: true,
+            items: result.items
+          });
+        },
 
-//   componentDidMount: function() {
-//     method: 'GET',
-//     url: 'https://api.calorieninjas.com/v1/nutrition?query=' + query,
-//     headers: { 'X-Api-Key': 'YOUR_API_KEY'},
-//     contentType: 'application/json',
-//     success: function(result) {
-//         console.log(result);
-//     },
-//     error: function ajaxError(jqXHR) {
-//         console.error('Error: ', jqXHR.responseText);
-//     }
-//   }
-
-
-// }
+        (error) => {
+          this.setState({
+            isLoaded: true,
+            error
+          });
+        }
+      )
+  }
+}
