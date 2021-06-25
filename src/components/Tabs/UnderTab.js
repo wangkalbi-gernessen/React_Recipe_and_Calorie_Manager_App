@@ -18,7 +18,8 @@ const useStyle = makeStyles({
     flexGrow: 1,
   },
   root: {
-    padding: 0
+    padding: 0,
+    margin: 0
   },
   avatarSize: {
     width: "30%",
@@ -46,7 +47,7 @@ const UnderTab = () => {
             <Tab icon={<Avatar src={menu} className={classes.avatarSize}/>} value="1" />
             <Tab icon={<Avatar src={cooking} className={classes.avatarSize}/>} value="2" />
             <Tab icon={<Avatar src={person} className={classes.avatarSize}/>} value="3" />
-            <Tab label="Log out" onClick={logout} value="4" style={{}}/>
+            <Tab label="Log out" onClick={logout} value="4" style={{paddingLeft: 0}}/>
           </TabList>
         </AppBar>
         <TabPanel value="1" className={classes.root}>

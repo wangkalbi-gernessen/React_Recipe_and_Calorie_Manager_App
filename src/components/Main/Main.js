@@ -57,29 +57,23 @@ const Main = () => {
   const [items, setItems] = useState([]);
 
   useEffect(() => {
-    fetch("'https://api.calorieninjas.com/v1/nutrition")
+    fetch("https://developer.edamam.com/edamam-docs-nutrition-api/nutrition-data")
       .then(res => res.json())
-      .then(
-        (result) => {
-          setIsLoaded(true);
-          setItems(result);
-          console.log(result);
-        },
-        // Note: it's important to handle errors here
-        // instead of a catch() block so that we don't swallow
-        // exceptions from actual bugs in components.
-        (error) => {
-          setIsLoaded(true);
-          setError(error);
-        }
-      )
+      .then((result) => {
+        console.log(result);
+        setIsLoaded(true);
+        setItems(result);
+      }).catch((error) => {
+        setIsLoaded(true);
+        setError(error);
+      });
   }, [])
 
 
   return (
     <Container className={classes.content}>
       <Typography align="center" variant="h4" style={{color:"#008b8b", paddingTop: "30px"}}>Add New Recipe</Typography>
-      <Typography variant="h5" style={{paddingLeft: "20px", paddingTop: "30px", fontFamily: "fantasy"}}>Welcome, {auth.currentUser.email}</Typography>
+      <Typography variant="h6" style={{paddingLeft: "20px", paddingTop: "30px", fontFamily: "fantasy"}}>Welcome, {auth.currentUser.email}</Typography>
       <FormControl noValidate   autoComplete="off" className={classes.form}>
         <Container >
           <TextField  placeholder="Chicken Adobo" variant="outlined" style={{background: "white", margin: "40px 20px"}} size="large" value={dishName} onChange={(e) => setDishName(e.target.value)} />
@@ -96,7 +90,7 @@ const Main = () => {
               </Grid>
               <Grid item xs={6} sm={3} md={2} lg={2}>
               <FormControlLabel value="dinner" control={<Radio color="primary" />}label="Dinner"labelPlacement="top" checked={meal === 'dinner'} onClick={() => setMeal('dinner')}/>
-              </Grid>
+            </Grid>
             </RadioGroup>
           </Grid>
           <Button variant="contained" color="secondary" style={{cursor: "pointer"}} onClick={addRecipe}>Add Recipe</Button>
@@ -106,9 +100,7 @@ const Main = () => {
         <Typography>Hello World</Typography>
         <ul>
           { items.map(item => (
-            <li key={item.id}>
-              {item.name}
-            </li>
+            <li key={item.id}>{item.title}</li>
           )) }
         </ul>
       </Container>
