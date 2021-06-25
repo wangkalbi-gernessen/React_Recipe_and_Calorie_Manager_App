@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import Main from '../Main/Main';
 import RecipeList from '../RecipeList/RecipeList';
-import Profile from '../Profile/Profile';
+import BmrCalculator from '../BMR/BmrCalculator';
 import { AppBar, Avatar, Container, makeStyles, Tab } from '@material-ui/core';
 import { TabPanel, TabContext, TabList } from '@material-ui/lab';
-import menu from '../../img/Footer/menu.png';
-import cooking from '../../img/Footer/cooking.png';
-import person from '../../img/Footer/person.png';
+import menu from '../../img/AppBar/menu.png';
+import cooking from '../../img/AppBar/cooking.png';
+import calculator from '../../img/AppBar/calculator.png';
 import { auth } from "../../firebase/initFirebase";
 
 
@@ -46,7 +46,7 @@ const UnderTab = () => {
           <TabList onChange={handleChange} aria-label="simple tabs example">
             <Tab icon={<Avatar src={menu} className={classes.avatarSize}/>} value="1" />
             <Tab icon={<Avatar src={cooking} className={classes.avatarSize}/>} value="2" />
-            <Tab icon={<Avatar src={person} className={classes.avatarSize}/>} value="3" />
+            <Tab icon={<Avatar src={calculator} className={classes.avatarSize}/>} value="3" />
             <Tab label="Log out" onClick={logout} value="4" style={{paddingLeft: 0}}/>
           </TabList>
         </AppBar>
@@ -57,7 +57,7 @@ const UnderTab = () => {
           <Main/>
         </TabPanel>
         <TabPanel value="3" className={classes.root}>
-          <Profile/>
+          <BmrCalculator/>
         </TabPanel>
       </TabContext>
     </Container>

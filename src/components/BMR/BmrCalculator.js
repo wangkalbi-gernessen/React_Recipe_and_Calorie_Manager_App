@@ -16,10 +16,9 @@ const useStyles = makeStyles({
     margin: 0,
     padding: "5px"
   },
-  
 });
 
-const Profile = () => {
+const BmrCalculator = () => {
   const classes = useStyles();
 
   const [age, setAge] = useState(0);
@@ -38,7 +37,6 @@ const Profile = () => {
       setResult(bmr);
     }
   }
-
 
   return(
       <Grid container spacing={0} direction="column" alignItems="center" justify="center" className={classes.content}>
@@ -85,4 +83,4 @@ const Profile = () => {
   );
 }
 
-export default Profile;
+export default BmrCalculator;
