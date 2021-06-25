@@ -5,7 +5,6 @@ import { auth } from './firebase/initFirebase';
 import UnderTab from './components/Tabs/UnderTab';
 import Application from './components/Application/Application';
 
-
 const useStyle = makeStyles({
   content: {
     margin: 0,

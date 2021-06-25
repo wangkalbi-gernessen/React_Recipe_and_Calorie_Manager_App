@@ -9,7 +9,6 @@ import cooking from '../../img/AppBar/cooking.png';
 import calculator from '../../img/AppBar/calculator.png';
 import { auth } from "../../firebase/initFirebase";
 
-
 const useStyle = makeStyles({
   content: {
     margin: 0,

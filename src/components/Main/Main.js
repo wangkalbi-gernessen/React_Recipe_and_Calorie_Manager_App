@@ -6,6 +6,8 @@ import sandwich from "../../img/Main/sandwich.png";
 import food from "../../img/Main/food.png";
 import steak from "../../img/Main/steak.png";
 import { useEffect, useState } from "react";
+import { BrowserRouter as Router, Route, Switch, Link } from 'react-router-dom';
+import AddIngredients from '../AddIngredients/AddIngredients';
 
 const useStyles = makeStyles({
   content: {
@@ -78,32 +80,46 @@ const Main = () => {
         <Container >
           <TextField  placeholder="Chicken Adobo" variant="outlined" style={{background: "white", margin: "40px 20px"}} size="large" value={dishName} onChange={(e) => setDishName(e.target.value)} />
           <Grid container spacing={12} justify="space-evenly" alignItems="center" className={classes.radioArea}>
-            <RadioGroup row aria-label="position" name="position" defaultValue="Breakfast">
-              <Grid item xs={6} sm={3} md={2} lg={2}>
+            <RadioGroup row aria-label="position" name="position" defaultValue="Breakfast" >
+              <Grid item xs={6} sm={3} md={3} lg={3}>
+                <Container>
+                  <img src={friedEgg} width={60} height={60} />
+                </Container>
                 <FormControlLabel value="breakfast" control={<Radio color="primary" />}label="Breakfast" labelPlacement="top" checked={meal === 'breakfast'} onClick={() => setMeal('breakfast')} />
               </Grid>
-              <Grid item xs={6} sm={3} md={2} lg={2}>
+              <Grid item xs={6} sm={3} md={3} lg={3}>
+                <Container>
+                  <img src={sandwich} width={60} height={60} />
+                </Container>
                 <FormControlLabel value="lunch" control={<Radio color="primary" />}label="Lunch"labelPlacement="top" checked={meal === 'lunch'} onClick={() => setMeal('lunch')}/>
               </Grid>
-              <Grid item xs={6} sm={3} md={2} lg={2}>
+              <Grid item xs={6} sm={3} md={3} lg={3}>
+                <Container>
+                  <img src={food} width={60} height={60} />
+                </Container>
                 <FormControlLabel value="snack" control={<Radio color="primary" />}label="Snack"labelPlacement="top" checked={meal === 'snack'} onClick={() => setMeal('snack')}/>
               </Grid>
-              <Grid item xs={6} sm={3} md={2} lg={2}>
-              <FormControlLabel value="dinner" control={<Radio color="primary" />}label="Dinner"labelPlacement="top" checked={meal === 'dinner'} onClick={() => setMeal('dinner')}/>
-            </Grid>
+              <Grid item xs={6} sm={3} md={3} lg={3}>
+                <Container>
+                  <img src={steak} width={60} height={60} />
+                </Container>
+                <FormControlLabel value="dinner" control={<Radio color="primary" />}label="Dinner"labelPlacement="top" checked={meal === 'dinner'} onClick={() => setMeal('dinner')}/>
+              </Grid>
             </RadioGroup>
           </Grid>
-          <Button variant="contained" color="secondary" style={{cursor: "pointer"}} onClick={addRecipe}>Add Recipe</Button>
+          <Router>
+        <Switch>
+          <Route path="/AddIngredients/AddIngredients">
+            <AddIngredients/>
+          </Route>
+        </Switch>
+      </Router>
+          <Link to="/AddIngredients/AddIngredients" style={{textDecoration: "none"}}>
+
+            <Button variant="contained" color="secondary" style={{cursor: "pointer"}} /*onClick={addRecipe}*/>Add Recipe</Button>
+          </Link>
         </Container>
       </FormControl>
-      <Container>
-        <Typography>Hello World</Typography>
-        <ul>
-          { items.map(item => (
-            <li key={item.id}>{item.title}</li>
-          )) }
-        </ul>
-      </Container>
      </Container>
   );
 }
