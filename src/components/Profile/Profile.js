@@ -31,27 +31,25 @@ const Profile = () => {
   const calculateBMR = (event) => {
     event.preventDefault();
     if(gender === 'male') {
-      let bmr = ((13.397 * weight) + (4.799 * height) - (5.677 * age) +  88.362).toLocaleString("en-US");
+      let bmr = ((13.397 * weight) + (4.799 * height) - (5.677 * age) +  88.362).toFixed(2);
       setResult(bmr);
     } else {
-      let bmr = ((9.247 * weight) + (3.098 * height) - (4.33 * age) +  447.593).toLocaleString("en-US");
+      let bmr = ((9.247 * weight) + (3.098 * height) - (4.33 * age) +  447.593).toFixed(2);
       setResult(bmr);
     }
   }
 
 
   return(
-    <Container className={classes.content}>
-      <Typography align="center" variant="h4" style={{color: "#008b8b", paddingTop: "50px"}}>Personal Profile</Typography>
-      <Grid container spacing={0} direction="column" alignItems="center" justify="center">
-        <Grid item xs={16} style={{marginBottom: "50px"}}>
+      <Grid container spacing={0} direction="column" alignItems="center" justify="center" className={classes.content}>
+        <Grid item xs={16} style={{paddingTop: "30px"}}>
           <Paper elevation={4}>
             <Container className={classes.accountId}>
               <Typography>Your Account ID: <br/>{auth.currentUser.uid}</Typography>
             </Container>
           </Paper>
         </Grid>
-        <Grid item xs={16}>
+        <Grid item xs={16} style={{padding: "25px"}}>
           <Paper elevation={4} style={{padding: "10px"}}>
             <Typography variant="h4" align="center" gutterBottom="true" style={{color: "#008b8b", fontWeight: "bold", padding: "15px"}}>Calculate BMR</Typography>
             <form noValidate autoComplete="off" style={{width: "100%", margin: "auto", padding: "20px", textAlign: "center"}} >
@@ -84,7 +82,6 @@ const Profile = () => {
           </Paper>
         </Grid>
       </Grid>
-    </Container>
   );
 }
 
