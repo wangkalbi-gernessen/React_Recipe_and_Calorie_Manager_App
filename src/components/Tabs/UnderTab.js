@@ -8,6 +8,8 @@ import menu from '../../img/AppBar/menu.png';
 import cooking from '../../img/AppBar/cooking.png';
 import calculator from '../../img/AppBar/calculator.png';
 import { auth } from "../../firebase/initFirebase";
+import {BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import AddIngredients from '../AddIngredients/AddIngredients';
 
 const useStyle = makeStyles({
   content: {
@@ -59,6 +61,13 @@ const UnderTab = () => {
           <BmrCalculator/>
         </TabPanel>
       </TabContext>
+      <Router>
+        <Switch>
+          <Route path="AddIngredients/AddIngredients">
+            <AddIngredients/>
+          </Route>
+        </Switch>
+      </Router>
     </Container>
   )
 }

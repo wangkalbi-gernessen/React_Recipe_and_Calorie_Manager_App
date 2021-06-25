@@ -6,8 +6,9 @@ import sandwich from "../../img/Main/sandwich.png";
 import food from "../../img/Main/food.png";
 import steak from "../../img/Main/steak.png";
 import { useEffect, useState } from "react";
-import { BrowserRouter as Router, Route, Switch, Link } from 'react-router-dom';
-import AddIngredients from '../AddIngredients/AddIngredients';
+// import AddIngredients from '../AddIngredients/AddIngredients';
+import { useHistory } from "react-router-dom";
+// import { BrowserRouter as Router, Link } from 'react-router-dom';
 
 const useStyles = makeStyles({
   content: {
@@ -42,6 +43,8 @@ const Main = () => {
   const [meal, setMeal] = useState('breakfast')
   const userId = auth.currentUser.uid;
 
+  const history = useHistory();
+
   const addRecipe = (event) => {
     event.preventDefault();
     db.collection('recipe').add({
@@ -51,6 +54,7 @@ const Main = () => {
     }).catch(alert);
     setDishName('');
     setMeal('breakfast');
+    history.push("/AddIngredients/AddIngredients");
   }
 
   // introduce APIs
@@ -107,17 +111,9 @@ const Main = () => {
               </Grid>
             </RadioGroup>
           </Grid>
-          <Router>
-        <Switch>
-          <Route path="/AddIngredients/AddIngredients">
-            <AddIngredients/>
-          </Route>
-        </Switch>
-      </Router>
-          <Link to="/AddIngredients/AddIngredients" style={{textDecoration: "none"}}>
-
-            <Button variant="contained" color="secondary" style={{cursor: "pointer"}} /*onClick={addRecipe}*/>Add Recipe</Button>
-          </Link>
+            {/* <Link to="/AddIngredients/AddIngredients" style={{textDecoration: "none"}}>  */}
+              <Button variant="contained" color="secondary" style={{cursor: "pointer"}} onClick={addRecipe}>Add Recipe</Button>
+            {/* </Link> */}
         </Container>
       </FormControl>
      </Container>
