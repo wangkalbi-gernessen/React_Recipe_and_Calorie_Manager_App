@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import Main from '../Main/Main';
+import MainRouter from '../Main/MainRouter';
 import RecipeList from '../RecipeList/RecipeList';
 import BmrCalculator from '../BMR/BmrCalculator';
 import { AppBar, Avatar, Container, makeStyles, Tab } from '@material-ui/core';
@@ -8,8 +8,6 @@ import menu from '../../img/AppBar/menu.png';
 import cooking from '../../img/AppBar/cooking.png';
 import calculator from '../../img/AppBar/calculator.png';
 import { auth } from "../../firebase/initFirebase";
-import {BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import AddIngredients from '../AddIngredients/AddIngredients';
 
 const useStyle = makeStyles({
   content: {
@@ -28,7 +26,7 @@ const useStyle = makeStyles({
   }
 });
 
-const UnderTab = () => {
+const TopTab = () => {
   const classes = useStyle();
   const [value, setValue] = useState('2');
 
@@ -55,21 +53,14 @@ const UnderTab = () => {
           <RecipeList/>
         </TabPanel>
         <TabPanel value="2" className={classes.root}>
-          <Main/>
+          <MainRouter/>
         </TabPanel>
         <TabPanel value="3" className={classes.root}>
           <BmrCalculator/>
         </TabPanel>
       </TabContext>
-      <Router>
-        <Switch>
-          <Route path="AddIngredients/AddIngredients">
-            <AddIngredients/>
-          </Route>
-        </Switch>
-      </Router>
     </Container>
   )
 }
 
-export default UnderTab;
+export default TopTab;

@@ -6,9 +6,8 @@ import sandwich from "../../img/Main/sandwich.png";
 import food from "../../img/Main/food.png";
 import steak from "../../img/Main/steak.png";
 import { useEffect, useState } from "react";
-// import AddIngredients from '../AddIngredients/AddIngredients';
 import { useHistory } from "react-router-dom";
-// import { BrowserRouter as Router, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 const useStyles = makeStyles({
   content: {
@@ -43,7 +42,7 @@ const Main = () => {
   const [meal, setMeal] = useState('breakfast')
   const userId = auth.currentUser.uid;
 
-  const history = useHistory();
+  // const history = useHistory();
 
   const addRecipe = (event) => {
     event.preventDefault();
@@ -54,27 +53,8 @@ const Main = () => {
     }).catch(alert);
     setDishName('');
     setMeal('breakfast');
-    history.push("/AddIngredients/AddIngredients");
+    // history.push("/");
   }
-
-  // introduce APIs
-  const [error, setError] = useState(null);
-  const [isLoaded, setIsLoaded] = useState(false);
-  const [items, setItems] = useState([]);
-
-  useEffect(() => {
-    fetch("https://developer.edamam.com/edamam-docs-nutrition-api/nutrition-data")
-      .then(res => res.json())
-      .then((result) => {
-        console.log(result);
-        setIsLoaded(true);
-        setItems(result);
-      }).catch((error) => {
-        setIsLoaded(true);
-        setError(error);
-      });
-  }, [])
-
 
   return (
     <Container className={classes.content}>
@@ -111,9 +91,9 @@ const Main = () => {
               </Grid>
             </RadioGroup>
           </Grid>
-            {/* <Link to="/AddIngredients/AddIngredients" style={{textDecoration: "none"}}>  */}
+            <Link to="/Main/AddIngredients" style={{textDecoration: "none"}}> 
               <Button variant="contained" color="secondary" style={{cursor: "pointer"}} onClick={addRecipe}>Add Recipe</Button>
-            {/* </Link> */}
+            </Link>
         </Container>
       </FormControl>
      </Container>

@@ -2,8 +2,9 @@ import { Container, makeStyles } from '@material-ui/core';
 import './App.css';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { auth } from './firebase/initFirebase';
-import UnderTab from './components/Tabs/UnderTab';
+import TopTab from './components/Tabs/TopTab';
 import Application from './components/Application/Application';
+import { Redirect } from 'react-router';
 
 const useStyle = makeStyles({
   content: {
@@ -18,9 +19,10 @@ function App() {
   const [user] = useAuthState(auth);
   return (
     user ? 
-    <Container className={classes.content}>
-      <UnderTab/>
-    </Container>
+    // <Container className={classes.content}>
+    //   <TopTab/>
+    // </Container>
+    <Redirect to="Main/Main" />
     : 
     <Container className={classes.content}>
       <Application/>

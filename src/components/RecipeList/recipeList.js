@@ -1,6 +1,6 @@
-import { Paper, Grid, List, Typography, Container, makeStyles, TableBody, TableRow, TableCell } from"@material-ui/core";
+import { FormControl, Button, Paper, Grid, List, Typography, Container, makeStyles, TableBody, TableRow, TableCell, TextField } from"@material-ui/core";
 import NavigateNextIcon from '@material-ui/icons/NavigateNext';
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { db, auth }  from '../../firebase/initFirebase';
 
 const useStyles = makeStyles({
@@ -45,6 +45,24 @@ const RecipeList = () => {
     })
   }
 
+  // fetch data from Calorie Ninjas API
+  const [ ingredients, setIngredients ] = useState('');
+  const [items, setItems] = useState([]);
+
+  const fetchAPI = (event) => {
+    event.preventDefault();
+    fetch('https://api.calorieninjas.com/v1/nutrition?query=' + ingredients, {
+      method: 'GET',
+      headers: {'X-Api-Key': 'f/TgvT5UXyrfwO03Fzk/jw==hnra1zNlgjYiplLH'},
+    })
+    .then(res => res.json())
+    .then((result) => {
+      console.log(result);
+      setItems(result);
+    }).catch((error) => {
+      // console.log("error");
+    });
+  }
 
   const classes = useStyles();
   return(
@@ -63,14 +81,21 @@ const RecipeList = () => {
           </TableBody>
         </Paper>
       </Grid>
+      <FormControl>
+        <TextField size="large" label="ingredients"
+      value={ingredients} onChange={(e) => setIngredients(e.target.value)} />
+        <Button onClick={fetchAPI}>Click</Button>
+      </FormControl>
+      <ul>
+        {items.map(item => (
+          <li key={item.id}>
+            {item.name}
+          </li>
+        ))}
+      </ul>
     </Grid>
 
 
-    // <Container className={classes.content}>
-    //   <Typography align="center" variant="h4" style={{color: "#008b8b"}}>Recipe List</Typography>
-    //   <Container className={classes.listArea}>
-    //   </Container> 
-    // </Container>
   );
 }
 
