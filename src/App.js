@@ -7,6 +7,8 @@ import Application from './components/Application/Application';
 // import Main from './components/Main/Main';
 import { useHistory } from 'react-router-dom';
 import RouterAfterLogin from './components/Application/RouterAfterLogin';
+// import Main from './components/Main/Main';
+
 
 const useStyle = makeStyles({
   content: {
@@ -20,9 +22,9 @@ function App() {
   const classes = useStyle();
   const [user] = useAuthState(auth); 
   const history = useHistory();
-  // if(user) {
-  //   history.push("/Main/Main");
-  // }
+  if(user) {
+    history.push("/Main/Main");
+  }
 
   return (
     user ? 
