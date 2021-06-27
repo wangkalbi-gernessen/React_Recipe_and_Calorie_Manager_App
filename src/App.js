@@ -23,7 +23,7 @@ function App() {
   const [user] = useAuthState(auth); 
   const history = useHistory();
   if(user) {
-    history.push("/Main/Main");
+    history.push("/");
   }
 
   return (

@@ -7,6 +7,10 @@ const AddIngredients = () => {
     <Container>
       <Appbar/>
       <Typography>Add Ingredients</Typography>
+      <Typography>Add Ingredients</Typography>
+      <Typography>Add Ingredients</Typography>
+      <Typography>Add Ingredients</Typography>
+      <Typography>Add Ingredients</Typography>
     </Container>
   )
 }

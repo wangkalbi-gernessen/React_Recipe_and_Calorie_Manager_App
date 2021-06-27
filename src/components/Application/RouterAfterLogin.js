@@ -3,6 +3,7 @@ import { Switch, Route } from 'react-router-dom';
 import Main from '../Main/Main';
 import RecipeList from '../RecipeList/RecipeList';
 import BmrCalculator from '../BMR/BmrCalculator';
+import AddIngredients from '../Main/AddIngredients';
 
 const useStyle = makeStyles({
   content: {
@@ -18,8 +19,9 @@ const RouterAfterLogin = () => {
     <Container className={classes.content}>
         <Switch>
           <Route path="/RecipeList/RecipeList" component={RecipeList}/>
-          <Route component={Main}/>
+          <Route exact path="/" component={Main}/>
           <Route path="/BMR/BmrCalculator" component={BmrCalculator} />
+          <Route path="/Main/AddIngredients" component={AddIngredients} />
         </Switch>
     </Container>
   );

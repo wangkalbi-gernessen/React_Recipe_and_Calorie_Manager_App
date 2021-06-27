@@ -6,10 +6,9 @@ import sandwich from "../../img/Main/sandwich.png";
 import food from "../../img/Main/food.png";
 import steak from "../../img/Main/steak.png";
 import { useState } from "react";
-// import { Link } from 'react-router-dom';
 import Appbar from "../Tabs/Appbar";
-import { useHistory } from "react-router-dom";
-
+import { Switch, Route, useHistory } from "react-router-dom";
+import AddIngredients from './AddIngredients';
 
 const useStyles = makeStyles({
   content: {
@@ -93,12 +92,9 @@ const Main = () => {
               </Grid>
             </RadioGroup>
           </Grid>
-            {/* <Link to="/Main/AddIngredients" style={{textDecoration: "none"}}>  */}
-              <Button variant="contained" color="secondary" style={{cursor: "pointer"}} onClick={addRecipe}>Add Recipe</Button>
-            {/* </Link> */}
+          <Button variant="contained" color="secondary" style={{cursor: "pointer"}} onClick={addRecipe}>Add Recipe</Button>
         </Container>
       </FormControl>
-      
      </Container>
   );
 }

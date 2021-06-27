@@ -1,7 +1,7 @@
 import { Paper, TextField, Button, Container,  Grid,  makeStyles, Typography } from "@material-ui/core";
 import React, { useState } from "react";
 import { auth, provider } from "../../firebase/initFirebase";
-import { Link, useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { register } from '../Auth/Auth';
 import japanese from '../../img/LoginSignUp/japanese-cuisine.jpeg';
 
@@ -27,7 +27,6 @@ const useStyles = makeStyles({
 
 const SignUp = () => {
   const classes = useStyles();
-  const history = useHistory();
   const [form, setForm] = useState({
     email: '',
     password: '',
@@ -40,13 +39,7 @@ const SignUp = () => {
 
   // Sign in with google
   const signInWithGoogle = () => {
-    auth.signInWithPopup(provider)
-    .then((result) => {
-      history.push("/Main/Main");
-    })
-    .catch(function(error) {
-      history.push("/");
-    });
+    auth.signInWithPopup(provider);
   }  
 
   return(

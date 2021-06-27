@@ -1,10 +1,5 @@
 import React, { useState } from 'react';
-// import MainRouter from '../Main/MainRouter';
-import Main from '../Main/Main';
-import RecipeList from '../RecipeList/RecipeList';
-import BmrCalculator from '../BMR/BmrCalculator';
 import { AppBar, Avatar, Container, makeStyles, Tabs, Tab } from '@material-ui/core';
-import { TabPanel, TabContext, TabList } from '@material-ui/lab';
 import menu from '../../img/AppBar/menu.png';
 import cooking from '../../img/AppBar/cooking.png';
 import calculator from '../../img/AppBar/calculator.png';

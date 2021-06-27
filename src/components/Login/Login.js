@@ -41,13 +41,13 @@ const Login = () => {
 
   // Sign in with google
   const signInWithGoogle = () => {
-    auth.signInWithPopup(provider)
-    .then((result) => {
-      history.push("/Main/Main");
-    })
-    .catch(function(error) {
-      history.push("/");
-    });
+    auth.signInWithPopup(provider);
+    // .then((result) => {
+    //   history.push("/Main/Main");
+    // })
+    // .catch(function(error) {
+    //   history.push("/");
+    // });
   }  
 
   return(
