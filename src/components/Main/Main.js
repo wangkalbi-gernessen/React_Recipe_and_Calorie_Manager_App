@@ -5,9 +5,11 @@ import friedEgg from "../../img/Main/fried-egg.png";
 import sandwich from "../../img/Main/sandwich.png";
 import food from "../../img/Main/food.png";
 import steak from "../../img/Main/steak.png";
-import { useEffect, useState } from "react";
+import { useState } from "react";
+// import { Link } from 'react-router-dom';
+import Appbar from "../Tabs/Appbar";
 import { useHistory } from "react-router-dom";
-import { Link } from 'react-router-dom';
+
 
 const useStyles = makeStyles({
   content: {
@@ -41,8 +43,7 @@ const Main = () => {
   const [dishName, setDishName] = useState('');
   const [meal, setMeal] = useState('breakfast')
   const userId = auth.currentUser.uid;
-
-  // const history = useHistory();
+  const history = useHistory();
 
   const addRecipe = (event) => {
     event.preventDefault();
@@ -53,11 +54,12 @@ const Main = () => {
     }).catch(alert);
     setDishName('');
     setMeal('breakfast');
-    // history.push("/");
+    history.push("/Main/AddIngredients");
   }
 
   return (
     <Container className={classes.content}>
+      <Appbar/>
       <Typography align="center" variant="h4" style={{color:"#008b8b", paddingTop: "30px"}}>Add New Recipe</Typography>
       <Typography variant="h6" style={{paddingLeft: "20px", paddingTop: "30px", fontFamily: "fantasy"}}>Welcome, {auth.currentUser.email}</Typography>
       <FormControl noValidate   autoComplete="off" className={classes.form}>
@@ -91,11 +93,12 @@ const Main = () => {
               </Grid>
             </RadioGroup>
           </Grid>
-            <Link to="/Main/AddIngredients" style={{textDecoration: "none"}}> 
+            {/* <Link to="/Main/AddIngredients" style={{textDecoration: "none"}}>  */}
               <Button variant="contained" color="secondary" style={{cursor: "pointer"}} onClick={addRecipe}>Add Recipe</Button>
-            </Link>
+            {/* </Link> */}
         </Container>
       </FormControl>
+      
      </Container>
   );
 }

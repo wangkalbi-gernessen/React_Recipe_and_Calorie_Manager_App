@@ -1,9 +1,13 @@
-import { Typography } from "@material-ui/core";
+import { Container, Typography } from "@material-ui/core";
 import React from "react";
+import Appbar from "../Tabs/Appbar";
 
 const AddIngredients = () => {
   return(
-    <Typography>Add Ingredients</Typography>
+    <Container>
+      <Appbar/>
+      <Typography>Add Ingredients</Typography>
+    </Container>
   )
 }
 

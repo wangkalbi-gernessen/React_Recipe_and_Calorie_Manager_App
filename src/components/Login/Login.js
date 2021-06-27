@@ -1,6 +1,6 @@
 import { Container,  Grid,  Button,makeStyles, Paper, TextField, Typography } from "@material-ui/core";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import vietnamese from '../../img/LoginSignUp/background-menu.jpeg';
 import { auth, provider } from '../../firebase/initFirebase';
 import { login } from '../Auth/Auth'
@@ -32,6 +32,7 @@ const Login = () => {
     email: '',
     password: '',
   });
+  const history = useHistory();
 
   const handleSubmit = async(e) => {
     e.preventDefault();
@@ -41,6 +42,7 @@ const Login = () => {
   // Sign in with google
   const signInWithGoogle = () => {
     auth.signInWithPopup(provider).catch(alert);
+    history.push("/Main/Main");
   }  
 
   return(
