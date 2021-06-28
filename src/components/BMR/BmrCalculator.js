@@ -3,7 +3,6 @@ import { useState } from 'react';
 import { Typography, Container, Radio,FormLabel, TextField, Button, Paper, Grid, FormControlLabel, makeStyles } from "@material-ui/core";
 import { auth } from "../../firebase/initFirebase";
 import AnimatedNumber from 'react-animated-number';
-import Appbar from "../Tabs/Appbar";
 
 const useStyles = makeStyles({
   content: {
@@ -41,7 +40,6 @@ const BmrCalculator = () => {
 
   return(
       <Grid container spacing={0} direction="column" alignItems="center" justify="center" className={classes.content}>
-        <Appbar/>
         <Grid item xs={16} style={{paddingTop: "30px"}}>
           <Paper elevation={4}>
             <Container className={classes.accountId}>

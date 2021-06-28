@@ -1,8 +1,7 @@
-import { FormControl, Button, Paper, Grid, List, Typography, Container, makeStyles, TableBody, TableRow, TableCell, TextField } from"@material-ui/core";
+import { FormControl, Button, Paper, Grid, makeStyles, TableBody, TableRow, TableCell, TextField } from"@material-ui/core";
 import NavigateNextIcon from '@material-ui/icons/NavigateNext';
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { db, auth }  from '../../firebase/initFirebase';
-import Appbar from "../Tabs/Appbar";
 
 const useStyles = makeStyles({
   content: {
@@ -68,7 +67,7 @@ const RecipeList = () => {
   const classes = useStyles();
   return(
     <Grid container spacing={0}direction="column" alignItems="center" justify="center" className={classes.content}>
-      <Appbar/>
+      {/* <Appbar/> */}
       <Grid item xs={11}>
         <Paper elevation={5}>
           <TableBody>
@@ -96,8 +95,6 @@ const RecipeList = () => {
         ))}
       </ul>
     </Grid>
-
-
   );
 }
 

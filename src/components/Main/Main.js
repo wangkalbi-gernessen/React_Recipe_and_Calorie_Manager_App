@@ -6,7 +6,6 @@ import sandwich from "../../img/Main/sandwich.png";
 import food from "../../img/Main/food.png";
 import steak from "../../img/Main/steak.png";
 import { useState } from "react";
-import Appbar from "../Tabs/Appbar";
 import { Switch, Route, useHistory } from "react-router-dom";
 import AddIngredients from './AddIngredients';
 
@@ -29,16 +28,8 @@ const useStyles = makeStyles({
   }
 });
 
-// const buttonImages = [
-//   {id: 1, image: friedEgg, type: "Breakfast"},
-//   {id: 2, image: sandwich, type: "Lunch"},
-//   {id: 3, image: food, type: "Snack"},
-//   {id: 4, image: steak, type: "Dinner"}
-// ];
-
 const Main = () => {
   const classes = useStyles();
-
   const [dishName, setDishName] = useState('');
   const [meal, setMeal] = useState('breakfast')
   const userId = auth.currentUser.uid;
@@ -58,7 +49,6 @@ const Main = () => {
 
   return (
     <Container className={classes.content}>
-      <Appbar/>
       <Typography align="center" variant="h4" style={{color:"#008b8b", paddingTop: "30px"}}>Add New Recipe</Typography>
       <Typography variant="h6" style={{paddingLeft: "20px", paddingTop: "30px", fontFamily: "fantasy"}}>Welcome, {auth.currentUser.email}</Typography>
       <FormControl noValidate   autoComplete="off" className={classes.form}>
@@ -95,6 +85,9 @@ const Main = () => {
           <Button variant="contained" color="secondary" style={{cursor: "pointer"}} onClick={addRecipe}>Add Recipe</Button>
         </Container>
       </FormControl>
+      <Switch>
+        <Route path="/Main/AddIngredients" component={AddIngredients} />
+      </Switch>
      </Container>
   );
 }

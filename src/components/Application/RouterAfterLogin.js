@@ -4,6 +4,7 @@ import Main from '../Main/Main';
 import RecipeList from '../RecipeList/RecipeList';
 import BmrCalculator from '../BMR/BmrCalculator';
 import AddIngredients from '../Main/AddIngredients';
+import Appbar from '../Tabs/Appbar';
 
 const useStyle = makeStyles({
   content: {
@@ -17,12 +18,13 @@ const RouterAfterLogin = () => {
   const classes = useStyle();
   return (
     <Container className={classes.content}>
-        <Switch>
-          <Route path="/RecipeList/RecipeList" component={RecipeList}/>
-          <Route exact path="/" component={Main}/>
-          <Route path="/BMR/BmrCalculator" component={BmrCalculator} />
-          <Route path="/Main/AddIngredients" component={AddIngredients} />
-        </Switch>
+      <Appbar/>
+      <Switch>
+        <Route path="/RecipeList/RecipeList" component={RecipeList}/>
+        <Route exact path="/" component={Main}/>
+        <Route path="/BMR/BmrCalculator" component={BmrCalculator} />
+        <Route path="/Main/AddIngredients" component={AddIngredients} />
+      </Switch>
     </Container>
   );
 }
