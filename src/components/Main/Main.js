@@ -35,16 +35,17 @@ const Main = () => {
   const userId = auth.currentUser.uid;
   const history = useHistory();
 
+
   const addRecipe = (event) => {
-    event.preventDefault();
-    db.collection('recipe').add({
-      userId: userId,
-      dishName: dishName,
-      meal: meal
-    }).catch(alert);
-    setDishName('');
-    setMeal('breakfast');
-    history.push("/Main/AddIngredients");
+    // event.preventDefault();
+    // db.collection('recipe').add({
+    //   userId: userId,
+    //   dishName: dishName,
+    //   meal: meal
+    // }).catch(alert);
+    // setDishName('');
+    // setMeal('breakfast');
+    history.push("/Main/AddIngredients", {params: dishName});
   }
 
   return (
@@ -53,7 +54,7 @@ const Main = () => {
       <Typography variant="h6" style={{paddingLeft: "20px", paddingTop: "30px", fontFamily: "fantasy"}}>Welcome, {auth.currentUser.email}</Typography>
       <FormControl noValidate   autoComplete="off" className={classes.form}>
         <Container >
-          <TextField  placeholder="Chicken Adobo" variant="outlined" style={{background: "white", margin: "40px 20px"}} size="large" value={dishName} onChange={(e) => setDishName(e.target.value)} />
+          <TextField  placeholder="Chicken Adobo" variant="outlined" style={{background: "white", margin: "40px 20px"}} size="large" value={dishName} onChange={(e) => setDishName(e.target.value)}/>
           <Grid container spacing={12} justify="space-evenly" alignItems="center" className={classes.radioArea}>
             <RadioGroup row aria-label="position" name="position" defaultValue="Breakfast" >
               <Grid item xs={6} sm={3} md={3} lg={3}>
@@ -82,7 +83,7 @@ const Main = () => {
               </Grid>
             </RadioGroup>
           </Grid>
-          <Button variant="contained" color="secondary" style={{cursor: "pointer"}} onClick={addRecipe}>Add Recipe</Button>
+          <Button variant="contained" color="secondary" style={{cursor: "pointer", marginTop: "50px"}} onClick={addRecipe} disabled={!dishName}>Add Recipe</Button>
         </Container>
       </FormControl>
       <Switch>

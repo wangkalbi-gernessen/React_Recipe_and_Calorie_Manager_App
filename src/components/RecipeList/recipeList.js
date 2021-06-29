@@ -1,4 +1,4 @@
-import { FormControl, Button, Paper, Grid, makeStyles, TableBody, TableRow, TableCell, TextField } from"@material-ui/core";
+import { Paper, Grid, makeStyles, TableBody, TableRow, TableCell } from"@material-ui/core";
 import NavigateNextIcon from '@material-ui/icons/NavigateNext';
 import { useState } from "react";
 import { db, auth }  from '../../firebase/initFirebase';
@@ -45,29 +45,10 @@ const RecipeList = () => {
     })
   }
 
-  // fetch data from Calorie Ninjas API
-  const [ ingredients, setIngredients ] = useState('');
-  const [items, setItems] = useState([]);
-
-  const fetchAPI = (event) => {
-    event.preventDefault();
-    fetch('https://api.calorieninjas.com/v1/nutrition?query=' + ingredients, {
-      method: 'GET',
-      headers: {'X-Api-Key': 'f/TgvT5UXyrfwO03Fzk/jw==hnra1zNlgjYiplLH'},
-    })
-    .then(res => res.json())
-    .then((result) => {
-      console.log(result);
-      setItems(result);
-    }).catch((error) => {
-      // console.log("error");
-    });
-  }
-
   const classes = useStyles();
+
   return(
     <Grid container spacing={0}direction="column" alignItems="center" justify="center" className={classes.content}>
-      {/* <Appbar/> */}
       <Grid item xs={11}>
         <Paper elevation={5}>
           <TableBody>
@@ -75,25 +56,13 @@ const RecipeList = () => {
             <TableRow>
               <TableCell>{meal.meal}</TableCell>
               <TableCell>
-                <NavigateNextIcon fontSize="large" onClick={() => console.log("good")}/>
+                <NavigateNextIcon fontSize="large"/>
               </TableCell>
           </TableRow>
           ))}
           </TableBody>
         </Paper>
       </Grid>
-      <FormControl>
-        <TextField size="large" label="ingredients"
-      value={ingredients} onChange={(e) => setIngredients(e.target.value)} />
-        <Button onClick={fetchAPI}>Click</Button>
-      </FormControl>
-      <ul>
-        {items.map(item => (
-          <li key={item.id}>
-            {item.name}
-          </li>
-        ))}
-      </ul>
     </Grid>
   );
 }

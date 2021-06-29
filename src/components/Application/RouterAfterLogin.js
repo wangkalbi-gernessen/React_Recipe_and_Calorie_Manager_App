@@ -5,6 +5,7 @@ import RecipeList from '../RecipeList/RecipeList';
 import BmrCalculator from '../BMR/BmrCalculator';
 import AddIngredients from '../Main/AddIngredients';
 import Appbar from '../Tabs/Appbar';
+import MenuTotalCalorieDetail from '../RecipeList/MenuTotalCalorieDetail';
 
 const useStyle = makeStyles({
   content: {
@@ -24,6 +25,7 @@ const RouterAfterLogin = () => {
         <Route exact path="/" component={Main}/>
         <Route path="/BMR/BmrCalculator" component={BmrCalculator} />
         <Route path="/Main/AddIngredients" component={AddIngredients} />
+        <Route path="/RecipeList/MenuTotalCalorieDetail" component={MenuTotalCalorieDetail} />
       </Switch>
     </Container>
   );
