@@ -32,7 +32,7 @@ const MenuTotalCalorieDetail = () => {
   const myParam = location.state.params;
 
   // fetch data from Calorie Ninjas API
-  const [ ingredients, setIngredients ] = useState('');
+  const [ ingredients, setIngredients ] = useState([]);
   const [items, setItems] = useState([]);
 
   const fetchAPI = (event) => {
@@ -57,10 +57,10 @@ const MenuTotalCalorieDetail = () => {
         <Typography variant="h4" align="center" gutterBottom="true" style={{fontFamily: "monospace", padding: "20px", color: "orange", fontWeight: "bold"}}>{myParam}</Typography>        
       <FormControl noValidate autoComplete="off" style={{width: "100%", margin: "auto", padding: "20px", textAlign: "center"}}>
         <Container className={classes.formArea}>
-
-        
-        <TextField placeholder="1 tbsp soy sauce" variant="outlined" style={{background: "white", margin:"40px 20px"}} type="text" size="large" label="ingredients" value={ingredients} onChange={(e) => setIngredients(e.target.value)} />
-        <Button onClick={fetchAPI} variant="contained" color="primary" style={{cursor: "pointer"}} disabled={!ingredients}>Click</Button>
+          <Grid container direction="row" alignItems="center" justify="center">
+            <TextField placeholder="1 tbsp soy sauce" variant="outlined" style={{background: "white", margin:"40px 20px"}} type="text" size="large" label="ingredients" value={ingredients} onChange={(e) => setIngredients(e.target.value)} />
+            <Button onClick={fetchAPI} variant="contained" color="primary" style={{cursor: "pointer"}} disabled={!ingredients}>Click</Button>
+          </Grid>
         </Container>
       </FormControl>
         </Paper>
