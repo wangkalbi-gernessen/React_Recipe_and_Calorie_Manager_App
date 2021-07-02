@@ -50,6 +50,22 @@ const MenuTotalCalorieDetail = () => {
     protein_g: 0,
     carbohydrates_total_g: 0
   });
+  // const [nutritions, setNutritions] = useState([]);
+
+  const mergeNutrition = (data) => {
+    const res = {};
+
+    data.forEach(basket => { 
+      for (let [key, value] of Object.entries(basket)) { 
+        if (res[key]) { 
+          res[key] += value; 
+        } else { 
+          res[key] = value;
+        }
+      }
+    });
+    return res;
+  }
 
   const fetchAPI = (event) => {
     event.preventDefault();
@@ -60,14 +76,19 @@ const MenuTotalCalorieDetail = () => {
     .then(res => res.json())
     .then(data => data.items)
     .then((items) => {
-      
-      setNutritions({calories: items[0].calories});
+      let arr = items;
+      const mergedNutritions = mergeNutrition(arr);
+      console.log(mergedNutritions);
+
+      let arrs =  mergedNutritions.map((data) => setNutritions({...nutritions, data}));
+      console.log(arrs);
       console.log(nutritions);
-      console.log(nutritions.calories);
+
     }).catch((error) => {
       console.log("error");
     });
     addIngredient();
+    setIngredient('');
   }
 
   const addIngredient = () => {
@@ -75,10 +96,7 @@ const MenuTotalCalorieDetail = () => {
       ...ingredients, {
         id: ingredients.length + 1,
         name: ingredient,
-        // nutrition: [{
-        //   sugar_g: 
-        //   calories: 
-        // }]
+        nutrition: nutritions
       }
     ]);
   };
@@ -111,7 +129,7 @@ const MenuTotalCalorieDetail = () => {
               <TableBody>
                 { ingredients.map(ingredient => (
                   <TableRow key={ingredient.id}>
-                    <TableCell>{ingredient.name}</TableCell>
+                    <TableCell>{ingredient.name}, {ingredient.nutrition.calories}</TableCell>
                     <TableCell><DeleteIcon onClick={() => deleteIngredient(ingredient.id)} /></TableCell>
                   </TableRow>
                 ))}
