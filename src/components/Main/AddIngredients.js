@@ -1,7 +1,9 @@
 import { Button, Grid, TextField } from "@material-ui/core";
-import { Paper, Container, FormControl, makeStyles, Typography } from "@material-ui/core";
+import { Table, TableHead, TableRow, TableCell, TableBody, Paper, Container, makeStyles, Typography } from "@material-ui/core";
 import React, { useState } from "react";
 import { useLocation } from "react-router-dom";
+import { auth } from '../../firebase/initFirebase';
+import DeleteIcon from '@material-ui/icons/Delete';
 
 const useStyles = makeStyles({
   content: {
@@ -30,39 +32,93 @@ const MenuTotalCalorieDetail = () => {
   const classes = useStyles();
   const location = useLocation();
   const myParam = location.state.params;
+  const userId = auth.currentUser.uid;
 
   // fetch data from Calorie Ninjas API
+  const [ ingredient, setIngredient ] = useState("");
   const [ ingredients, setIngredients ] = useState([]);
-  const [items, setItems] = useState([]);
+  const [nutritions, setNutritions] = useState({
+    sugar_g: 0,
+    fiber_g: 0,
+    serving_size_g: 0,
+    sodium_mg: 0,
+    potassium_mg: 0,
+    fat_saturated_g: 0,
+    fat_total_g: 0,
+    calories: 0,
+    cholesterol_mg: 0,
+    protein_g: 0,
+    carbohydrates_total_g: 0
+  });
 
   const fetchAPI = (event) => {
     event.preventDefault();
-    fetch('https://api.calorieninjas.com/v1/nutrition?query=' + ingredients, {
+    fetch('https://api.calorieninjas.com/v1/nutrition?query=' + ingredient, {
       method: 'GET',
       headers: {'X-Api-Key': 'f/TgvT5UXyrfwO03Fzk/jw==hnra1zNlgjYiplLH'},
     })
     .then(res => res.json())
-    .then((result) => {
-      console.log(result);
-      setItems(result);
+    .then(data => data.items)
+    .then((items) => {
+      
+      setNutritions({calories: items[0].calories});
+      console.log(nutritions);
+      console.log(nutritions.calories);
     }).catch((error) => {
       console.log("error");
     });
+    addIngredient();
+  }
+
+  const addIngredient = () => {
+    setIngredients([
+      ...ingredients, {
+        id: ingredients.length + 1,
+        name: ingredient,
+        // nutrition: [{
+        //   sugar_g: 
+        //   calories: 
+        // }]
+      }
+    ]);
+  };
+
+  const deleteIngredient = (ingredientId) => {
+    const updatedIngredients = ingredients.filter(ingredient => ingredient.id !== ingredientId);
+    setIngredients(updatedIngredients);
   }
 
   return(
     <Grid container spacing={0} direction="column" alignItems="center" justify="center" className={classes.content}>
       <Grid item xs={16}>
         <Paper elevation={10}>
-        <Typography variant="h4" align="center" gutterBottom="true" style={{fontFamily: "monospace", padding: "20px", color: "orange", fontWeight: "bold"}}>{myParam}</Typography>        
-      <FormControl noValidate autoComplete="off" style={{width: "100%", margin: "auto", padding: "20px", textAlign: "center"}}>
-        <Container className={classes.formArea}>
-          <Grid container direction="row" alignItems="center" justify="center">
-            <TextField placeholder="1 tbsp soy sauce" variant="outlined" style={{background: "white", margin:"40px 20px"}} type="text" size="large" label="ingredients" value={ingredients} onChange={(e) => setIngredients(e.target.value)} />
-            <Button onClick={fetchAPI} variant="contained" color="primary" style={{cursor: "pointer"}} disabled={!ingredients}>Click</Button>
-          </Grid>
-        </Container>
-      </FormControl>
+          <Typography variant="h4" align="center" gutterBottom="true" style={{fontFamily: "monospace", padding: "20px", color: "orange", fontWeight: "bold"}}>{myParam}</Typography>        
+          <Container className={classes.formArea}>
+            <Grid container direction="row" alignItems="center" justify="center">
+              <form onSubmit={fetchAPI} noValidate autoComplete="off" style={{width: "100%", margin: "auto", padding: "20px", textAlign: "center"}}>
+                <TextField placeholder="1 tbsp soy sauce" variant="outlined" style={{background: "white", margin:"40px 20px"}} type="text" size="large" label="ingredients" value={ingredient} onChange={(e) => setIngredient(e.target.value)} />
+                <Button type="submit" variant="contained" color="primary" style={{cursor: "pointer"}} disabled={!ingredient}>Click</Button>
+              </form>
+            </Grid>
+          </Container>
+          <Container>
+            <Table size="small">
+              <TableHead>
+                <TableRow component="th" scope="row">
+                  <TableCell>Ingredient</TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                { ingredients.map(ingredient => (
+                  <TableRow key={ingredient.id}>
+                    <TableCell>{ingredient.name}</TableCell>
+                    <TableCell><DeleteIcon onClick={() => deleteIngredient(ingredient.id)} /></TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </Container>
+
         </Paper>
       </Grid>
     </Grid>
