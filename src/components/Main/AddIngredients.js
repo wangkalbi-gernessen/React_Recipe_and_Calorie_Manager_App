@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import { useLocation } from "react-router-dom";
 import { auth } from '../../firebase/initFirebase';
 import DeleteIcon from '@material-ui/icons/Delete';
+import AnimatedNumber from "react-animated-number";
 
 const useStyles = makeStyles({
   content: {
@@ -37,7 +38,7 @@ const MenuTotalCalorieDetail = () => {
   // fetch data from Calorie Ninjas API
   const [ ingredient, setIngredient ] = useState("");
   const [ ingredients, setIngredients ] = useState([]);
-  const [nutritions, setNutritions] = useState({
+  const [nutritions, setNutritions] = useState([{
     sugar_g: 0,
     fiber_g: 0,
     serving_size_g: 0,
@@ -49,8 +50,7 @@ const MenuTotalCalorieDetail = () => {
     cholesterol_mg: 0,
     protein_g: 0,
     carbohydrates_total_g: 0
-  });
-  // const [nutritions, setNutritions] = useState([]);
+  }]);
 
   const mergeNutrition = (data) => {
     const res = {};
@@ -78,12 +78,12 @@ const MenuTotalCalorieDetail = () => {
     .then((items) => {
       let arr = items;
       const mergedNutritions = mergeNutrition(arr);
-      console.log(mergedNutritions);
+      for(let key in mergedNutritions) {
+        nutritions[key] = mergedNutritions[key];
+      }
 
-      let arrs =  mergedNutritions.map((data) => setNutritions({...nutritions, data}));
-      console.log(arrs);
-      console.log(nutritions);
-
+      let dt = Object.assign({}, nutritions);
+      setNutritions([dt]);
     }).catch((error) => {
       console.log("error");
     });
@@ -106,6 +106,21 @@ const MenuTotalCalorieDetail = () => {
     setIngredients(updatedIngredients);
   }
 
+  const caloriesReducer = (total, item) => total + parseInt(item.nutrition.calories);
+  const totalCalories = ingredients.reduce(caloriesReducer, 0);
+
+  const carbsReducer = (total, item) => total + parseInt(item.nutrition.carbohydrates_total_g);
+  const totalCarbs = ingredients.reduce(carbsReducer, 0);
+
+  const proteinReducer = (total, item) => total + parseInt(item.nutrition.protein_g);
+  const totalProtein = ingredients.reduce(proteinReducer, 0);
+
+  const fatReducer = (total, item) => total + parseInt(item.nutrition.fat_total_g);
+  const totalFat = ingredients.reduce(fatReducer, 0);
+
+  const fiberReducer = (total, item) => total + parseInt(item.nutrition.fiber_g);
+  const totalFiber = ingredients.reduce(fiberReducer, 0);
+
   return(
     <Grid container spacing={0} direction="column" alignItems="center" justify="center" className={classes.content}>
       <Grid item xs={16}>
@@ -119,24 +134,54 @@ const MenuTotalCalorieDetail = () => {
               </form>
             </Grid>
           </Container>
+          {/* table of total nutrition of all ingredients */}
           <Container>
             <Table size="small">
               <TableHead>
-                <TableRow component="th" scope="row">
-                  <TableCell>Ingredient</TableCell>
+                <TableRow style={{background: "green", borderRadius: "50%"}}>
+                  <TableCell>Calories</TableCell>
+                  <TableCell>Carbs</TableCell>
+                  <TableCell>Protein</TableCell>
+                  <TableCell>Fat</TableCell>
+                  <TableCell>Fiber</TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
+                <TableRow>
+                  <TableCell align="right"><AnimatedNumber component="text" value={totalCalories} style={{margin: "10px", fontSize: "20px", transition: '0.8s ease-out', transitionProperty: 'background-color, color, opacity'}} frameStyle={perc => ({ opacity : perc / 100})} duration={100} /> g</TableCell>
+                  <TableCell align="right">
+                    <AnimatedNumber component="text" value={totalCarbs} style={{margin: "10px", fontSize:  "20px", transition: '0.8s ease-out', transitionProperty: 'background-color, color, opacity'}} frameStyle={perc => ({ opacity : perc / 100})} duration={100} />
+                     g</TableCell>
+                  <TableCell align="right">
+                    <AnimatedNumber component="text" value={totalProtein} style={{margin: "10px", fontSize:  "20px", transition: '0.8s ease-out', transitionProperty: 'background-color, color, opacity'}} frameStyle={perc => ({ opacity : perc / 100})} duration={100} />
+                     g</TableCell>
+                  <TableCell align="right">
+                    <AnimatedNumber component="text" value={totalFat} style={{margin: "10px", fontSize:  "20px", transition: '0.8s ease-out', transitionProperty: 'background-color, color, opacity'}} frameStyle={perc => ({ opacity : perc / 100})} duration={100} />
+                     g</TableCell>
+                  <TableCell align="right">
+                    <AnimatedNumber component="text" value={totalFiber} style={{margin: "10px", fontSize:  "20px", transition: '0.8s ease-out', transitionProperty: 'background-color, color, opacity'}} frameStyle={perc => ({ opacity : perc / 100})} duration={100} />
+                     g</TableCell>
+                </TableRow>
+              </TableBody>
+            </Table>
+          </Container>
+          <Container>
+            <Typography variant="h6" style={{color: "brown", fontSize: "30px"}}>Ingredients</Typography>
+            <Table size="small">
+              <TableBody>
                 { ingredients.map(ingredient => (
                   <TableRow key={ingredient.id}>
-                    <TableCell>{ingredient.name}, {ingredient.nutrition.calories}</TableCell>
+                    <TableCell>{ingredient.name}</TableCell>  
                     <TableCell><DeleteIcon onClick={() => deleteIngredient(ingredient.id)} /></TableCell>
                   </TableRow>
                 ))}
               </TableBody>
             </Table>
           </Container>
-
+          <Container>
+          <Typography variant="h6" style={{color: "brown", fontSize: "30px"}}>Nutrition Facts</Typography>
+            
+          </Container>
         </Paper>
       </Grid>
     </Grid>
