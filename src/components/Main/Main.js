@@ -37,15 +37,7 @@ const Main = () => {
 
 
   const addRecipe = (event) => {
-    // event.preventDefault();
-    // db.collection('recipe').add({
-    //   userId: userId,
-    //   dishName: dishName,
-    //   meal: meal
-    // }).catch(alert);
-    // setDishName('');
-    // setMeal('breakfast');
-    history.push("/Main/AddIngredients", {params: dishName});
+    history.push("/Main/AddIngredients", {dishName: dishName, meal: meal});
   }
 
   return (

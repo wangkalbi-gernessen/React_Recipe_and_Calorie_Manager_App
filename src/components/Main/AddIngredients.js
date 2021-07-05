@@ -1,8 +1,8 @@
 import { Button, Grid, TextField } from "@material-ui/core";
 import { Table, TableHead, TableRow, TableCell, TableBody, Paper, Container, makeStyles, Typography } from "@material-ui/core";
 import React, { useState } from "react";
-import { useLocation } from "react-router-dom";
-import { auth } from '../../firebase/initFirebase';
+import { useHistory, useLocation } from "react-router-dom";
+import { db, auth } from '../../firebase/initFirebase';
 import DeleteIcon from '@material-ui/icons/Delete';
 import AnimatedNumber from "react-animated-number";
 
@@ -26,14 +26,20 @@ const useStyles = makeStyles({
     margin: 0,
     padding: "auto",
     opacity: "0.6",
+  },
+  nutritionFact: {
+    width: "100%",
+    background: "lime"    
   }
 });
 
 const MenuTotalCalorieDetail = () => {
   const classes = useStyles();
   const location = useLocation();
-  const myParam = location.state.params;
+  const dishName = location.state.dishName;
+  const mealType = location.state.meal;
   const userId = auth.currentUser.uid;
+  const history = useHistory();
 
   // fetch data from Calorie Ninjas API
   const [ ingredient, setIngredient ] = useState("");
@@ -121,11 +127,24 @@ const MenuTotalCalorieDetail = () => {
   const fiberReducer = (total, item) => total + parseInt(item.nutrition.fiber_g);
   const totalFiber = ingredients.reduce(fiberReducer, 0);
 
+  // add data to firebase
+  const registerRecipe = (event) => {
+    event.preventDefault();
+    db.collection('recipe').add({
+      userId: userId,
+      dishName: dishName,
+      mealType: mealType,
+      ingredients: ingredients
+    }).catch(alert);
+
+    history
+  }
+
   return(
     <Grid container spacing={0} direction="column" alignItems="center" justify="center" className={classes.content}>
       <Grid item xs={16}>
         <Paper elevation={10}>
-          <Typography variant="h4" align="center" gutterBottom="true" style={{fontFamily: "monospace", padding: "20px", color: "orange", fontWeight: "bold"}}>{myParam}</Typography>        
+          <Typography variant="h4" align="center" gutterBottom="true" style={{fontFamily: "monospace", padding: "20px", color: "orange", fontWeight: "bold"}}>{dishName}</Typography>        
           <Container className={classes.formArea}>
             <Grid container direction="row" alignItems="center" justify="center">
               <form onSubmit={fetchAPI} noValidate autoComplete="off" style={{width: "100%", margin: "auto", padding: "20px", textAlign: "center"}}>
@@ -148,7 +167,7 @@ const MenuTotalCalorieDetail = () => {
               </TableHead>
               <TableBody>
                 <TableRow>
-                  <TableCell align="right"><AnimatedNumber component="text" value={totalCalories} style={{margin: "10px", fontSize: "20px", transition: '0.8s ease-out', transitionProperty: 'background-color, color, opacity'}} frameStyle={perc => ({ opacity : perc / 100})} duration={100} /> g</TableCell>
+                  <TableCell align="right"><AnimatedNumber component="text" value={totalCalories} style={{margin: "10px", fontSize: "20px", transition: '0.5s linear', transitionProperty: 'background-color, color, opacity'}} frameStyle={perc => ({ opacity : perc / 100})} duration={500} /> g</TableCell>
                   <TableCell align="right">
                     <AnimatedNumber component="text" value={totalCarbs} style={{margin: "10px", fontSize:  "20px", transition: '0.8s ease-out', transitionProperty: 'background-color, color, opacity'}} frameStyle={perc => ({ opacity : perc / 100})} duration={100} />
                      g</TableCell>
@@ -178,9 +197,15 @@ const MenuTotalCalorieDetail = () => {
               </TableBody>
             </Table>
           </Container>
+          {/* nutrition facts of all ingredients */}
           <Container>
-          <Typography variant="h6" style={{color: "brown", fontSize: "30px"}}>Nutrition Facts</Typography>
-            
+            <Typography variant="h6" style={{color: "brown", fontSize: "30px"}}>Nutrition Facts</Typography>
+            <Container className={classes.nutritionFact}>
+              
+            </Container>
+          </Container>
+          <Container>
+            <Button size="large" color="secondary" variant="outlined" style={{cursor: "pointer", marginTop: "50px"}} type="submit" onClick={registerRecipe}>Add Recipe</Button>
           </Container>
         </Paper>
       </Grid>
