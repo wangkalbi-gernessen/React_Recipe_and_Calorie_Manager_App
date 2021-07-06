@@ -130,13 +130,17 @@ const MenuTotalCalorieDetail = () => {
   // add data to firebase
   const registerRecipe = (event) => {
     event.preventDefault();
-    db.collection('recipe').add({
+    // get auto generated ID for recipe
+    const recipeId = db.collection('recipe').doc().id;
+    // add data to firebase
+    db.collection('recipe').doc(recipeId).set({
+      recipeId: recipeId, 
       userId: userId,
       dishName: dishName,
       mealType: mealType,
       ingredients: ingredients
-    }).catch(alert);
-
+    })
+    // go to main page
     history.push("/");
   }
 
