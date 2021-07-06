@@ -137,7 +137,7 @@ const MenuTotalCalorieDetail = () => {
       ingredients: ingredients
     }).catch(alert);
 
-    history
+    history.push("/");
   }
 
   return(

@@ -1,7 +1,7 @@
-import { Paper, Grid, makeStyles, TableBody, TableRow, TableCell } from"@material-ui/core";
+import { Paper, Grid, makeStyles, TableBody, TableRow, TableCell, Table } from"@material-ui/core";
 import NavigateNextIcon from '@material-ui/icons/NavigateNext';
-import { useState } from "react";
-import { db, auth }  from '../../firebase/initFirebase';
+import { useHistory } from "react-router-dom";
+
 
 const useStyles = makeStyles({
   content: {
@@ -22,45 +22,32 @@ const useStyles = makeStyles({
 });
 
 const meals = [
-  {id: 1, meal: "Breakfast"},
-  {id: 2, meal: "Lunch"},
-  {id: 3, meal: "Snack"},
-  {id: 4, meal: "Dinner"},
+  {id: 1, meal: "Breakfast", value: "breakfast"},
+  {id: 2, meal: "Lunch", value: "lunch"},
+  {id: 3, meal: "Snack", value: "snack"},
+  {id: 4, meal: "Dinner", value: "dinner"},
 ];
 
 const RecipeList = () => {
-  const [info, setInfo] = useState([]);
-  const userId = auth.currentUser.uid;
-
-  window.addEventListener('load', () => {
-    FetchData();
-  });
-
-  const FetchData = () => {
-    db.collection('recipe').where("userId", "==", userId ).get().then((querySnapshot) => {
-      querySnapshot.forEach(element => {
-        let data = element.data();
-        setInfo(arr => [...arr, data]);
-      })
-    })
-  }
-
   const classes = useStyles();
+  const history = useHistory();
 
   return(
     <Grid container spacing={0}direction="column" alignItems="center" justify="center" className={classes.content}>
       <Grid item xs={11}>
         <Paper elevation={5}>
-          <TableBody>
-          { meals.map((meal) => (
-            <TableRow>
-              <TableCell>{meal.meal}</TableCell>
-              <TableCell>
-                <NavigateNextIcon fontSize="large"/>
-              </TableCell>
-          </TableRow>
-          ))}
-          </TableBody>
+          <Table>
+            <TableBody>
+            { meals.map((meal) => (
+              <TableRow key={meal.id}>
+                <TableCell>{meal.meal}</TableCell>
+                <TableCell onClick={() => {history.push("/RecipeList/MenuTotalCalorieDetail", {value: meal.value} )}}>
+                  <NavigateNextIcon fontSize="large"/>
+                </TableCell>
+            </TableRow>
+            ))}
+            </TableBody>
+          </Table>
         </Paper>
       </Grid>
     </Grid>

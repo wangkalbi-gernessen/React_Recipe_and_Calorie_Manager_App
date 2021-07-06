@@ -1,6 +1,8 @@
 import {  } from "@material-ui/core";
-import { Container, makeStyles, Typography } from "@material-ui/core";
-import React, { useState } from "react";
+import { Container, makeStyles, Button, Typography } from "@material-ui/core";
+import React, { useEffect, useState } from "react";
+import { useHistory, useLocation } from "react-router-dom";
+import { auth, db } from '../../firebase/initFirebase';
 
 const useStyles = makeStyles({
   content: {
@@ -14,9 +16,34 @@ const useStyles = makeStyles({
 
 const MenuTotalCalorieDetail = () => {
   const classes = useStyles();
+  const userId = auth.currentUser.uid;
+  const [recipe, setRecipe] = useState([]);
+  const history = useHistory();
+  const location = useLocation();
+  const selectedValue = location.state.value;
+
+  useEffect(() => {
+    db.collection('recipe').onSnapshot(snapshot => {
+      const lists = snapshot.docs.map(doc => ({
+        userId: doc.userId,
+        dishName: doc.data().dishName,
+        mealType: doc.data().mealType,
+        ingredients: doc.data().ingredients
+      }));  
+      setRecipe(lists);
+      console.log("lists:", recipe);
+    })
+  }, []);
+
+  const goToMain = () => {
+    history.push("/RecipeList/RecipeList");
+  }
+
   return(
     <Container className={classes.content}>
       <Typography>Hello World</Typography>
+      <Typography>{selectedValue}</Typography>
+      <Button onClick={goToMain}>Go to Main</Button>
     </Container>
   );
 }
