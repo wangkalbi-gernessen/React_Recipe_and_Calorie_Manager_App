@@ -5,6 +5,7 @@ import { useHistory, useLocation } from "react-router-dom";
 import { db, auth } from '../../firebase/initFirebase';
 import DeleteIcon from '@material-ui/icons/Delete';
 import AnimatedNumber from "react-animated-number";
+import InfoOutlinedIcon from '@material-ui/icons/InfoOutlined';
 
 const useStyles = makeStyles({
   content: {
@@ -29,7 +30,15 @@ const useStyles = makeStyles({
   },
   nutritionFact: {
     width: "100%",
-    background: "lime"    
+    height: "100%",
+    background: "lime",
+    overflow: "scroll"
+  }, 
+  addBtn: {
+    width: "100%",
+    margin: "0 auto",
+    padding: "30px",
+    textAlign: "center"
   }
 });
 
@@ -58,6 +67,20 @@ const MenuTotalCalorieDetail = () => {
     carbohydrates_total_g: 0
   }]);
 
+  const [displayNutritions, setDisplayNutritions] = useState([{
+    sugar_g: 0,
+    fiber_g: 0,
+    serving_size_g: 0,
+    sodium_mg: 0,
+    potassium_mg: 0,
+    fat_saturated_g: 0,
+    fat_total_g: 0,
+    calories: 0,
+    cholesterol_mg: 0,
+    protein_g: 0,
+    carbohydrates_total_g: 0
+  }]);
+ 
   const mergeNutrition = (data) => {
     const res = {};
 
@@ -112,6 +135,16 @@ const MenuTotalCalorieDetail = () => {
     setIngredients(updatedIngredients);
   }
 
+  const displayIngredientNutrition = (ingredientId) => {
+    const newArr = [...displayNutritions];
+    newArr[0] = ingredients[ingredientId - 1];
+    console.log(newArr);
+
+    
+    // setDisplayNutritions(newArr);
+    // console.log(displayNutritions);
+  }
+
   const caloriesReducer = (total, item) => total + parseInt(item.nutrition.calories);
   const totalCalories = ingredients.reduce(caloriesReducer, 0);
 
@@ -146,19 +179,23 @@ const MenuTotalCalorieDetail = () => {
 
   return(
     <Grid container spacing={0} direction="column" alignItems="center" justify="center" className={classes.content}>
-      <Grid item xs={16}>
+      <Grid item xs={11} sm={9} md={3} lg={3}>
         <Paper elevation={10}>
           <Typography variant="h4" align="center" gutterBottom="true" style={{fontFamily: "monospace", padding: "20px", color: "orange", fontWeight: "bold"}}>{dishName}</Typography>        
           <Container className={classes.formArea}>
             <Grid container direction="row" alignItems="center" justify="center">
               <form onSubmit={fetchAPI} noValidate autoComplete="off" style={{width: "100%", margin: "auto", padding: "20px", textAlign: "center"}}>
-                <TextField placeholder="1 tbsp soy sauce" variant="outlined" style={{background: "white", margin:"40px 20px"}} type="text" size="large" label="ingredients" value={ingredient} onChange={(e) => setIngredient(e.target.value)} />
-                <Button type="submit" variant="contained" color="primary" style={{cursor: "pointer"}} disabled={!ingredient}>Click</Button>
+                <Container>
+                  <TextField placeholder="1 tbsp soy sauce" variant="outlined" style={{background: "white", margin:"40px 20px"}} type="text" size="large" label="ingredients" value={ingredient} onChange={(e) => setIngredient(e.target.value)} />
+                </Container>
+                <Container>
+                  <Button type="submit" variant="contained" color="primary" style={{cursor: "pointer"}} disabled={!ingredient}>Click</Button>
+                </Container>
               </form>
             </Grid>
           </Container>
           {/* table of total nutrition of all ingredients */}
-          <Container>
+          {/* <Container>
             <Table size="small">
               <TableHead>
                 <TableRow style={{background: "green", borderRadius: "50%"}}>
@@ -187,7 +224,7 @@ const MenuTotalCalorieDetail = () => {
                 </TableRow>
               </TableBody>
             </Table>
-          </Container>
+          </Container> */}
           <Container>
             <Typography variant="h6" style={{color: "brown", fontSize: "30px"}}>Ingredients</Typography>
             <Table size="small">
@@ -196,6 +233,7 @@ const MenuTotalCalorieDetail = () => {
                   <TableRow key={ingredient.id}>
                     <TableCell>{ingredient.name}</TableCell>  
                     <TableCell><DeleteIcon onClick={() => deleteIngredient(ingredient.id)} /></TableCell>
+                    <TableCell><InfoOutlinedIcon onClick={() => displayIngredientNutrition(ingredient.id)} /></TableCell>
                   </TableRow>
                 ))}
               </TableBody>
@@ -205,10 +243,10 @@ const MenuTotalCalorieDetail = () => {
           <Container>
             <Typography variant="h6" style={{color: "brown", fontSize: "30px"}}>Nutrition Facts</Typography>
             <Container className={classes.nutritionFact}>
-              
+              <Typography>Calories: </Typography>
             </Container>
           </Container>
-          <Container>
+          <Container className={classes.addBtn}>
             <Button size="large" color="secondary" variant="outlined" style={{cursor: "pointer", marginTop: "50px"}} type="submit" onClick={registerRecipe}>Add Recipe</Button>
           </Container>
         </Paper>

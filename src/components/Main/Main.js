@@ -75,7 +75,7 @@ const Main = () => {
               </Grid>
             </RadioGroup>
           </Grid>
-          <Button variant="contained" color="secondary" style={{cursor: "pointer", marginTop: "50px"}} onClick={addRecipe} disabled={!dishName}>Add Recipe</Button>
+          <Button size="large" variant="contained" color="secondary" style={{cursor: "pointer", marginTop: "50px"}} onClick={addRecipe} disabled={!dishName}>Add Recipe</Button>
         </Container>
       </FormControl>
       <Switch>
