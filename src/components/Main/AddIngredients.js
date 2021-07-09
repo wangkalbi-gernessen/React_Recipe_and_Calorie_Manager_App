@@ -28,6 +28,10 @@ const useStyles = makeStyles({
     padding: "auto",
     opacity: "0.6",
   },
+  totalNutritions: {
+    width: "100%",
+    overflowX: "scroll"
+  },
   nutritionFact: {
     width: "100%",
     height: "100%",
@@ -53,19 +57,7 @@ const MenuTotalCalorieDetail = () => {
   // fetch data from Calorie Ninjas API
   const [ ingredient, setIngredient ] = useState("");
   const [ingredients, setIngredients] = useState([]);
-  const [nutritions, setNutritions] = useState([{
-    sugar_g: 0,
-    fiber_g: 0,
-    serving_size_g: 0,
-    sodium_mg: 0,
-    potassium_mg: 0,
-    fat_saturated_g: 0,
-    fat_total_g: 0,
-    calories: 0,
-    cholesterol_mg: 0,
-    protein_g: 0,
-    carbohydrates_total_g: 0
-  }]);
+  const [nutritions, setNutritions] = useState({});
 
   const [selectedRecipeId, setSelectedRecipeId] = useState('');
 
@@ -108,9 +100,8 @@ const MenuTotalCalorieDetail = () => {
     setIngredient('');
   }
 
-
   useEffect(() => {
-    console.log(selectedRecipeId);
+    console.log(ingredients);
   }, [ingredients, selectedRecipeId]);
 　　　　
   const addIngredient = () => {
@@ -121,28 +112,35 @@ const MenuTotalCalorieDetail = () => {
 
   const deleteIngredient = (ingredientId) => {
     const updatedIngredients = ingredients.filter(ingredient => ingredient.id !== ingredientId);
+    let idCount = 1;
+    for(let i = 0; i < updatedIngredients.length; i++) {
+      if(updatedIngredients[i].id !== idCount) {
+        updatedIngredients[i].id = idCount;
+      }
+      idCount++;
+    }
     setIngredients(updatedIngredients);
-    setSelectedRecipeId('');
+    setSelectedRecipeId("");
   }
 
   const displayIngredientNutrition = (ingredientId) => {
     setSelectedRecipeId(ingredientId);
   }
 
-  // const caloriesReducer = (total, item) => total + parseInt(item.nutrition.calories);
-  // const totalCalories = ingredients.reduce(caloriesReducer, 0);
+  const caloriesReducer = (total, item) => total + parseInt(item.nutrition.calories);
+  const totalCalories = ingredients.reduce(caloriesReducer, 0);
 
-  // const carbsReducer = (total, item) => total + parseInt(item.nutrition.carbohydrates_total_g);
-  // const totalCarbs = ingredients.reduce(carbsReducer, 0);
+  const carbsReducer = (total, item) => total + parseInt(item.nutrition.carbohydrates_total_g);
+  const totalCarbs = ingredients.reduce(carbsReducer, 0);
 
-  // const proteinReducer = (total, item) => total + parseInt(item.nutrition.protein_g);
-  // const totalProtein = ingredients.reduce(proteinReducer, 0);
+  const proteinReducer = (total, item) => total + parseInt(item.nutrition.protein_g);
+  const totalProtein = ingredients.reduce(proteinReducer, 0);
 
-  // const fatReducer = (total, item) => total + parseInt(item.nutrition.fat_total_g);
-  // const totalFat = ingredients.reduce(fatReducer, 0);
+  const fatReducer = (total, item) => total + parseInt(item.nutrition.fat_total_g);
+  const totalFat = ingredients.reduce(fatReducer, 0);
 
-  // const fiberReducer = (total, item) => total + parseInt(item.nutrition.fiber_g);
-  // const totalFiber = ingredients.reduce(fiberReducer, 0);
+  const fiberReducer = (total, item) => total + parseInt(item.nutrition.fiber_g);
+  const totalFiber = ingredients.reduce(fiberReducer, 0);
 
   // add data to firebase
   const registerRecipe = (event) => {
@@ -179,36 +177,40 @@ const MenuTotalCalorieDetail = () => {
             </Grid>
           </Container>
           {/* table of total nutrition of all ingredients */}
-          {/* <Container>
-            <Table size="small">
-              <TableHead>
-                <TableRow style={{background: "green", borderRadius: "50%"}}>
-                  <TableCell>Calories</TableCell>
-                  <TableCell>Carbs</TableCell>
-                  <TableCell>Protein</TableCell>
-                  <TableCell>Fat</TableCell>
-                  <TableCell>Fiber</TableCell>
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                <TableRow>
-                  <TableCell align="right"><AnimatedNumber component="text" value={totalCalories} style={{margin: "10px", fontSize: "20px", transition: '0.5s linear', transitionProperty: 'background-color, color, opacity'}} frameStyle={perc => ({ opacity : perc / 100})} duration={500} /> g</TableCell>
-                  <TableCell align="right">
-                    <AnimatedNumber component="text" value={totalCarbs} style={{margin: "10px", fontSize:  "20px", transition: '0.8s ease-out', transitionProperty: 'background-color, color, opacity'}} frameStyle={perc => ({ opacity : perc / 100})} duration={100} />
-                     g</TableCell>
-                  <TableCell align="right">
-                    <AnimatedNumber component="text" value={totalProtein} style={{margin: "10px", fontSize:  "20px", transition: '0.8s ease-out', transitionProperty: 'background-color, color, opacity'}} frameStyle={perc => ({ opacity : perc / 100})} duration={100} />
-                     g</TableCell>
-                  <TableCell align="right">
-                    <AnimatedNumber component="text" value={totalFat} style={{margin: "10px", fontSize:  "20px", transition: '0.8s ease-out', transitionProperty: 'background-color, color, opacity'}} frameStyle={perc => ({ opacity : perc / 100})} duration={100} />
-                     g</TableCell>
-                  <TableCell align="right">
-                    <AnimatedNumber component="text" value={totalFiber} style={{margin: "10px", fontSize:  "20px", transition: '0.8s ease-out', transitionProperty: 'background-color, color, opacity'}} frameStyle={perc => ({ opacity : perc / 100})} duration={100} />
-                     g</TableCell>
-                </TableRow>
-              </TableBody>
-            </Table>
-          </Container> */}
+          <Container className={classes.totalNutritions}>
+            <Grid container alignItems="center" direction="column" justify="center" spacing={0}>
+              <Grid item xs={11} sm={9} md={3} lg={3}>
+                <Table size="small">
+                  <TableHead>
+                    <TableRow style={{background: "green", borderRadius: "50%"}}>
+                      <TableCell>Calories</TableCell>
+                      <TableCell>Carbs</TableCell>
+                      <TableCell>Protein</TableCell>
+                      <TableCell>Fat</TableCell>
+                      <TableCell>Fiber</TableCell>
+                    </TableRow>
+                  </TableHead>
+                  <TableBody>
+                    <TableRow>
+                      <TableCell align="right"><AnimatedNumber component="text" value={totalCalories} style={{margin: "10px", fontSize: "20px", transition: '0.5s linear', transitionProperty: 'background-color, color, opacity'}} frameStyle={perc => ({ opacity : perc / 100})} duration={100} /> g</TableCell>
+                      <TableCell align="right">
+                        <AnimatedNumber component="text" value={totalCarbs} style={{margin: "10px", fontSize:  "20px", transition: '0.8s ease-out', transitionProperty: 'background-color, color, opacity'}} frameStyle={perc => ({ opacity : perc / 100})} duration={100} />
+                        g</TableCell>
+                      <TableCell align="right">
+                        <AnimatedNumber component="text" value={totalProtein} style={{margin: "10px", fontSize:  "20px", transition: '0.8s ease-out', transitionProperty: 'background-color, color, opacity'}} frameStyle={perc => ({ opacity : perc / 100})} duration={100} />
+                        g</TableCell>
+                      <TableCell align="right">
+                        <AnimatedNumber component="text" value={totalFat} style={{margin: "10px", fontSize:  "20px", transition: '0.8s ease-out', transitionProperty: 'background-color, color, opacity'}} frameStyle={perc => ({ opacity : perc / 100})} duration={100} />
+                        g</TableCell>
+                      <TableCell align="right">
+                        <AnimatedNumber component="text" value={totalFiber} style={{margin: "10px", fontSize:  "20px", transition: '0.8s ease-out', transitionProperty: 'background-color, color, opacity'}} frameStyle={perc => ({ opacity : perc / 100})} duration={100} />
+                        g</TableCell>
+                    </TableRow>
+                  </TableBody>
+                </Table>
+              </Grid>
+            </Grid>
+          </Container>
           <Container>
             <Typography variant="h6" style={{color: "brown", fontSize: "30px"}}>Ingredients</Typography>
             <Table size="small">
@@ -226,12 +228,10 @@ const MenuTotalCalorieDetail = () => {
           {/* nutrition facts of all ingredients */}
           <Container>
             <Typography variant="h6" style={{color: "brown", fontSize: "30px"}}>Nutrition Facts</Typography>
-            <h1>{ingredients.length}</h1>
-            <h1>{selectedRecipeId}</h1>
             {ingredients.length > 0 && selectedRecipeId ? 
             <Container className={classes.nutritionFact}>
               <Typography>Calories: {ingredients[selectedRecipeId - 1].nutrition.calories}</Typography>
-              {/* <Typography>Protein: {ingredients[selectedRecipeId - 1].nutrition.protein_g}</Typography> */}
+              <Typography>Protein: {ingredients[selectedRecipeId - 1].nutrition.protein_g}</Typography>
             </Container>
             : 
             <Container>
