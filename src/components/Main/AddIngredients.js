@@ -1,6 +1,6 @@
 import { Button, Grid, TextField } from "@material-ui/core";
 import { Table, TableHead, TableRow, TableCell, TableBody, Paper, Container, makeStyles, Typography } from "@material-ui/core";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useHistory, useLocation } from "react-router-dom";
 import { db, auth } from '../../firebase/initFirebase';
 import DeleteIcon from '@material-ui/icons/Delete';
@@ -52,7 +52,7 @@ const MenuTotalCalorieDetail = () => {
 
   // fetch data from Calorie Ninjas API
   const [ ingredient, setIngredient ] = useState("");
-  const [ ingredients, setIngredients ] = useState([]);
+  const [ingredients, setIngredients] = useState([]);
   const [nutritions, setNutritions] = useState([{
     sugar_g: 0,
     fiber_g: 0,
@@ -67,20 +67,8 @@ const MenuTotalCalorieDetail = () => {
     carbohydrates_total_g: 0
   }]);
 
-  const [displayNutritions, setDisplayNutritions] = useState([{
-    sugar_g: 0,
-    fiber_g: 0,
-    serving_size_g: 0,
-    sodium_mg: 0,
-    potassium_mg: 0,
-    fat_saturated_g: 0,
-    fat_total_g: 0,
-    calories: 0,
-    cholesterol_mg: 0,
-    protein_g: 0,
-    carbohydrates_total_g: 0
-  }]);
- 
+  const [selectedRecipeId, setSelectedRecipeId] = useState('');
+
   const mergeNutrition = (data) => {
     const res = {};
 
@@ -89,7 +77,7 @@ const MenuTotalCalorieDetail = () => {
         if (res[key]) { 
           res[key] += value; 
         } else { 
-          res[key] = value;
+          res[key] =  value;
         }
       }
     });
@@ -98,7 +86,7 @@ const MenuTotalCalorieDetail = () => {
 
   const fetchAPI = (event) => {
     event.preventDefault();
-    fetch('https://api.calorieninjas.com/v1/nutrition?query=' + ingredient, {
+    fetch('https://api.calorieninjas.com/v1/nutrition?query=' + ingredient, { 
       method: 'GET',
       headers: {'X-Api-Key': 'f/TgvT5UXyrfwO03Fzk/jw==hnra1zNlgjYiplLH'},
     })
@@ -120,45 +108,41 @@ const MenuTotalCalorieDetail = () => {
     setIngredient('');
   }
 
+
+  useEffect(() => {
+    console.log(selectedRecipeId);
+  }, [ingredients, selectedRecipeId]);
+　　　　
   const addIngredient = () => {
-    setIngredients([
-      ...ingredients, {
-        id: ingredients.length + 1,
-        name: ingredient,
-        nutrition: nutritions
-      }
-    ]);
+    const newIngredients = {id: ingredients.length + 1, name: ingredient, nutrition: nutritions};
+    setIngredients([...ingredients, newIngredients]);
+    setSelectedRecipeId(ingredients.length + 1);
   };
 
   const deleteIngredient = (ingredientId) => {
     const updatedIngredients = ingredients.filter(ingredient => ingredient.id !== ingredientId);
     setIngredients(updatedIngredients);
+    setSelectedRecipeId('');
   }
 
   const displayIngredientNutrition = (ingredientId) => {
-    const newArr = [...displayNutritions];
-    newArr[0] = ingredients[ingredientId - 1];
-    console.log(newArr);
-
-    
-    // setDisplayNutritions(newArr);
-    // console.log(displayNutritions);
+    setSelectedRecipeId(ingredientId);
   }
 
-  const caloriesReducer = (total, item) => total + parseInt(item.nutrition.calories);
-  const totalCalories = ingredients.reduce(caloriesReducer, 0);
+  // const caloriesReducer = (total, item) => total + parseInt(item.nutrition.calories);
+  // const totalCalories = ingredients.reduce(caloriesReducer, 0);
 
-  const carbsReducer = (total, item) => total + parseInt(item.nutrition.carbohydrates_total_g);
-  const totalCarbs = ingredients.reduce(carbsReducer, 0);
+  // const carbsReducer = (total, item) => total + parseInt(item.nutrition.carbohydrates_total_g);
+  // const totalCarbs = ingredients.reduce(carbsReducer, 0);
 
-  const proteinReducer = (total, item) => total + parseInt(item.nutrition.protein_g);
-  const totalProtein = ingredients.reduce(proteinReducer, 0);
+  // const proteinReducer = (total, item) => total + parseInt(item.nutrition.protein_g);
+  // const totalProtein = ingredients.reduce(proteinReducer, 0);
 
-  const fatReducer = (total, item) => total + parseInt(item.nutrition.fat_total_g);
-  const totalFat = ingredients.reduce(fatReducer, 0);
+  // const fatReducer = (total, item) => total + parseInt(item.nutrition.fat_total_g);
+  // const totalFat = ingredients.reduce(fatReducer, 0);
 
-  const fiberReducer = (total, item) => total + parseInt(item.nutrition.fiber_g);
-  const totalFiber = ingredients.reduce(fiberReducer, 0);
+  // const fiberReducer = (total, item) => total + parseInt(item.nutrition.fiber_g);
+  // const totalFiber = ingredients.reduce(fiberReducer, 0);
 
   // add data to firebase
   const registerRecipe = (event) => {
@@ -233,7 +217,7 @@ const MenuTotalCalorieDetail = () => {
                   <TableRow key={ingredient.id}>
                     <TableCell>{ingredient.name}</TableCell>  
                     <TableCell><DeleteIcon onClick={() => deleteIngredient(ingredient.id)} /></TableCell>
-                    <TableCell><InfoOutlinedIcon onClick={() => displayIngredientNutrition(ingredient.id)} /></TableCell>
+                    <TableCell><InfoOutlinedIcon onClick={() => displayIngredientNutrition(ingredient.id)} />{ingredient.id}</TableCell>
                   </TableRow>
                 ))}
               </TableBody>
@@ -242,9 +226,18 @@ const MenuTotalCalorieDetail = () => {
           {/* nutrition facts of all ingredients */}
           <Container>
             <Typography variant="h6" style={{color: "brown", fontSize: "30px"}}>Nutrition Facts</Typography>
+            <h1>{ingredients.length}</h1>
+            <h1>{selectedRecipeId}</h1>
+            {ingredients.length > 0 && selectedRecipeId ? 
             <Container className={classes.nutritionFact}>
-              <Typography>Calories: </Typography>
+              <Typography>Calories: {ingredients[selectedRecipeId - 1].nutrition.calories}</Typography>
+              {/* <Typography>Protein: {ingredients[selectedRecipeId - 1].nutrition.protein_g}</Typography> */}
             </Container>
+            : 
+            <Container>
+              <Typography align="center" variant="h6">Not found</Typography>
+            </Container>
+            }
           </Container>
           <Container className={classes.addBtn}>
             <Button size="large" color="secondary" variant="outlined" style={{cursor: "pointer", marginTop: "50px"}} type="submit" onClick={registerRecipe}>Add Recipe</Button>

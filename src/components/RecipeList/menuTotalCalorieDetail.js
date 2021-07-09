@@ -68,6 +68,7 @@ const MenuTotalCalorieDetail = () => {
 
   return(
     <Grid container spacing={0}direction="column" alignItems="center" justify="center" className={classes.content}>
+      <Typography align="center" variant="h4">{selectedValue}</Typography>
       <Grid item xs={11}>
         <Paper elevation={5}>
           <Table>
