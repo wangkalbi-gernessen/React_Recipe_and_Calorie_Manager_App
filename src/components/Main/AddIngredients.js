@@ -13,7 +13,7 @@ const useStyles = makeStyles({
     minWidth: "100%",
     minHeight: "100vh",
     margin: 0,
-    padding: 0  
+    padding: "30px"
   },
   inputArea: {
     margin: "auto",
@@ -76,6 +76,7 @@ const MenuTotalCalorieDetail = () => {
     return res;
   }
 
+  // fetch data from Calorie Ninjas API
   const fetchAPI = (event) => {
     event.preventDefault();
     fetch('https://api.calorieninjas.com/v1/nutrition?query=' + ingredient, { 
@@ -101,7 +102,6 @@ const MenuTotalCalorieDetail = () => {
   }
 
   useEffect(() => {
-    console.log(ingredients);
   }, [ingredients, selectedRecipeId]);
 　　　　
   const addIngredient = () => {
@@ -127,20 +127,40 @@ const MenuTotalCalorieDetail = () => {
     setSelectedRecipeId(ingredientId);
   }
 
-  const caloriesReducer = (total, item) => total + parseInt(item.nutrition.calories);
-  const totalCalories = ingredients.reduce(caloriesReducer, 0);
+  const totalCalories = ingredients.reduce((total, item) => {
+    if(isNaN(item.nutrition.calories)) {
+      return total;
+    }
+    return total + item.nutrition.calories;
+  }, 0);
 
-  const carbsReducer = (total, item) => total + parseInt(item.nutrition.carbohydrates_total_g);
-  const totalCarbs = ingredients.reduce(carbsReducer, 0);
+  const totalCarbs = ingredients.reduce((total, item) => {
+    if(isNaN(item.nutrition.carbohydrates_total_g)) {
+      return total;
+    }
+    return total + item.nutrition.carbohydrates_total_g;
+  }, 0);
 
-  const proteinReducer = (total, item) => total + parseInt(item.nutrition.protein_g);
-  const totalProtein = ingredients.reduce(proteinReducer, 0);
+  const totalProtein = ingredients.reduce((total, item) => {
+    if(isNaN(item.nutrition.protein_g)) {
+      return total;
+    }
+    return total + item.nutrition.protein_g;
+  }, 0);
 
-  const fatReducer = (total, item) => total + parseInt(item.nutrition.fat_total_g);
-  const totalFat = ingredients.reduce(fatReducer, 0);
+  const totalFat = ingredients.reduce((total, item) => {
+    if(isNaN(item.nutrition.fat_total_g)) {
+      return total;
+    }
+    return total + item.nutrition.fat_total_g;
+  }, 0);
 
-  const fiberReducer = (total, item) => total + parseInt(item.nutrition.fiber_g);
-  const totalFiber = ingredients.reduce(fiberReducer, 0);
+  const totalFiber = ingredients.reduce((total, item) => {
+    if(isNaN(item.nutrition.fiber_g)) {
+      return total;
+    }
+    return total + item.nutrition.fiber_g;
+  }, 0);
 
   // add data to firebase
   const registerRecipe = (event) => {
@@ -161,7 +181,7 @@ const MenuTotalCalorieDetail = () => {
 
   return(
     <Grid container spacing={0} direction="column" alignItems="center" justify="center" className={classes.content}>
-      <Grid item xs={11} sm={9} md={3} lg={3}>
+      <Grid item xs={11} sm={9} md={4} lg={4}>
         <Paper elevation={10}>
           <Typography variant="h4" align="center" gutterBottom="true" style={{fontFamily: "monospace", padding: "20px", color: "orange", fontWeight: "bold"}}>{dishName}</Typography>        
           <Container className={classes.formArea}>
@@ -179,7 +199,7 @@ const MenuTotalCalorieDetail = () => {
           {/* table of total nutrition of all ingredients */}
           <Container className={classes.totalNutritions}>
             <Grid container alignItems="center" direction="column" justify="center" spacing={0}>
-              <Grid item xs={11} sm={9} md={3} lg={3}>
+              <Grid item xs={8} sm={6} md={3} lg={3}>
                 <Table size="small">
                   <TableHead>
                     <TableRow style={{background: "green", borderRadius: "50%"}}>
