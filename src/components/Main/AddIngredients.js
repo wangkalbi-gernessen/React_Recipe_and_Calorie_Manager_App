@@ -33,15 +33,16 @@ const useStyles = makeStyles({
     overflowX: "scroll"
   },
   nutritionFact: {
-    width: "100%",
-    height: "100%",
-    background: "lime",
-    overflow: "scroll"
+    width: "90%",
+    maxHeight: "50%",
+    background: "beige",
+    overflow: "scroll",
+    margin: "20px auto"
   }, 
   addBtn: {
     width: "100%",
     margin: "0 auto",
-    padding: "30px",
+    paddingBottom: "30px",
     textAlign: "center"
   }
 });
@@ -152,7 +153,7 @@ const MenuTotalCalorieDetail = () => {
     if(isNaN(item.nutrition.fat_total_g)) {
       return total;
     }
-    return total + item.nutrition.fat_total_g;
+    return total + item.nutrition.fat_total_g;;
   }, 0);
 
   const totalFiber = ingredients.reduce((total, item) => {
@@ -212,18 +213,18 @@ const MenuTotalCalorieDetail = () => {
                   </TableHead>
                   <TableBody>
                     <TableRow>
-                      <TableCell align="right"><AnimatedNumber component="text" value={totalCalories} style={{margin: "10px", fontSize: "20px", transition: '0.5s linear', transitionProperty: 'background-color, color, opacity'}} frameStyle={perc => ({ opacity : perc / 100})} duration={100} /> g</TableCell>
+                      <TableCell align="right"><AnimatedNumber component="text" value={totalCalories.toFixed(2)} style={{margin: "10px", fontSize: "20px", transition: '0.5s linear', transitionProperty: 'background-color, color, opacity'}} frameStyle={perc => ({ opacity : perc / 100})} duration={100} /> g</TableCell>
                       <TableCell align="right">
-                        <AnimatedNumber component="text" value={totalCarbs} style={{margin: "10px", fontSize:  "20px", transition: '0.8s ease-out', transitionProperty: 'background-color, color, opacity'}} frameStyle={perc => ({ opacity : perc / 100})} duration={100} />
+                        <AnimatedNumber component="text" value={totalCarbs.toFixed(2)} style={{margin: "10px", fontSize:  "20px", transition: '0.8s ease-out', transitionProperty: 'background-color, color, opacity'}} frameStyle={perc => ({ opacity : perc / 100})} duration={100} />
                         g</TableCell>
                       <TableCell align="right">
-                        <AnimatedNumber component="text" value={totalProtein} style={{margin: "10px", fontSize:  "20px", transition: '0.8s ease-out', transitionProperty: 'background-color, color, opacity'}} frameStyle={perc => ({ opacity : perc / 100})} duration={100} />
+                        <AnimatedNumber component="text" value={totalProtein.toFixed(2)} style={{margin: "10px", fontSize:  "20px", transition: '0.8s ease-out', transitionProperty: 'background-color, color, opacity'}} frameStyle={perc => ({ opacity : perc / 100})} duration={100} />
                         g</TableCell>
                       <TableCell align="right">
-                        <AnimatedNumber component="text" value={totalFat} style={{margin: "10px", fontSize:  "20px", transition: '0.8s ease-out', transitionProperty: 'background-color, color, opacity'}} frameStyle={perc => ({ opacity : perc / 100})} duration={100} />
+                        <AnimatedNumber component="text" value={totalFat.toFixed(2)} style={{margin: "10px", fontSize:  "20px", transition: '0.8s ease-out', transitionProperty: 'background-color, color, opacity'}} frameStyle={perc => ({ opacity : perc / 100})} duration={100} />
                         g</TableCell>
                       <TableCell align="right">
-                        <AnimatedNumber component="text" value={totalFiber} style={{margin: "10px", fontSize:  "20px", transition: '0.8s ease-out', transitionProperty: 'background-color, color, opacity'}} frameStyle={perc => ({ opacity : perc / 100})} duration={100} />
+                        <AnimatedNumber component="text" value={totalFiber.toFixed(2)} style={{margin: "10px", fontSize:  "20px", transition: '0.8s ease-out', transitionProperty: 'background-color, color, opacity'}} frameStyle={perc => ({ opacity : perc / 100})} duration={100} />
                         g</TableCell>
                     </TableRow>
                   </TableBody>
@@ -231,33 +232,82 @@ const MenuTotalCalorieDetail = () => {
               </Grid>
             </Grid>
           </Container>
-          <Container>
-            <Typography variant="h6" style={{color: "brown", fontSize: "30px"}}>Ingredients</Typography>
-            <Table size="small">
-              <TableBody>
-                { ingredients.map(ingredient => (
-                  <TableRow key={ingredient.id}>
-                    <TableCell>{ingredient.name}</TableCell>  
-                    <TableCell><DeleteIcon onClick={() => deleteIngredient(ingredient.id)} /></TableCell>
-                    <TableCell><InfoOutlinedIcon onClick={() => displayIngredientNutrition(ingredient.id)} />{ingredient.id}</TableCell>
-                  </TableRow>
-                ))}
-              </TableBody>
-            </Table>
-          </Container>
-          {/* nutrition facts of all ingredients */}
-          <Container>
-            <Typography variant="h6" style={{color: "brown", fontSize: "30px"}}>Nutrition Facts</Typography>
-            {ingredients.length > 0 && selectedRecipeId ? 
-            <Container className={classes.nutritionFact}>
-              <Typography>Calories: {ingredients[selectedRecipeId - 1].nutrition.calories}</Typography>
-              <Typography>Protein: {ingredients[selectedRecipeId - 1].nutrition.protein_g}</Typography>
-            </Container>
-            : 
+          <Container className={classes.nutritionFact}>
             <Container>
-              <Typography align="center" variant="h6">Not found</Typography>
+              <Typography align="center" style={{color: "brown", fontSize: "25px", fontWeight: "bold"}}>Ingredients</Typography>
+              <Table size="small">
+                <TableBody>
+                  { ingredients.map(ingredient => (
+                    <TableRow key={ingredient.id}>
+                      <TableCell>{ingredient.name}</TableCell>  
+                      <TableCell><DeleteIcon onClick={() => deleteIngredient(ingredient.id)} /></TableCell>
+                      <TableCell><InfoOutlinedIcon onClick={() => displayIngredientNutrition(ingredient.id)} /></TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
             </Container>
-            }
+            {/* nutrition facts of all ingredients */}
+            <Container>
+              <Typography align="center" style={{color: "brown", fontSize: "25px", fontWeight: "bold"}}>Nutrition Facts</Typography>
+              {ingredients.length > 0 && selectedRecipeId ? 
+              <Container>
+                <Table size="small">
+                  <TableBody>
+                    <TableRow >
+                      <TableCell>Calories</TableCell>
+                      <TableCell>{ingredients[selectedRecipeId - 1].nutrition.calories}</TableCell>
+                    </TableRow>
+                    <TableRow>
+                      <TableCell></TableCell>
+                      <TableCell>% Daily Value*</TableCell>
+                    </TableRow>
+                    <TableRow>
+                      <TableCell>Total Fat {ingredients[selectedRecipeId - 1].nutrition.fat_total_g}g</TableCell>
+                      <TableCell>%</TableCell>
+                    </TableRow>
+                    <TableRow>
+                      <TableCell>Saturated Fat {ingredients[selectedRecipeId - 1].nutrition.fat_saturated_g}g</TableCell>
+                      <TableCell>%</TableCell>
+                    </TableRow>
+                    <TableRow>
+                      <TableCell>Cholesterol {ingredients[selectedRecipeId - 1].nutrition.cholesterol_mg}mg</TableCell>
+                      <TableCell>%</TableCell>
+                    </TableRow>
+                    <TableRow>
+                      <TableCell>Sodium {ingredients[selectedRecipeId - 1].nutrition.sodium_mg}mg</TableCell>
+                      <TableCell>%</TableCell>
+                    </TableRow>
+                    <TableRow>
+                      <TableCell>Total Carbonhydrate {ingredients[selectedRecipeId - 1].nutrition.carbohydrates_total_g}g</TableCell>
+                      <TableCell>%</TableCell>
+                    </TableRow>
+                    <TableRow>
+                      <TableCell colSpan={2}>Total Sugars {ingredients[selectedRecipeId - 1].nutrition.sugar_g}g</TableCell>
+                    </TableRow>
+                    <TableRow>
+                      <TableCell colSpan={2}>Fiber {ingredients[selectedRecipeId - 1].nutrition.fiber_g}g</TableCell>
+                    </TableRow>
+                    <TableRow>
+                      <TableCell>Protein {ingredients[selectedRecipeId - 1].nutrition.protein_g}g</TableCell>
+                      <TableCell>%</TableCell>
+                    </TableRow>
+                    <TableRow>
+                      <TableCell>Potassium {ingredients[selectedRecipeId - 1].nutrition.potassium_mg}mg</TableCell>
+                      <TableCell>%</TableCell>
+                    </TableRow>
+                    <TableRow>
+                      <TableCell colSpan={2}>The % Daily Value(DV) tells you how much a nutrient in a serving of food contributes to a daily diet. 2,000 calories a day is used for general nutrition advice.(FDA.gov)</TableCell>
+                    </TableRow>
+                  </TableBody>
+                </Table>
+              </Container>
+              : 
+              <Container>
+                <Typography align="center" variant="h5">No Data</Typography>
+              </Container>
+              }
+            </Container>
           </Container>
           <Container className={classes.addBtn}>
             <Button size="large" color="secondary" variant="outlined" style={{cursor: "pointer", marginTop: "50px"}} type="submit" onClick={registerRecipe}>Add Recipe</Button>
