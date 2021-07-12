@@ -186,7 +186,6 @@ const MenuTotalCalorieDetail = () => {
       mealType: mealType,
       ingredients: ingredients
     });
-    console.log(db.collection('recipes').doc(recipeId));
     // go to main page
     history.push("/");
   }

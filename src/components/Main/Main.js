@@ -49,25 +49,25 @@ const Main = () => {
           <TextField  placeholder="Chicken Adobo" variant="outlined" style={{background: "white", margin: "40px 20px"}} size="large" value={dishName} onChange={(e) => setDishName(e.target.value)}/>
           <Grid container spacing={12} justify="space-evenly" alignItems="center" className={classes.radioArea}>
             <RadioGroup row aria-label="position" name="position" defaultValue="Breakfast" >
-              <Grid item xs={6} sm={3} md={3} lg={3}>
+              <Grid item xs={6} sm={3} md={3} lg={3} style={{textAlign: "center"}}>
                 <Container>
                   <img src={friedEgg} width={60} height={60} />
                 </Container>
                 <FormControlLabel value="breakfast" control={<Radio color="primary" />}label="Breakfast" labelPlacement="top" checked={meal === 'breakfast'} onClick={() => setMeal('breakfast')} />
               </Grid>
-              <Grid item xs={6} sm={3} md={3} lg={3}>
+              <Grid item xs={6} sm={3} md={3} lg={3} style={{textAlign: "center"}}>
                 <Container>
                   <img src={sandwich} width={60} height={60} />
                 </Container>
                 <FormControlLabel value="lunch" control={<Radio color="primary" />}label="Lunch"labelPlacement="top" checked={meal === 'lunch'} onClick={() => setMeal('lunch')}/>
               </Grid>
-              <Grid item xs={6} sm={3} md={3} lg={3}>
+              <Grid item xs={6} sm={3} md={3} lg={3} style={{textAlign: "center"}}>
                 <Container>
                   <img src={food} width={60} height={60} />
                 </Container>
                 <FormControlLabel value="snack" control={<Radio color="primary" />}label="Snack"labelPlacement="top" checked={meal === 'snack'} onClick={() => setMeal('snack')}/>
               </Grid>
-              <Grid item xs={6} sm={3} md={3} lg={3}>
+              <Grid item xs={6} sm={3} md={3} lg={3} style={{textAlign: "center"}}>
                 <Container>
                   <img src={steak} width={60} height={60} />
                 </Container>
