@@ -23,29 +23,25 @@ const MenuTotalCalorieDetail = () => {
   const location = useLocation();
   const selectedValue = location.state.value;
 
-  const [open, setOpen] = useState(false);
-  const [update, setUpdate] = useState('');
-  const [toUpdateId, setToUpdateId] = useState('');
+  // const openEditDialog = (recipe) => {
+  //   setOpen(true);
+  //   setToUpdateId(recipe.recipeId);
+  //   setUpdate(recipe.dishName);
+  // }
 
-  const openEditDialog = (recipe) => {
-    setOpen(true);
-    setToUpdateId(recipe.recipeId);
-    setUpdate(recipe.dishName);
-  }
+  // const handleClose = () => {
+  //   setOpen(false);
+  // }
 
-  const handleClose = () => {
-    setOpen(false);
-  }
-
-  const editDishName = () => {
-    db.collection('recipe').doc(toUpdateId).update({
-      dishName: update
-    });
-    setOpen(false);
-  }
+  // const editDishName = () => {
+  //   db.collection('recipes').doc(toUpdateId).update({
+  //     dishName: update
+  //   });
+  //   setOpen(false);
+  // }
 
   useEffect(() => {
-    db.collection('recipe').where("userId", "==", userId).where("mealType", "==", selectedValue).onSnapshot(snapshot => {
+    db.collection('recipes').where("userId", "==", userId).where("mealType", "==", selectedValue).onSnapshot(snapshot => {
       setRecipes(snapshot.docs.map(doc => {
         return {
           userId: doc.data().userId,
@@ -58,37 +54,41 @@ const MenuTotalCalorieDetail = () => {
     }) 
   }, []);
 
-  const goToMain = () => {
-    history.push("/recipesList/recipesList");
+  const deleteRecipes = (id) => {
+    db.collection('recipes').doc(id).delete();    
   }
 
-  const deleteRecipes = (id) => {
-    db.collection('recipe').doc(id).delete();    
+  const goToEditRecipe = (res) => {
+    history.push("/RecipeList/EditRecipe", {recipe: res});
   }
 
   return(
     <Grid container spacing={0}direction="column" alignItems="center" justify="center" className={classes.content}>
-      <Typography align="center" variant="h4">{selectedValue}</Typography>
-      <Grid item xs={11}>
-        <Paper elevation={5}>
-          <Table>
-            <TableBody>
-            { recipes.map((res) => (
-              <TableRow key={res.recipeId}>
-                <TableCell>{res.dishName}</TableCell>
-                <TableCell onClick={() => deleteRecipes(res.recipeId)}>
-                  <DeleteIcon fontSize="large"/>
-                </TableCell>
-                <TableCell>
-                  <EditIcon fontSize="large" onClick={() => openEditDialog(res)}/>
-                </TableCell>
-            </TableRow>
-            ))}
-            </TableBody>
-          </Table>
-        </Paper>
-      </Grid>
-      <Dialog open={open} onClose={handleClose}>
+      <Typography align="center" variant="h4" style={{paddingBottom: "30px"}}>{selectedValue}</Typography>
+      { recipes.length > 0 ? 
+        <Grid item xs={11}>
+          <Paper elevation={5}>
+            <Table>
+              <TableBody>
+              { recipes.map((res) => (
+                <TableRow key={res.recipeId}>
+                  <TableCell>{res.dishName}</TableCell>
+                  <TableCell onClick={() => deleteRecipes(res.recipeId)}>
+                    <DeleteIcon fontSize="large"/>
+                  </TableCell>
+                  <TableCell>
+                    <EditIcon fontSize="large" onClick={() => goToEditRecipe(res)}/>
+                  </TableCell>
+              </TableRow>
+              ))}
+              </TableBody>
+            </Table>
+          </Paper>
+        </Grid>
+        :
+        <Typography variant="h5">No data</Typography>
+      }
+      {/* <Dialog open={open} onClose={handleClose}>
         <DialogContent>
           <TextField autoFocus margin="normal" label="Edit dishName" type="text" name="editDishName" value={update} onChange={event => setUpdate(event.target.value)}/>
         </DialogContent>
@@ -96,7 +96,7 @@ const MenuTotalCalorieDetail = () => {
           <Button onClick={handleClose} color="primary">Cancel</Button>
           <Button onClick={editDishName} color="primary">Save</Button>
         </DialogActions>
-      </Dialog>
+      </Dialog> */}
     </Grid>
   );
 }

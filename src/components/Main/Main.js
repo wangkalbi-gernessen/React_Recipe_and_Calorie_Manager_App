@@ -31,7 +31,7 @@ const useStyles = makeStyles({
 const Main = () => {
   const classes = useStyles();
   const [dishName, setDishName] = useState('');
-  const [meal, setMeal] = useState('breakfast')
+  const [meal, setMeal] = useState('breakfast');
   const userId = auth.currentUser.uid;
   const history = useHistory();
 
@@ -43,7 +43,7 @@ const Main = () => {
   return (
     <Container className={classes.content}>
       <Typography align="center" variant="h4" style={{color:"#008b8b", paddingTop: "30px"}}>Add New Recipe</Typography>
-      <Typography variant="h6" style={{paddingLeft: "20px", paddingTop: "30px", fontFamily: "fantasy"}}>Welcome, {auth.currentUser.email}</Typography>
+      <Typography style={{fontSize: "15px", paddingLeft: "10px", paddingTop: "30px", fontFamily: "fantasy"}}>Welcome, {auth.currentUser.email}</Typography>
       <FormControl noValidate   autoComplete="off" className={classes.form}>
         <Container >
           <TextField  placeholder="Chicken Adobo" variant="outlined" style={{background: "white", margin: "40px 20px"}} size="large" value={dishName} onChange={(e) => setDishName(e.target.value)}/>

@@ -29,8 +29,10 @@ const useStyles = makeStyles({
     opacity: "0.6",
   },
   totalNutritions: {
-    width: "100%",
-    overflowX: "scroll"
+    width: "90%",
+    margin: "20px auto",
+    overflowX: "scroll",
+    padding: 0
   },
   nutritionFact: {
     width: "90%",
@@ -61,6 +63,14 @@ const MenuTotalCalorieDetail = () => {
   const [nutritions, setNutritions] = useState({});
 
   const [selectedRecipeId, setSelectedRecipeId] = useState('');
+
+  const tableHeaders = [
+    {title: "Calories"},
+    {title: "Carbs"},
+    {title: "Protein"},
+    {title: "Fat"},
+    {title: "Fiber"}
+  ];
 
   const mergeNutrition = (data) => {
     const res = {};
@@ -167,15 +177,16 @@ const MenuTotalCalorieDetail = () => {
   const registerRecipe = (event) => {
     event.preventDefault();
     // get auto generated ID for recipe
-    const recipeId = db.collection('recipe').doc().id;
+    const recipeId = db.collection('recipes').doc().id;
     // add data to firebase
-    db.collection('recipe').doc(recipeId).set({
+    db.collection('recipes').doc(recipeId).set({
       recipeId: recipeId, 
       userId: userId,
       dishName: dishName,
       mealType: mealType,
       ingredients: ingredients
-    })
+    });
+    console.log(db.collection('recipes').doc(recipeId));
     // go to main page
     history.push("/");
   }
@@ -184,10 +195,10 @@ const MenuTotalCalorieDetail = () => {
     <Grid container spacing={0} direction="column" alignItems="center" justify="center" className={classes.content}>
       <Grid item xs={11} sm={9} md={4} lg={4}>
         <Paper elevation={10}>
-          <Typography variant="h4" align="center" gutterBottom="true" style={{fontFamily: "monospace", padding: "20px", color: "orange", fontWeight: "bold"}}>{dishName}</Typography>        
+          <Typography variant="h4" align="center" style={{fontFamily: "monospace", padding: "20px", color: "orange", fontWeight: "bold"}}>{dishName}</Typography>        
           <Container className={classes.formArea}>
             <Grid container direction="row" alignItems="center" justify="center">
-              <form onSubmit={fetchAPI} noValidate autoComplete="off" style={{width: "100%", margin: "auto", padding: "20px", textAlign: "center"}}>
+              <form onSubmit={fetchAPI} noValidate autoComplete="off" style={{width: "100%", margin: "auto", textAlign: "center"}}>
                 <Container>
                   <TextField placeholder="1 tbsp soy sauce" variant="outlined" style={{background: "white", margin:"40px 20px"}} type="text" size="large" label="ingredients" value={ingredient} onChange={(e) => setIngredient(e.target.value)} />
                 </Container>
@@ -199,38 +210,34 @@ const MenuTotalCalorieDetail = () => {
           </Container>
           {/* table of total nutrition of all ingredients */}
           <Container className={classes.totalNutritions}>
-            <Grid container alignItems="center" direction="column" justify="center" spacing={0}>
-              <Grid item xs={8} sm={6} md={3} lg={3}>
-                <Table size="small">
-                  <TableHead>
-                    <TableRow style={{background: "green", borderRadius: "50%"}}>
-                      <TableCell>Calories</TableCell>
-                      <TableCell>Carbs</TableCell>
-                      <TableCell>Protein</TableCell>
-                      <TableCell>Fat</TableCell>
-                      <TableCell>Fiber</TableCell>
-                    </TableRow>
-                  </TableHead>
-                  <TableBody>
-                    <TableRow>
-                      <TableCell align="right"><AnimatedNumber component="text" value={totalCalories.toFixed(2)} style={{margin: "10px", fontSize: "20px", transition: '0.5s linear', transitionProperty: 'background-color, color, opacity'}} frameStyle={perc => ({ opacity : perc / 100})} duration={100} /> g</TableCell>
-                      <TableCell align="right">
-                        <AnimatedNumber component="text" value={totalCarbs.toFixed(2)} style={{margin: "10px", fontSize:  "20px", transition: '0.8s ease-out', transitionProperty: 'background-color, color, opacity'}} frameStyle={perc => ({ opacity : perc / 100})} duration={100} />
-                        g</TableCell>
-                      <TableCell align="right">
-                        <AnimatedNumber component="text" value={totalProtein.toFixed(2)} style={{margin: "10px", fontSize:  "20px", transition: '0.8s ease-out', transitionProperty: 'background-color, color, opacity'}} frameStyle={perc => ({ opacity : perc / 100})} duration={100} />
-                        g</TableCell>
-                      <TableCell align="right">
-                        <AnimatedNumber component="text" value={totalFat.toFixed(2)} style={{margin: "10px", fontSize:  "20px", transition: '0.8s ease-out', transitionProperty: 'background-color, color, opacity'}} frameStyle={perc => ({ opacity : perc / 100})} duration={100} />
-                        g</TableCell>
-                      <TableCell align="right">
-                        <AnimatedNumber component="text" value={totalFiber.toFixed(2)} style={{margin: "10px", fontSize:  "20px", transition: '0.8s ease-out', transitionProperty: 'background-color, color, opacity'}} frameStyle={perc => ({ opacity : perc / 100})} duration={100} />
-                        g</TableCell>
-                    </TableRow>
-                  </TableBody>
-                </Table>
-              </Grid>
-            </Grid>
+            <Table size="small">
+              <TableHead>
+                <TableRow>
+                  {tableHeaders.map((tableHeader) => (
+                    <TableCell style={{background: "green", borderRadius: "10px", color: "white"}}>{tableHeader.title}</TableCell>
+                  ))}
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                <TableRow>
+                  <TableCell align="right">
+                    <AnimatedNumber component="text" value={totalCalories.toFixed(2)} style={{margin: "10px", fontSize:  "20px", transition: '0.5s linear', transitionProperty: 'background-color, color, opacity'}} frameStyle={perc => ({ opacity : perc / 100})} duration={100} />
+                    g</TableCell>
+                  <TableCell align="right">
+                    <AnimatedNumber component="text" value={totalCarbs.toFixed(2)} style={{margin: "10px", fontSize:  "20px", transition: '0.5s linear', transitionProperty: 'background-color, color, opacity'}} frameStyle={perc => ({ opacity : perc / 100})} duration={100} />
+                    g</TableCell>
+                  <TableCell align="right">
+                    <AnimatedNumber component="text" value={totalProtein.toFixed(2)} style={{margin: "10px", fontSize:  "20px", transition: '0.8s ease-out', transitionProperty: 'background-color, color, opacity'}} frameStyle={perc => ({ opacity : perc / 100})} duration={100} />
+                    g</TableCell>
+                  <TableCell align="right">
+                    <AnimatedNumber component="text" value={totalFat.toFixed(2)} style={{margin: "10px", fontSize:  "20px", transition: '0.8s ease-out', transitionProperty: 'background-color, color, opacity'}} frameStyle={perc => ({ opacity : perc / 100})} duration={100} />
+                    g</TableCell>
+                  <TableCell align="right">
+                    <AnimatedNumber component="text" value={totalFiber.toFixed(2)} style={{margin: "10px", fontSize:  "20px", transition: '0.8s ease-out', transitionProperty: 'background-color, color, opacity'}} frameStyle={perc => ({ opacity : perc / 100})} duration={100} />
+                    g</TableCell>
+                </TableRow>
+              </TableBody>
+            </Table>
           </Container>
           <Container className={classes.nutritionFact}>
             <Container>

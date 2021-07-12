@@ -45,7 +45,7 @@ const Appbar = () => {
             <Tab icon={<Avatar src={menu} className={classes.avatarSize}/>} component={Link} to="/RecipeList/RecipeList"/>
             <Tab icon={<Avatar src={cooking} className={classes.avatarSize}/>} component={Link} to="/"/>
             <Tab  icon={<Avatar src={calculator} className={classes.avatarSize}/>} component={Link} to="/BMR/BmrCalculator" />
-            <Tab  label="Log out" onClick={logout} style={{paddingLeft: 0}}/>
+            <Tab  label="Log out" onClick={logout} style={{paddingLeft: 0, fontSize: "15px"}}/>
           </Tabs>
         </Toolbar>
       </AppBar>

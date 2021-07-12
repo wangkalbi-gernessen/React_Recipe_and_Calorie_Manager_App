@@ -3,14 +3,14 @@ import 'firebase/auth';
 import "firebase/firestore";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyA7jCzUZ0TXLC6xx305z8KfFvv-QjOl9Ho",
-  authDomain: "recipe-and-calorie-manag-d5c04.firebaseapp.com",
-  databaseURL: "https://recipe-and-calorie-manag-d5c04-default-rtdb.firebaseio.com",
-  projectId: "recipe-and-calorie-manag-d5c04",
-  storageBucket: "recipe-and-calorie-manag-d5c04.appspot.com",
-  messagingSenderId: "87692265955",
-  appId: "1:87692265955:web:0bfd1b4e8b5b00e2ceb8d6",
-  measurementId: "G-XE2SFJSEHJ"
+  apiKey: "AIzaSyApfm-ZbIXBn9II4XyZPHIUakcllOz_b4Q",
+  authDomain: "recipe-and-calorie.firebaseapp.com",
+  databaseURL: "https://recipe-and-calorie-default-rtdb.firebaseio.com",
+  projectId: "recipe-and-calorie",
+  storageBucket: "recipe-and-calorie.appspot.com",
+  messagingSenderId: "989041596134",
+  appId: "1:989041596134:web:2367f0d4e08188ee00cd27",
+  measurementId: "G-7WMEY1Q0VG"
 };
 
 // Initialize Firebase

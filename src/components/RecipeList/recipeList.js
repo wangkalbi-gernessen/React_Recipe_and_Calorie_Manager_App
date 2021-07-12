@@ -1,4 +1,4 @@
-import { Paper, Grid, makeStyles, TableBody, TableRow, TableCell, Table } from"@material-ui/core";
+import { Paper, Grid, makeStyles, Typography, TableBody, TableRow, TableCell, Table } from"@material-ui/core";
 import NavigateNextIcon from '@material-ui/icons/NavigateNext';
 import { useHistory } from "react-router-dom";
 
@@ -34,6 +34,7 @@ const RecipeList = () => {
 
   return(
     <Grid container spacing={0}direction="column" alignItems="center" justify="center" className={classes.content}>
+      <Typography align="center" variant="h4" style={{paddingBottom: "30px"}}>Registered Recipe List</Typography>
       <Grid item xs={11}>
         <Paper elevation={5}>
           <Table>
