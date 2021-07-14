@@ -1,5 +1,4 @@
-import { Button, Grid, TextField } from "@material-ui/core";
-import { Table, TableHead, TableRow, TableCell, TableBody, Paper, Container, makeStyles, Typography } from "@material-ui/core";
+import { Button, Grid, TextField, Table, TableHead, TableRow, TableCell, TableBody, Paper, Container, makeStyles, Typography } from "@material-ui/core";
 import React, { useEffect, useState } from "react";
 import { useHistory, useLocation } from "react-router-dom";
 import { db, auth } from '../../firebase/initFirebase';
@@ -61,7 +60,6 @@ const MenuTotalCalorieDetail = () => {
   const [ ingredient, setIngredient ] = useState("");
   const [ingredients, setIngredients] = useState([]);
   const [nutritions, setNutritions] = useState({});
-
   const [selectedRecipeId, setSelectedRecipeId] = useState('');
 
   const tableHeaders = [
@@ -104,6 +102,7 @@ const MenuTotalCalorieDetail = () => {
       }
 
       let dt = Object.assign({}, nutritions);
+      console.log(dt);
       setNutritions([dt]);
     }).catch((error) => {
       console.log("error");

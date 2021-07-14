@@ -1,14 +1,15 @@
 /* eslint-disable jsx-a11y/alt-text */
-import { Grid, Paper, Container, makeStyles, Button, Typography, Table, TableBody, TableRow, TableCell, Dialog, DialogContent, DialogActions, TextField, FormControl, FormControlLabel, RadioGroup, Radio} from "@material-ui/core";
+import { Grid, Paper, Container, makeStyles, Button, Typography, Table, TableBody, TableRow, TableCell,TextField, FormControl, FormControlLabel, RadioGroup, Radio} from "@material-ui/core";
 import React, { useEffect, useState } from "react";
 import { useHistory, useLocation } from "react-router-dom";
-import { auth, db } from '../../firebase/initFirebase';
+import { db } from '../../firebase/initFirebase';
 import DeleteIcon from '@material-ui/icons/Delete';
 import InfoOutlinedIcon from '@material-ui/icons/InfoOutlined';
 import friedEgg from "../../img/Main/fried-egg.png";
 import sandwich from "../../img/Main/sandwich.png";
 import food from "../../img/Main/food.png";
 import steak from "../../img/Main/steak.png";
+import NutritionFactModal from "./NutritionFactModal";
 
 const useStyles = makeStyles({
   content: {
@@ -43,15 +44,16 @@ const EditRecipe = () => {
   const [ ingredient, setIngredient ] = useState("");
   const [nutritions, setNutritions] = useState({});
   const [selectedRecipeId, setSelectedRecipeId] = useState('');
+  const [selectedRecipeNutrition, setSelectedRecipeNutrition] = useState('');
+  const [selectedRecipeNutritionZero, setSelectedRecipeNutritionZero] = useState('');
   const [updateDishName, setUpdatedDishName] = useState(recipe.dishName);
   const [updateMeal, setUpdatedMeal] = useState(recipe.mealType);
   const [updatedIngredients, setUpdatedIngredients] = useState(recipe.ingredients);
-  // const [toUpdateId, setToUpdateId] = useState('');
+  const [open, setOpen] = useState(false);
 
   // combine multiple ingredients at a time
   const mergeNutrition = (data) => {
     const res = {};
-
     data.forEach(basket => { 
       for (let [key, value] of Object.entries(basket)) { 
         if (res[key]) { 
@@ -87,20 +89,19 @@ const EditRecipe = () => {
     addIngredient();
     setIngredient('');
   }
+
   // reload recipe's ingredients in table
   useEffect(() => {
-  }, [updatedIngredients, selectedRecipeId]);
+  }, [selectedRecipeId, selectedRecipeNutrition,  updatedIngredients]);
 
   // add a new ingredient
   const addIngredient = () => {
     const newIngredients = {id: updatedIngredients.length + 1, name: ingredient, nutrition: nutritions};
     setUpdatedIngredients([...updatedIngredients, newIngredients]);
-    setSelectedRecipeId(updatedIngredients.length + 1);
   };
 
   const deleteIngredient = (ingredientId) => {
     const editedIngredients = updatedIngredients.filter(ingredient => ingredient.id !== ingredientId);
-    console.log(editedIngredients);
     let idCount = 1;
     for(let i = 0; i < editedIngredients.length; i++) {
       if(editedIngredients[i].id !== idCount) {
@@ -109,11 +110,7 @@ const EditRecipe = () => {
       idCount++;
     }
     setUpdatedIngredients(editedIngredients);
-    setSelectedRecipeId("");
-  }
-
-  const displayIngredientNutrition = (ingredientId) => {
-    setSelectedRecipeId(ingredientId);
+    // setSelectedRecipeId("");
   }
 
   const editRecipe = () => {
@@ -123,6 +120,18 @@ const EditRecipe = () => {
       ingredients: updatedIngredients
     });
     history.push("/RecipeList/RecipeList");
+  }
+
+  const openDialog = (ingredient) => {
+    setSelectedRecipeId(ingredient.id);
+    setSelectedRecipeNutrition(ingredient.nutrition);
+    setSelectedRecipeNutritionZero(ingredient.nutrition[0]);
+    setOpen(true);
+  }
+
+  const closeDialog = () => {
+    setOpen(false);
+    // setSelectedRecipeId("");
   }
 
   return(
@@ -176,80 +185,22 @@ const EditRecipe = () => {
                 <TableBody>
                 { updatedIngredients.map((res) => (
                   <TableRow>
-                    <TableCell>{res.name},{res.id}</TableCell>
+                    <TableCell>{res.name}</TableCell>
                     <TableCell>
                       <DeleteIcon fontSize="large" onClick={() => deleteIngredient(res.id)} />
                     </TableCell>
-                    <TableCell><InfoOutlinedIcon onClick={() => displayIngredientNutrition(res.id)}/></TableCell>
+                    <TableCell><InfoOutlinedIcon onClick={() => openDialog(res)}/></TableCell>
                 </TableRow>
                 ))}
                 </TableBody>
               </Table>
             </Container>
-            <Container>
-              <Typography align="center" style={{color: "brown", fontSize: "25px", fontWeight: "bold"}}>Nutrition Facts</Typography>
-              {/* {recipe.ingredients.length > 0 && selectedRecipeId ? 
-              <Container>
-                <Table size="small">
-                  <TableBody>
-                    <TableRow >
-                      <TableCell>Calories</TableCell>
-                      <TableCell>{recipe.ingredients[selectedRecipeId - 1].nutrition.calories}</TableCell>
-                    </TableRow>
-                    <TableRow>
-                      <TableCell></TableCell>
-                      <TableCell>% Daily Value*</TableCell>
-                    </TableRow>
-                    <TableRow>
-                      <TableCell>Total Fat {recipe.ingredients[selectedRecipeId - 1].nutrition.fat_total_g}g</TableCell>
-                      <TableCell>%</TableCell>
-                    </TableRow>
-                    <TableRow>
-                      <TableCell>Saturated Fat {recipe.ingredients[selectedRecipeId - 1].nutrition.fat_saturated_g}g</TableCell>
-                      <TableCell>%</TableCell>
-                    </TableRow>
-                    <TableRow>
-                      <TableCell>Cholesterol {recipe.ingredients[selectedRecipeId - 1].nutrition.cholesterol_mg}mg</TableCell>
-                      <TableCell>%</TableCell>
-                    </TableRow>
-                    <TableRow>
-                      <TableCell>Sodium {ingredients[selectedRecipeId - 1].nutrition.sodium_mg}mg</TableCell>
-                      <TableCell>%</TableCell>
-                    </TableRow>
-                    <TableRow>
-                      <TableCell>Total Carbonhydrate {ingredients[selectedRecipeId - 1].nutrition.carbohydrates_total_g}g</TableCell>
-                      <TableCell>%</TableCell>
-                    </TableRow>
-                    <TableRow>
-                      <TableCell colSpan={2}>Total Sugars {ingredients[selectedRecipeId - 1].nutrition.sugar_g}g</TableCell>
-                    </TableRow>
-                    <TableRow>
-                      <TableCell colSpan={2}>Fiber {ingredients[selectedRecipeId - 1].nutrition.fiber_g}g</TableCell>
-                    </TableRow>
-                    <TableRow>
-                      <TableCell>Protein {ingredients[selectedRecipeId - 1].nutrition.protein_g}g</TableCell>
-                      <TableCell>%</TableCell>
-                    </TableRow>
-                    <TableRow>
-                      <TableCell>Potassium {ingredients[selectedRecipeId - 1].nutrition.potassium_mg}mg</TableCell>
-                      <TableCell>%</TableCell>
-                    </TableRow>
-                    <TableRow>
-                      <TableCell colSpan={2}>The % Daily Value(DV) tells you how much a nutrient in a serving of food contributes to a daily diet. 2,000 calories a day is used for general nutrition advice.(FDA.gov)</TableCell>
-                    </TableRow>
-                  </TableBody>
-                </Table>
-              </Container>
-              : 
-              <Container>
-                <Typography align="center" variant="h5">No Data</Typography>
-              </Container>
-              } */}
-            </Container>
             <Container className={classes.editBtn}>
               <Button size="large" color="secondary" variant="outlined" style={{cursor: "pointer", marginTop: "50px"}} type="submit" onClick={editRecipe}>Edit Recipe</Button>
             </Container>
           </FormControl>
+          {/* connect dialog of nutrition facts */}
+          <NutritionFactModal open={open} handleClose={closeDialog} selectedRecipeNutrition={selectedRecipeNutrition} selectedRecipeNutritionZero={selectedRecipeNutritionZero} selectedRecipeId={selectedRecipeId} />
         </Paper>
       </Grid>
     </Grid>

@@ -1,4 +1,4 @@
-import { Grid, Paper, Container, makeStyles, Button, Typography, Table, TableBody, TableRow, TableCell, Dialog, DialogContent, DialogActions, TextField } from "@material-ui/core";
+import { Grid, Paper, Container, makeStyles, Button, Typography, Table, TableBody, TableRow, TableCell, TextField } from "@material-ui/core";
 import React, { useEffect, useState } from "react";
 import { useHistory, useLocation } from "react-router-dom";
 import { auth, db } from '../../firebase/initFirebase';
@@ -30,13 +30,6 @@ const MenuTotalCalorieDetail = () => {
   // }
 
   // const handleClose = () => {
-  //   setOpen(false);
-  // }
-
-  // const editDishName = () => {
-  //   db.collection('recipes').doc(toUpdateId).update({
-  //     dishName: update
-  //   });
   //   setOpen(false);
   // }
 
@@ -88,15 +81,6 @@ const MenuTotalCalorieDetail = () => {
         :
         <Typography variant="h5">No data</Typography>
       }
-      {/* <Dialog open={open} onClose={handleClose}>
-        <DialogContent>
-          <TextField autoFocus margin="normal" label="Edit dishName" type="text" name="editDishName" value={update} onChange={event => setUpdate(event.target.value)}/>
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleClose} color="primary">Cancel</Button>
-          <Button onClick={editDishName} color="primary">Save</Button>
-        </DialogActions>
-      </Dialog> */}
     </Grid>
   );
 }
