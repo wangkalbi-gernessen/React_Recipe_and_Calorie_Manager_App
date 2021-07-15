@@ -61,7 +61,7 @@ const MenuTotalCalorieDetail = () => {
   const [ingredients, setIngredients] = useState([]);
   const [nutritions, setNutritions] = useState({});
   const [selectedRecipeId, setSelectedRecipeId] = useState('');
-
+  
   const tableHeaders = [
     {title: "Calories"},
     {title: "Carbs"},
@@ -100,21 +100,22 @@ const MenuTotalCalorieDetail = () => {
       for(let key in mergedNutritions) {
         nutritions[key] = mergedNutritions[key];
       }
-
       let dt = Object.assign({}, nutritions);
-      console.log(dt);
-      setNutritions([dt]);
+      setNutritions(dt);
+      console.log(nutritions);
+
     }).catch((error) => {
       console.log("error");
     });
-    addIngredient();
+    addIngredient(nutritions);
     setIngredient('');
   }
 
   useEffect(() => {
-  }, [ingredients, selectedRecipeId]);
+  }, [nutritions, ingredients, selectedRecipeId]);
 　　　　
-  const addIngredient = () => {
+  const addIngredient = (nutritions) => {
+    console.log(nutritions);
     const newIngredients = {id: ingredients.length + 1, name: ingredient, nutrition: nutritions};
     setIngredients([...ingredients, newIngredients]);
     setSelectedRecipeId(ingredients.length + 1);
@@ -244,7 +245,7 @@ const MenuTotalCalorieDetail = () => {
                 <TableBody>
                   { ingredients.map(ingredient => (
                     <TableRow key={ingredient.id}>
-                      <TableCell>{ingredient.name}</TableCell>  
+                      <TableCell>{ingredient.name}, {ingredient.id}</TableCell>  
                       <TableCell><DeleteIcon onClick={() => deleteIngredient(ingredient.id)} /></TableCell>
                       <TableCell><InfoOutlinedIcon onClick={() => displayIngredientNutrition(ingredient.id)} /></TableCell>
                     </TableRow>
@@ -260,8 +261,8 @@ const MenuTotalCalorieDetail = () => {
                 <Table size="small">
                   <TableBody>
                     <TableRow >
-                      <TableCell>Calories</TableCell>
-                      <TableCell>{ingredients[selectedRecipeId - 1].nutrition.calories}</TableCell>
+                      <TableCell>Calories { selectedRecipeId }</TableCell>
+                      <TableCell>{ingredients[selectedRecipeId - 1].nutrition.calories}g</TableCell>
                     </TableRow>
                     <TableRow>
                       <TableCell></TableCell>

@@ -17,7 +17,7 @@ const useStyles = makeStyles({
     minWidth: "100%",
     minHeight: "100vh",
     margin: 0,
-    padding: 0  
+    padding: "30px 0 30px"  
   }, 
   dishNameTextField: {
     width: "100%",
@@ -45,7 +45,6 @@ const EditRecipe = () => {
   const [nutritions, setNutritions] = useState({});
   const [selectedRecipeId, setSelectedRecipeId] = useState('');
   const [selectedRecipeNutrition, setSelectedRecipeNutrition] = useState('');
-  const [selectedRecipeNutritionZero, setSelectedRecipeNutritionZero] = useState('');
   const [updateDishName, setUpdatedDishName] = useState(recipe.dishName);
   const [updateMeal, setUpdatedMeal] = useState(recipe.mealType);
   const [updatedIngredients, setUpdatedIngredients] = useState(recipe.ingredients);
@@ -125,7 +124,6 @@ const EditRecipe = () => {
   const openDialog = (ingredient) => {
     setSelectedRecipeId(ingredient.id);
     setSelectedRecipeNutrition(ingredient.nutrition);
-    setSelectedRecipeNutritionZero(ingredient.nutrition[0]);
     setOpen(true);
   }
 
@@ -185,11 +183,13 @@ const EditRecipe = () => {
                 <TableBody>
                 { updatedIngredients.map((res) => (
                   <TableRow>
-                    <TableCell>{res.name}</TableCell>
                     <TableCell>
-                      <DeleteIcon fontSize="large" onClick={() => deleteIngredient(res.id)} />
+                      <Typography variant="h5" align="left" style={{fontWeight: "bold"}}>{res.name}</Typography>
                     </TableCell>
-                    <TableCell><InfoOutlinedIcon onClick={() => openDialog(res)}/></TableCell>
+                    <TableCell>
+                      <DeleteIcon style={{cursor: "pointer"}} fontSize="large" onClick={() => deleteIngredient(res.id)} />
+                    </TableCell>
+                    <TableCell><InfoOutlinedIcon style={{cursor: "pointer"}} fontSize="large" onClick={() => openDialog(res)}/></TableCell>
                 </TableRow>
                 ))}
                 </TableBody>
@@ -200,7 +200,7 @@ const EditRecipe = () => {
             </Container>
           </FormControl>
           {/* connect dialog of nutrition facts */}
-          <NutritionFactModal open={open} handleClose={closeDialog} selectedRecipeNutrition={selectedRecipeNutrition} selectedRecipeNutritionZero={selectedRecipeNutritionZero} selectedRecipeId={selectedRecipeId} />
+          <NutritionFactModal open={open} handleClose={closeDialog} selectedRecipeNutrition={selectedRecipeNutrition} />
         </Paper>
       </Grid>
     </Grid>
