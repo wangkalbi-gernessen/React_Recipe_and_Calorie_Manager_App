@@ -1,8 +1,9 @@
 /* eslint-disable jsx-a11y/alt-text */
-import { Grid, Paper, Container, makeStyles, Button, Typography, Table, TableBody, TableRow, TableCell,TextField, FormControl, FormControlLabel, RadioGroup, Radio} from "@material-ui/core";
+import { Grid, Paper, Container, makeStyles, Button, Typography, Table, TableBody, TableHead, TableRow, TableCell,TextField, FormControl, FormControlLabel, RadioGroup, Radio} from "@material-ui/core";
 import React, { useEffect, useState } from "react";
 import { useHistory, useLocation } from "react-router-dom";
 import { db } from '../../firebase/initFirebase';
+import AnimatedNumber from "react-animated-number";
 import DeleteIcon from '@material-ui/icons/Delete';
 import InfoOutlinedIcon from '@material-ui/icons/InfoOutlined';
 import friedEgg from "../../img/Main/fried-egg.png";
@@ -49,6 +50,49 @@ const EditRecipe = () => {
   const [updateMeal, setUpdatedMeal] = useState(recipe.mealType);
   const [updatedIngredients, setUpdatedIngredients] = useState(recipe.ingredients);
   const [open, setOpen] = useState(false);
+
+  const totalCalories = updatedIngredients.reduce((total, item) => {
+    if(isNaN(item.nutrition.calories)) {
+      return total;
+    }
+    return total + item.nutrition.calories;
+  }, 0);
+
+  const totalCarbs = updatedIngredients.reduce((total, item) => {
+    if(isNaN(item.nutrition.carbohydrates_total_g)) {
+      return total;
+    }
+    return total + item.nutrition.carbohydrates_total_g;
+  }, 0);
+
+  const totalProtein = updatedIngredients.reduce((total, item) => {
+    if(isNaN(item.nutrition.protein_g)) {
+      return total;
+    }
+    return total + item.nutrition.protein_g;
+  }, 0);
+
+  const totalFat = updatedIngredients.reduce((total, item) => {
+    if(isNaN(item.nutrition.fat_total_g)) {
+      return total;
+    }
+    return total + item.nutrition.fat_total_g;;
+  }, 0);
+
+  const totalFiber = updatedIngredients.reduce((total, item) => {
+    if(isNaN(item.nutrition.fiber_g)) {
+      return total;
+    }
+    return total + item.nutrition.fiber_g;
+  }, 0);
+
+  const tableHeaders = [
+    {title: "Calories"},
+    {title: "Carbs"},
+    {title: "Protein"},
+    {title: "Fat"},
+    {title: "Fiber"}
+  ];
 
   // combine multiple ingredients at a time
   const mergeNutrition = (data) => {
@@ -109,7 +153,6 @@ const EditRecipe = () => {
       idCount++;
     }
     setUpdatedIngredients(editedIngredients);
-    // setSelectedRecipeId("");
   }
 
   const editRecipe = () => {
@@ -177,6 +220,37 @@ const EditRecipe = () => {
                 <Button type="submit" variant="contained" color="primary" style={{cursor: "pointer"}} disabled={!ingredient}>Click</Button>
               </Container>
             </form>
+            {/* table of total nutrition of all ingredients */}
+          <Container className={classes.totalNutritions}>
+            <Table size="small">
+              <TableHead>
+                <TableRow>
+                  {tableHeaders.map((tableHeader) => (
+                    <TableCell style={{background: "green", borderRadius: "10px", color: "white"}}>{tableHeader.title}</TableCell>
+                  ))}
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                <TableRow>
+                  <TableCell align="right">
+                    <AnimatedNumber component="text" value={totalCalories.toFixed(2)} style={{margin: "10px", fontSize:  "20px", transition: '0.5s linear', transitionProperty: 'background-color, color, opacity'}} frameStyle={perc => ({ opacity : perc / 100})} duration={100} />
+                    g</TableCell>
+                  <TableCell align="right">
+                    <AnimatedNumber component="text" value={totalCarbs.toFixed(2)} style={{margin: "10px", fontSize:  "20px", transition: '0.5s linear', transitionProperty: 'background-color, color, opacity'}} frameStyle={perc => ({ opacity : perc / 100})} duration={100} />
+                    g</TableCell>
+                  <TableCell align="right">
+                    <AnimatedNumber component="text" value={totalProtein.toFixed(2)} style={{margin: "10px", fontSize:  "20px", transition: '0.8s ease-out', transitionProperty: 'background-color, color, opacity'}} frameStyle={perc => ({ opacity : perc / 100})} duration={100} />
+                    g</TableCell>
+                  <TableCell align="right">
+                    <AnimatedNumber component="text" value={totalFat.toFixed(2)} style={{margin: "10px", fontSize:  "20px", transition: '0.8s ease-out', transitionProperty: 'background-color, color, opacity'}} frameStyle={perc => ({ opacity : perc / 100})} duration={100} />
+                    g</TableCell>
+                  <TableCell align="right">
+                    <AnimatedNumber component="text" value={totalFiber.toFixed(2)} style={{margin: "10px", fontSize:  "20px", transition: '0.8s ease-out', transitionProperty: 'background-color, color, opacity'}} frameStyle={perc => ({ opacity : perc / 100})} duration={100} />
+                    g</TableCell>
+                </TableRow>
+              </TableBody>
+            </Table>
+          </Container>
             <Container>
               <Typography align="center" style={{color: "brown", fontSize: "25px", fontWeight: "bold"}}>Ingredients</Typography>
               <Table size="small">
