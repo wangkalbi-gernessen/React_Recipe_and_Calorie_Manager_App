@@ -17,24 +17,20 @@ That's why I imagined this is good theme to investigate some technologies which 
 
 ## Language and Libraries
 - JavaScript(language)
-- Next.js(JavaScript framework)
+- React.js(JavaScript library)
 - Visual Studio Code(Code Editor)
 - Firebase (Auth, Firestore, Storage)
-- Material UI
+- Material UI 
 
 ## Architecture 
 
 ## CI and Deployment
 
+
+
 ## Upcoming Features
-- Notifications
-- Filtering posts on timeline
-- Cache posts using Room
-- Uploading image background using WorkManager
-- Paging timeline
-- Refreshing timeline by pulling down
-- Editing user info
-- Following / Followed user
-- Adding filter to image
+- Notifications(After user added or edited a recipe)
+- Reordering recipe list
+- Pagination of all registered recipes
 
 ## License
