@@ -12,7 +12,7 @@ const useStyles = makeStyles({
     minWidth: "100%",
     minHeight: "100vh",
     margin: 0,
-    padding: "30px"
+    padding: "30px 0 30px"
   },
   inputArea: {
     margin: "auto",
@@ -33,7 +33,7 @@ const useStyles = makeStyles({
     overflowX: "scroll",
     padding: 0
   },
-  nutritionFact: {
+  ingredientsList: {
     width: "90%",
     maxHeight: "50%",
     background: "beige",
@@ -238,14 +238,14 @@ const MenuTotalCalorieDetail = () => {
               </TableBody>
             </Table>
           </Container>
-          <Container className={classes.nutritionFact}>
+          <Container className={classes.ingredientsList}>
             <Container>
               <Typography align="center" style={{color: "brown", fontSize: "25px", fontWeight: "bold"}}>Ingredients</Typography>
               <Table size="small">
                 <TableBody>
                   { ingredients.map(ingredient => (
                     <TableRow key={ingredient.id}>
-                      <TableCell>{ingredient.name}, {ingredient.id}</TableCell>  
+                      <TableCell>{ingredient.name}</TableCell>  
                       <TableCell><DeleteIcon onClick={() => deleteIngredient(ingredient.id)} /></TableCell>
                       <TableCell><InfoOutlinedIcon onClick={() => displayIngredientNutrition(ingredient.id)} /></TableCell>
                     </TableRow>
@@ -261,7 +261,7 @@ const MenuTotalCalorieDetail = () => {
                 <Table size="small">
                   <TableBody>
                     <TableRow >
-                      <TableCell>Calories { selectedRecipeId }</TableCell>
+                      <TableCell>Calories</TableCell>
                       <TableCell>{ingredients[selectedRecipeId - 1].nutrition.calories}g</TableCell>
                     </TableRow>
                     <TableRow>

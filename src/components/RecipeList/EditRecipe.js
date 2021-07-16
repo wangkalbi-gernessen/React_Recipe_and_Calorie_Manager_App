@@ -20,7 +20,7 @@ const useStyles = makeStyles({
     margin: 0,
     padding: "30px 0 30px"  
   }, 
-  dishNameTextField: {
+  formArea: {
     width: "100%",
     margin: "30px auto",
     padding: 0,
@@ -29,12 +29,18 @@ const useStyles = makeStyles({
   radioArea: {
     width: "100%"
   }, 
+  totalNutritions: {
+    width: "90%",
+    margin: "20px auto",
+    overflowX: "scroll",
+    padding: 0
+  },
   editBtn: {
     width: "100%",
     margin: "0 auto",
     paddingBottom: "30px",
     textAlign: "center"  
-  }
+  } 
 });
 
 const EditRecipe = () => {
@@ -172,15 +178,14 @@ const EditRecipe = () => {
 
   const closeDialog = () => {
     setOpen(false);
-    // setSelectedRecipeId("");
   }
 
   return(
     <Grid container spacing={0}direction="column" alignItems="center" justify="center" className={classes.content}>
-      <Grid item xs={11}>
-        <Paper elevation={5}>
-          <FormControl noValidate autoComplete="off">
-            <Container className={classes.dishNameTextField}>
+      <Grid item xs={11} sm={9} md={4} lg={4}>
+        <Paper elevation={10}>
+          <FormControl noValidate autoComplete="off" className={classes.formArea}>
+            <Container>
               <Typography align="center" variant="h4">Edit Recipe</Typography>
               <TextField label="Edit dishName"  type="text" autoFocus value={updateDishName} variant="outlined" style={{background: "white", margin:"40px 20px"}} size="large" onChange={(event) => setUpdatedDishName(event.target.value)}/>
             </Container>
@@ -251,7 +256,7 @@ const EditRecipe = () => {
               </TableBody>
             </Table>
           </Container>
-            <Container>
+            <Container style={{padding: 0}}>
               <Typography align="center" style={{color: "brown", fontSize: "25px", fontWeight: "bold"}}>Ingredients</Typography>
               <Table size="small">
                 <TableBody>
