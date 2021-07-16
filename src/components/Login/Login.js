@@ -7,7 +7,7 @@ import { login } from '../Auth/Auth'
 
 const useStyles = makeStyles({
   content: {
-    width: "100%",
+    minWidth: "100%",
     minHeight: "100vh",  
     margin: 0,
     padding: 0,
@@ -49,9 +49,9 @@ const Login = () => {
 
   return(
     <Grid container spacing={0}direction="column" alignItems="center" justify="center" className={classes.content}>
-      {/* <Typography variant="h3" align="center" gutterBottom="true" style={{color: "white", fontFamily: "cursive"}}>Welcome to Recipe and Calorie Manager!!</Typography> */}
+      <Typography variant="h2" align="center" gutterBottom="true" style={{color: "white", fontFamily: "cursive"}}>Welcome to Recipe and Calorie Manager!!</Typography>
       <Grid item xs={11}>
-        <Paper elevation={3}>
+        <Paper elevation={3} style={{margin: "30px"}}>
           <Typography variant="h4" align="center" gutterBottom="true" style={{fontFamily: "monospace", padding: "15px"}}>Log in here</Typography>
           <form noValidate autoComplete="off" style={{width: "100%", margin: "auto", padding: "20px", textAlign: "center"}} onSubmit={handleSubmit}>
             <Container className={classes.formArea}>
