@@ -17,16 +17,19 @@ They are basic features of app but you can also add more features such as upload
 That's why I imagined this is good theme to investigate some technologies which I've never done.
 
 ## Demo
+<h1>Login</h1>
+
 
 ## Technologies Used
 - JavaScript(language)
 - React.js(JavaScript library)
 - Visual Studio Code(Code Editor)
 - Firebase (Auth, Firestore, Storage)
-- Material UI 
+- Material UI (Grid, Typography, etc)
 
 ## Upcoming Features
 - Notifications(After user added or edited a recipe)
 - Reordering recipe list
 - Pagination of all registered recipes
 - Daily Value(%) on Nutrition Facts
+- Deleting user account
