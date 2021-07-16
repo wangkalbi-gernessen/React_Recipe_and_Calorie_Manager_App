@@ -40,7 +40,11 @@ const Login = () => {
 
   // Sign in with google
   const signInWithGoogle = () => {
-    auth.signInWithPopup(provider);
+    auth.signInWithPopup(provider).then((res) => {
+      console.log(res.user)
+    }).catch((error) => {
+      console.log(error.message);
+    })
   }  
 
   return(
