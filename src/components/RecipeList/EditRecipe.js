@@ -35,6 +35,14 @@ const useStyles = makeStyles({
     overflowX: "scroll",
     padding: 0
   },
+  ingredientsList: {
+    width: "90%",
+    maxHeight: "50%",
+    background: "beige",
+    overflow: "scroll",
+    margin: "20px auto",
+    padding: 0
+  },
   editBtn: {
     width: "100%",
     margin: "0 auto",
@@ -256,7 +264,7 @@ const EditRecipe = () => {
               </TableBody>
             </Table>
           </Container>
-            <Container style={{padding: 0}}>
+            <Container className={classes.ingredientsList}>
               <Typography align="center" style={{color: "brown", fontSize: "25px", fontWeight: "bold"}}>Ingredients</Typography>
               <Table size="small">
                 <TableBody>

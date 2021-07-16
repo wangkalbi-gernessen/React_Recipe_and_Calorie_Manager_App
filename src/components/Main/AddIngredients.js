@@ -38,7 +38,8 @@ const useStyles = makeStyles({
     maxHeight: "50%",
     background: "beige",
     overflow: "scroll",
-    margin: "20px auto"
+    margin: "20px auto",
+    padding: 0
   }, 
   addBtn: {
     width: "100%",
@@ -246,8 +247,8 @@ const MenuTotalCalorieDetail = () => {
                   { ingredients.map(ingredient => (
                     <TableRow key={ingredient.id}>
                       <TableCell>{ingredient.name}</TableCell>  
-                      <TableCell><DeleteIcon onClick={() => deleteIngredient(ingredient.id)} /></TableCell>
-                      <TableCell><InfoOutlinedIcon onClick={() => displayIngredientNutrition(ingredient.id)} /></TableCell>
+                      <TableCell><DeleteIcon style={{cursor: "pointer"}} fontSize="large" onClick={() => deleteIngredient(ingredient.id)} /></TableCell>
+                      <TableCell><InfoOutlinedIcon style={{cursor: "pointer"}} fontSize="large" onClick={() => displayIngredientNutrition(ingredient.id)} /></TableCell>
                     </TableRow>
                   ))}
                 </TableBody>
