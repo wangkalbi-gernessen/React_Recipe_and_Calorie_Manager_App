@@ -1,8 +1,11 @@
 🚧 This app is still WIP 🚧
 
-## About
+## Project Title
+Recipe-and-Calorie-Manager
 
-## Why I created this app
+
+
+## Description
 I created this app to show my developing skill.  
 I can write clean codes in JavaScript with good architecture which makes the app sustainable and testable.
 
@@ -13,24 +16,17 @@ Obviously it requires internet connection and showing posts in list furthermore 
 They are basic features of app but you can also add more features such as uploading videos, adding filter to images if you want.  
 That's why I imagined this is good theme to investigate some technologies which I've never done.
 
-## UI Design
+## Demo
 
-## Language and Libraries
+## Technologies Used
 - JavaScript(language)
 - React.js(JavaScript library)
 - Visual Studio Code(Code Editor)
 - Firebase (Auth, Firestore, Storage)
 - Material UI 
 
-## Architecture 
-
-## CI and Deployment
-
-
-
 ## Upcoming Features
 - Notifications(After user added or edited a recipe)
 - Reordering recipe list
 - Pagination of all registered recipes
-
-## License
+- Daily Value(%) on Nutrition Facts
