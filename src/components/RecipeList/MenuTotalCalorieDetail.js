@@ -1,4 +1,4 @@
-import { Grid, Paper, Container, makeStyles, Button, Typography, Table, TableBody, TableRow, TableCell, TextField } from "@material-ui/core";
+import { Grid, Paper, makeStyles, Typography, Table, TableBody, TableRow, TableCell } from "@material-ui/core";
 import React, { useEffect, useState } from "react";
 import { useHistory, useLocation } from "react-router-dom";
 import { auth, db } from '../../firebase/initFirebase';
@@ -22,16 +22,6 @@ const MenuTotalCalorieDetail = () => {
   const history = useHistory();
   const location = useLocation();
   const selectedValue = location.state.value;
-
-  // const openEditDialog = (recipe) => {
-  //   setOpen(true);
-  //   setToUpdateId(recipe.recipeId);
-  //   setUpdate(recipe.dishName);
-  // }
-
-  // const handleClose = () => {
-  //   setOpen(false);
-  // }
 
   useEffect(() => {
     db.collection('recipes').where("userId", "==", userId).where("mealType", "==", selectedValue).onSnapshot(snapshot => {

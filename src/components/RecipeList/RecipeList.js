@@ -2,7 +2,6 @@ import { Paper, Grid, makeStyles, Typography, TableBody, TableRow, TableCell, Ta
 import NavigateNextIcon from '@material-ui/icons/NavigateNext';
 import { useHistory } from "react-router-dom";
 
-
 const useStyles = makeStyles({
   content: {
     background: "#f5f5dc",
@@ -31,7 +30,6 @@ const meals = [
 const RecipeList = () => {
   const classes = useStyles();
   const history = useHistory();
-
   return(
     <Grid container spacing={0}direction="column" alignItems="center" justify="center" className={classes.content}>
       <Typography align="center" variant="h4" style={{paddingBottom: "30px"}}>Registered Recipe List</Typography>

@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/alt-text */
 import { Radio, Container, FormControl, FormControlLabel, Grid, makeStyles, TextField, Button, Typography, RadioGroup } from "@material-ui/core";
-import { auth, db } from "../../firebase/initFirebase";
+import { auth } from "../../firebase/initFirebase";
 import friedEgg from "../../img/Main/fried-egg.png";
 import sandwich from "../../img/Main/sandwich.png";
 import food from "../../img/Main/food.png";
@@ -32,14 +32,11 @@ const Main = () => {
   const classes = useStyles();
   const [dishName, setDishName] = useState('');
   const [meal, setMeal] = useState('breakfast');
-  const userId = auth.currentUser.uid;
   const history = useHistory();
-
 
   const addRecipe = (event) => {
     history.push("/Main/AddIngredients", {dishName: dishName, meal: meal});
   }
-
   return (
     <Container className={classes.content}>
       <Typography align="center" variant="h4" style={{color:"#008b8b", paddingTop: "30px"}}>Add New Recipe</Typography>
