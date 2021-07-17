@@ -4,7 +4,7 @@ import "firebase/firestore";
 
 const firebaseConfig = {
   apiKey: "AIzaSyApfm-ZbIXBn9II4XyZPHIUakcllOz_b4Q",
-  authDomain: "recipe-and-calorie-manager.com",
+  authDomain: "auth.recipe-and-calorie-manager.com",
   databaseURL: "https://recipe-and-calorie-default-rtdb.firebaseio.com",
   projectId: "recipe-and-calorie",
   storageBucket: "recipe-and-calorie.appspot.com",
