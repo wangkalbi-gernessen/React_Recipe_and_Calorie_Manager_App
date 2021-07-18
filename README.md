@@ -1,23 +1,34 @@
 🚧 This app is still WIP 🚧
 
 ## Project Title
-Recipe-and-Calorie-Manager
-
+# Recipe-and-Calorie-Manager
+CRUD and API Web app created with React.js, Material UI and Firebase.
+Through this web app user can register their favorite recipes and check nutrition facts of all ingredients and user's BMR.
 
 
 ## Description
-I created this app to show my developing skill.  
-I can write clean codes in JavaScript with good architecture which makes the app sustainable and testable.
+# What's this project's aim? 
+- make all users know their appropriate calorie they can take in a day.
+- make all users think about ingredients used for a recipe in order to improve or maintain their health.
 
-I can also make beautiful layout using Material Ui. I used to use Material UI before but Material UI is better to make efficient and responsive layout.
-
-Recipe-and-Calorie-Manager looks simple but it has so many features.  
-Obviously it requires internet connection and showing posts in list furthermore uploading image file with caption. 
-They are basic features of app but you can also add more features such as uploading videos, adding filter to images if you want.  
-That's why I imagined this is good theme to investigate some technologies which I've never done.
+# what problems does a given application solve? 
+- know what ingredient and how much they need to take in order to cook healthy dishes.
+- update ingredients according to dishes and to the health situation anytime.
 
 ## Demo
-<h1>Login</h1>
+- Sign-in
+
+- Sign-up
+
+- Calculate BMR
+
+- Register a new recipe
+
+- Add ingredients
+
+- Check a new recipe
+
+- Edit an added recipe
 
 
 ## Technologies Used
