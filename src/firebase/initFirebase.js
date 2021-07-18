@@ -3,7 +3,7 @@ import 'firebase/auth';
 import "firebase/firestore";
 
 const firebaseConfig = {
-  apiKey: "",
+  apiKey: "...",
   // apiKey: "AIzaSyApfm-ZbIXBn9II4XyZPHIUakcllOz_b4Q",
   authDomain: "auth.recipe-and-calorie-manager.com",
   databaseURL: "https://recipe-and-calorie-default-rtdb.firebaseio.com",
