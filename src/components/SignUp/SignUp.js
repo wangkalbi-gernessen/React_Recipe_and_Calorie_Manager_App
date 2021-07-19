@@ -1,6 +1,6 @@
 import { Paper, TextField, Button, Container,  Grid,  makeStyles, Typography } from "@material-ui/core";
 import React, { useState } from "react";
-import { auth, provider } from "../../firebase/initFirebase";
+// import { auth, provider } from "../../firebase/initFirebase";
 import { Link } from "react-router-dom";
 import { register } from '../Auth/Auth';
 import japanese from '../../img/LoginSignUp/japanese-cuisine.jpeg';
@@ -38,9 +38,9 @@ const SignUp = () => {
   };
 
   // Sign in with google
-  const signInWithGoogle = () => {
-    auth.signInWithPopup(provider);
-  }  
+  // const signInWithGoogle = () => {
+  //   auth.signInWithPopup(provider);
+  // }  
 
   return(
     <Grid container spacing={0}direction="column" alignItems="center" justify="center" className={classes.content}>
@@ -58,9 +58,9 @@ const SignUp = () => {
               <Button type="submit" variant="contained" size="medium" color="primary" style={{cursor: "pointer"}} >Register</Button>
             </Container>
           </form>
-          <Typography variant="h6" align="center">OR</Typography>
+          {/* <Typography variant="h6" align="center">OR</Typography> */}
           <Container style={{textAlign:"center", marginTop: "10px"}}>
-            <Button variant="contained" size="medium" color="success" onClick={signInWithGoogle} style={{cursor:"pointer"}}>Sign in with Google</Button>
+            {/* <Button variant="contained" size="medium" color="success" onClick={signInWithGoogle} style={{cursor:"pointer"}}>Sign in with Google</Button> */}
             <Typography align="center" style={{paddingTop: "20px", fontWeight: "bold"}}>Already have an account?</Typography>
             <Container style={{width: "100%", margin: "auto", textAlign: "center", paddingBottom: "10px"}}>
               <Link to="/" style={{textDecoration: "none", color: "white"}}>

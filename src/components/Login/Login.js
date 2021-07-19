@@ -2,7 +2,7 @@ import { Container,  Grid,  Button,makeStyles, Paper, TextField, Typography } fr
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import vietnamese from '../../img/LoginSignUp/background-menu.jpeg';
-import { auth, provider } from '../../firebase/initFirebase';
+// import { auth, provider } from '../../firebase/initFirebase';
 import { login } from '../Auth/Auth'
 
 const useStyles = makeStyles({
@@ -39,13 +39,13 @@ const Login = () => {
   };
 
   // Sign in with google
-  const signInWithGoogle = () => {
-    auth.signInWithPopup(provider).then((res) => {
-      console.log(res.user)
-    }).catch((error) => {
-      console.log(error.message);
-    })
-  }  
+  // const signInWithGoogle = () => {
+  //   auth.signInWithPopup(provider).then((res) => {
+  //     console.log(res.user)
+  //   }).catch((error) => {
+  //     console.log(error.message);
+  //   })
+  // }  
 
   return(
     <Grid container spacing={0}direction="column" alignItems="center" justify="center" className={classes.content}>
@@ -64,9 +64,9 @@ const Login = () => {
               <Button type="submit" variant="contained" size="medium" color="primary" style={{cursor: "pointer"}} >Log in</Button>
             </Container>
           </form>
-          <Typography variant="h6" align="center">OR</Typography>
+          {/* <Typography variant="h6" align="center">OR</Typography> */}
           <Container style={{textAlign:"center", marginTop: "10px"}}>
-            <Button variant="contained" size="medium" color="success" onClick={signInWithGoogle} style={{cursor:"pointer"}}>Sign in with Google</Button>
+            {/* <Button variant="contained" size="medium" color="success" onClick={signInWithGoogle} style={{cursor:"pointer"}}>Sign in with Google</Button> */}
             <Typography align="center" style={{paddingTop: "20px", fontWeight: "bold"}}>Already have an account?</Typography>
             <Container style={{width: "100%", margin: "auto", textAlign: "center", padding: "10px"}}>
               <Link to="/SignUp/SignUp" style={{textDecoration: "none", color: "white"}}>
