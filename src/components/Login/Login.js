@@ -33,9 +33,15 @@ const Login = () => {
     password: '',
   });
 
+  const [errorMessage, setErrorMessage] = useState('');
+
   const handleSubmit = async(e) => {
     e.preventDefault();
-    await login(form);
+    try {
+      await login(form);
+    } catch(err) {
+      setErrorMessage(err.message);
+    }
   };
 
   // Sign in with google
@@ -53,8 +59,11 @@ const Login = () => {
       <Grid item xs={11}>
         <Paper elevation={3} style={{margin: "30px"}}>
           <Typography variant="h4" align="center" gutterBottom="true" style={{fontFamily: "monospace", padding: "15px"}}>Log in here</Typography>
-          <form noValidate autoComplete="off" style={{width: "100%", margin: "auto", padding: "20px", textAlign: "center"}} onSubmit={handleSubmit}>
+          <form noValidate autoComplete="off" style={{width: "100%", margin: "auto", padding: "10px", textAlign: "center"}} onSubmit={handleSubmit}>
             <Container className={classes.formArea}>
+              {errorMessage !== null && (
+                <Typography variant="h6" color="secondary" style={{marginBottom:"15px"}}>{errorMessage}</Typography>
+              )}
               <TextField id="my-email" type="email" label="Email Address" variant="outlined" onChange={(e) => setForm({...form, email: e.target.value})}/>
             </Container>
             <Container style={{paddingTop:"10px"}}>
@@ -67,7 +76,7 @@ const Login = () => {
           {/* <Typography variant="h6" align="center">OR</Typography> */}
           <Container style={{textAlign:"center", marginTop: "10px"}}>
             {/* <Button variant="contained" size="medium" color="success" onClick={signInWithGoogle} style={{cursor:"pointer"}}>Sign in with Google</Button> */}
-            <Typography align="center" style={{paddingTop: "20px", fontWeight: "bold"}}>Already have an account?</Typography>
+            <Typography align="center" style={{fontWeight: "bold"}}>Don't have an account?</Typography>
             <Container style={{width: "100%", margin: "auto", textAlign: "center", padding: "10px"}}>
               <Link to="/SignUp/SignUp" style={{textDecoration: "none", color: "white"}}>
                 <Button variant="contained" size="medium" color="primary">Sign up here</Button>
@@ -75,7 +84,7 @@ const Login = () => {
             </Container>
             <Container style={{width: "100%", margin: "auto", textAlign: "center", padding: "10px"}}>
               <Link to="/PasswordReset/PasswordReset" style={{textDecoration: "none", color: "white"}}>
-                <Button variant="contained" size="medium" color="inherit">Forgot Password?</Button>
+                <Button variant="contained" size="medium" color="secondary">Forgot Password?</Button>
               </Link>
             </Container>
           </Container>

@@ -47,7 +47,7 @@ const SignUp = () => {
       <Grid item xs={11}>
         <Paper elevation={3}>
           <Typography variant="h4" align="center" gutterBottom="true" style={{color: "black", fontWeight: "bold", padding: "15px"}}>Register your account</Typography>
-          <form noValidate autoComplete="off" style={{width: "100%", margin: "auto", padding: "20px", textAlign: "center"}} onSubmit={handleSubmit}>
+          <form noValidate autoComplete="off" style={{width: "100%", margin: "auto", padding: "10px", textAlign: "center"}} onSubmit={handleSubmit}>
             <Container className={classes.formArea}>
               <TextField id="email" type="email" label="Email Address" variant="outlined" onChange={(e) => setForm({...form, email: e.target.value})} required />
             </Container>
@@ -61,7 +61,7 @@ const SignUp = () => {
           {/* <Typography variant="h6" align="center">OR</Typography> */}
           <Container style={{textAlign:"center", marginTop: "10px"}}>
             {/* <Button variant="contained" size="medium" color="success" onClick={signInWithGoogle} style={{cursor:"pointer"}}>Sign in with Google</Button> */}
-            <Typography align="center" style={{paddingTop: "20px", fontWeight: "bold"}}>Already have an account?</Typography>
+            <Typography align="center" style={{fontWeight: "bold"}}>Already have an account?</Typography>
             <Container style={{width: "100%", margin: "auto", textAlign: "center", paddingBottom: "10px"}}>
               <Link to="/" style={{textDecoration: "none", color: "white"}}>
                 <Button variant="contained" size="medium" color="primary">Sign in here</Button>

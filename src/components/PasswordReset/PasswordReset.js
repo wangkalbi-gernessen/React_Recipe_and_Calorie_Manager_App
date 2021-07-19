@@ -45,20 +45,20 @@ const PasswordReset = () => {
     <Grid container spacing={0}direction="column" alignItems="center" justify="center" className={classes.content}>
       <Grid item xs={11}>
         <Paper elevation={3}>
-          <Typography variant="h4" align="center" gutterBottom="true" style={{fontFamily: "monospace", padding: "15px"}}>Reset your password</Typography>
+          <Typography variant="h4" align="center" style={{fontFamily: "monospace", padding: "15px"}}>Reset your password</Typography>
           <FormControl noValidate autoComplete="off" style={{width: "100%", margin: "auto", padding: "20px", textAlign: "center"}}>
            {emailHasBeenSent && (
              <Typography variant="h6" color="secondary">An email has been sent to you!</Typography>
              )} 
             {error !== null && (
-              <Typography variant="h6" color="secondary">{error}</Typography>
+              <Typography variant="h6" color="secondary" style={{marginBottom: "15px"}}>{error}</Typography>
             )}
             <Container className={classes.formArea}>
               <Container>
-                <TextField id="my-input" type="email" label="Email Address" helperText="*I never share your email." variant="outlined" value={email} onChange={event => setEmail(event.target.value)}/>
+                <TextField id="my-input" type="email" placeholder="Enter email address" label="Email Address" helperText="*I never share your email." variant="outlined" value={email} onChange={event => setEmail(event.target.value)}/>
               </Container>
               <Container style={{paddingTop:"10px"}}>
-                <Button variant="contained" size="medium" color="primary" style={{cursor: "pointer"}} onClick={event => {sendResetEmail(event)}}>Send a reset link</Button> 
+                <Button variant="contained" size="medium" color="primary" style={{cursor: "pointer"}} onClick={event => {sendResetEmail(event)}}disabled={!email}>Send a reset link</Button> 
               </Container>
             </Container>
           </FormControl>
