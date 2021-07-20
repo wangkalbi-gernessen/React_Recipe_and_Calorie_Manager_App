@@ -23,7 +23,9 @@ Through this web app user can register their favorite recipes and check nutritio
 # Demo
 - Sign-in
 
+
 - Sign-up
+![Sign_up](https://media.giphy.com/media/w8mJdZwxk1LtVM8amr/giphy.gif)
 
 - Calculate BMR
 
