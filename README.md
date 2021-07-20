@@ -21,17 +21,20 @@ Through this web app user can register their favorite recipes and check nutritio
 - update ingredients according to dishes and to the health situation anytime.
 
 # Demo
-- Sign-in
- 
-![Sign-in](https://media.giphy.com/media/rv3trIXpK8SES3Iixi/giphy.gif)
-
-
 - Sign-up
 
 ![Sign-up](https://media.giphy.com/media/w8mJdZwxk1LtVM8amr/giphy.gif)
 
 
+- Sign-in
+ 
+![Sign-in](https://media.giphy.com/media/rv3trIXpK8SES3Iixi/giphy.gif)
+
+
 - Calculate BMR
+
+![Calculate BMR](https://media.giphy.com/media/MV7XvXf0GqQGmAysBs/giphy.gif)
+
 
 - Register a new recipe
 
