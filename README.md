@@ -36,13 +36,24 @@ Through this web app user can register their favorite recipes and check nutritio
 ![Calculate BMR](https://media.giphy.com/media/MV7XvXf0GqQGmAysBs/giphy.gif)
 
 
-- Register a new recipe
+- Start registering a new recipe
+
+![start registering a new recipe](https://media.giphy.com/media/YqMQi19CUhlx19NzWA/gip)
+
 
 - Add ingredients
 
+![Add ingredients](https://media.giphy.com/media/3blIdQZop58AErVZ10/giphy.gif)
+
+
 - Check a new recipe
 
+
+
+
 - Edit an added recipe
+
+
 
 
 # Technologies Used
