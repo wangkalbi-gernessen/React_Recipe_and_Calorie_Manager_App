@@ -103,8 +103,6 @@ const MenuTotalCalorieDetail = () => {
       }
       let dt = Object.assign({}, nutritions);
       setNutritions(dt);
-      console.log(nutritions);
-
     }).catch((error) => {
       console.log("error");
     });
@@ -116,7 +114,6 @@ const MenuTotalCalorieDetail = () => {
   }, [nutritions, ingredients, selectedRecipeId]);
 　　　　
   const addIngredient = (nutritions) => {
-    console.log(nutritions);
     const newIngredients = {id: ingredients.length + 1, name: ingredient, nutrition: nutritions};
     setIngredients([...ingredients, newIngredients]);
     setSelectedRecipeId(ingredients.length + 1);
