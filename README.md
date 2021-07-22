@@ -38,7 +38,7 @@ Through this web app user can register their favorite recipes and check nutritio
 
 - Start registering a new recipe
 
-![start registering a new recipe](https://media.giphy.com/media/YqMQi19CUhlx19NzWA/gip)
+![Start registering a new recipe](https://media.giphy.com/media/YqMQi19CUhlx19NzWA/giphy.gif)
 
 
 - Add ingredients
@@ -48,12 +48,17 @@ Through this web app user can register their favorite recipes and check nutritio
 
 - Check a new recipe
 
+![Check a new recipe](https://media.giphy.com/media/BkjM39xobvtWWz5d7S/giphy.gif)
 
 
+- Edit a recipe
 
-- Edit an added recipe
+![Edit a recipe](https://media.giphy.com/media/6YaqW1VWXg8rOmP4qJ/giphy.gif)
 
 
+- Delete a recipe
+
+![Delete a recipe](https://media.giphy.com/media/4JBBnlg3AQRhS3yF7x/giphy.gif) 
 
 
 # Technologies Used
