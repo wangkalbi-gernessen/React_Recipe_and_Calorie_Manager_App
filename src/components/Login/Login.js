@@ -32,7 +32,6 @@ const Login = () => {
     email: '',
     password: '',
   });
-
   const [errorMessage, setErrorMessage] = useState('');
 
   const handleSubmit = async(e) => {

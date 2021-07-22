@@ -31,10 +31,15 @@ const SignUp = () => {
     email: '',
     password: '',
   });
+  const [errorMessage, setErrorMessage] = useState('');
 
   const handleSubmit = async(e) => {
     e.preventDefault();
-    await register(form);
+    try {
+      await register(form);
+    } catch(err) {
+      setErrorMessage(err.message);
+    }
   };
 
   // Sign in with google
@@ -49,6 +54,9 @@ const SignUp = () => {
           <Typography variant="h4" align="center" gutterBottom="true" style={{color: "black", fontWeight: "bold", padding: "15px"}}>Register your account</Typography>
           <form noValidate autoComplete="off" style={{width: "100%", margin: "auto", padding: "10px", textAlign: "center"}} onSubmit={handleSubmit}>
             <Container className={classes.formArea}>
+            {errorMessage !== null && (
+                <Typography variant="h6" color="secondary" style={{marginBottom:"15px"}}>{errorMessage}</Typography>
+              )}
               <TextField id="email" type="email" label="Email Address" variant="outlined" onChange={(e) => setForm({...form, email: e.target.value})} required />
             </Container>
             <Container style={{paddingTop:"10px"}}>
