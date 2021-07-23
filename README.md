@@ -67,6 +67,7 @@ Through this web app user can register their favorite recipes and check nutritio
 - Visual Studio Code(Code Editor)
 - Firebase (Auth, Firestore, Storage)
 - Material UI (Grid, Typography, etc)
+- Calorie Ninjas (API to fetch data of input ingredient's nutrition facts) -> https://calorieninjas.com/
 
 # Upcoming Features
 - Notifications(After user added or edited a recipe)
