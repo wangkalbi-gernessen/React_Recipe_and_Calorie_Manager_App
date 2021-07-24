@@ -260,7 +260,7 @@ const MenuTotalCalorieDetail = () => {
                   <TableBody>
                     <TableRow >
                       <TableCell>Calories</TableCell>
-                      <TableCell>{ingredients[selectedRecipeId - 1].nutrition.calories}g</TableCell>
+                      <TableCell><Typography style={{fontWeight: "bold"}}>{ingredients[selectedRecipeId - 1].nutrition.calories}</Typography>g</TableCell>
                     </TableRow>
                     <TableRow>
                       <TableCell></TableCell>
