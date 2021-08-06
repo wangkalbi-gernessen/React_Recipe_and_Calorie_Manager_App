@@ -1,4 +1,4 @@
-import { Grid, Paper, makeStyles, Typography, Table, TableBody, TableRow, TableCell } from "@material-ui/core";
+import { Grid, Paper, makeStyles, Typography, Table, TableBody, TableRow, TableCell, TableFooter, TablePagination } from "@material-ui/core";
 import React, { useEffect, useState } from "react";
 import { useHistory, useLocation } from "react-router-dom";
 import { auth, db } from '../../firebase/initFirebase';
@@ -22,6 +22,8 @@ const MenuTotalCalorieDetail = () => {
   const history = useHistory();
   const location = useLocation();
   const selectedValue = location.state.value;
+  const [page, setPage] = useState(0);
+  const [rowsPerPage, setRowsPerPage] = useState(5);
 
   useEffect(() => {
     db.collection('recipes').where("userId", "==", userId).where("mealType", "==", selectedValue).onSnapshot(snapshot => {
@@ -46,6 +48,16 @@ const MenuTotalCalorieDetail = () => {
     history.push("/RecipeList/EditRecipe", {recipe: res});
   }
 
+  // Pagination
+  const handleChangePage = (event, newPage) => {
+    setPage(newPage);
+  }
+
+  const handleChangeRowsPerPage = (event) => {
+    setRowsPerPage(+event.target.value);
+    setPage(0);
+  }
+
   return(
     <Grid container spacing={0}direction="column" alignItems="center" justify="center" className={classes.content}>
       <Typography align="center" variant="h4" style={{paddingBottom: "30px"}}>{selectedValue}</Typography>
@@ -54,7 +66,7 @@ const MenuTotalCalorieDetail = () => {
           <Paper elevation={5}>
             <Table>
               <TableBody>
-              { recipes.map((res) => (
+              { recipes.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((res) => (
                 <TableRow key={res.recipeId}>
                   <TableCell>{res.dishName}</TableCell>
                   <TableCell onClick={() => deleteRecipes(res.recipeId)}>
@@ -66,6 +78,11 @@ const MenuTotalCalorieDetail = () => {
               </TableRow>
               ))}
               </TableBody>
+              <TableFooter>
+                <TableRow>
+                  <TablePagination rowsPerPageOptions={[5, 10]} colSpan={3} count={recipes.length} rowsPerPage={rowsPerPage} page={page} onChangePage={handleChangePage} onChangeRowsPerPage={handleChangeRowsPerPage} />
+                </TableRow>
+              </TableFooter>
             </Table>
           </Paper>
         </Grid>
