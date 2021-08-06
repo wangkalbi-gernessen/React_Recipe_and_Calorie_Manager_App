@@ -72,7 +72,6 @@ Through this web app user can register their favorite recipes and check nutritio
 # Upcoming Features
 - Notifications(After user added or edited a recipe)
 - Reordering recipe list
-- Pagination of all registered recipes
 - Daily Value(%) on Nutrition Facts
 - Deleting user account
 - Sign-in with Google, Facebook, Twitter, etc
