@@ -48,11 +48,12 @@ const MenuTotalCalorieDetail = () => {
     history.push("/RecipeList/EditRecipe", {recipe: res});
   }
 
-  // Pagination
+  // Pagination for a page
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
   }
 
+  // Pagination for per page
   const handleChangeRowsPerPage = (event) => {
     setRowsPerPage(+event.target.value);
     setPage(0);
