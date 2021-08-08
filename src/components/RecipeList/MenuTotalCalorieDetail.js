@@ -44,6 +44,7 @@ const MenuTotalCalorieDetail = () => {
     db.collection('recipes').doc(id).delete();    
   }
 
+  // access to editRecipe page
   const goToEditRecipe = (res) => {
     history.push("/RecipeList/EditRecipe", {recipe: res});
   }
