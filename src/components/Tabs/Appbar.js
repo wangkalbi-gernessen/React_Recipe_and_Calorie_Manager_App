@@ -41,7 +41,7 @@ const Appbar = () => {
     <Container className={classes.content}>
       <AppBar position="static">
         <Toolbar>
-          <Tabs value={value} onChange={handleChange} indicatorColor="secondary">
+          <Tabs value={value} onChange={handleChange} indicatorColor="secondary" variant="scrollable" scrollButtons="on">
             <Tab icon={<Avatar src={menu} className={classes.avatarSize}/>} component={Link} to="/RecipeList/RecipeList"/>
             <Tab icon={<Avatar src={cooking} className={classes.avatarSize}/>} component={Link} to="/"/>
             <Tab  icon={<Avatar src={calculator} className={classes.avatarSize}/>} component={Link} to="/BMR/BmrCalculator" />
