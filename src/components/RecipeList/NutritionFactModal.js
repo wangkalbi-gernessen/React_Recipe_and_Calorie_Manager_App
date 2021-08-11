@@ -16,7 +16,7 @@ const NutritionFactModal = ({open, handleClose, selectedRecipeNutrition}) => {
               <TableBody>
                 <TableRow >
                   <TableCell>Calories</TableCell>
-                  <TableCell>{selectedRecipeNutrition.calories} g</TableCell>
+                  <TableCell><Typography style={{fontWeight: "bold"}}>{selectedRecipeNutrition.calories}</Typography> g</TableCell>
                 </TableRow>
                 <TableRow>
                   <TableCell></TableCell>
