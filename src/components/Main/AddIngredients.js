@@ -25,7 +25,7 @@ const useStyles = makeStyles({
     height: "100%",
     margin: 0,
     padding: "auto",
-    opacity: "0.6",
+    opacity: "0.7",
   },
   totalNutritions: {
     width: "90%",
