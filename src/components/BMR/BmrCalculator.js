@@ -43,7 +43,7 @@ const BmrCalculator = () => {
         <Grid item xs={16} style={{paddingTop: "30px"}}>
           <Paper elevation={4}>
             <Container className={classes.accountId}>
-              <Typography>Your Account ID: <br/>{auth.currentUser.uid}</Typography>
+              <Typography>Your account ID: <br/>{auth.currentUser.uid}</Typography>
             </Container>
           </Paper>
         </Grid>
