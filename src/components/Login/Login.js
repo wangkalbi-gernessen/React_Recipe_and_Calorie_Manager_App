@@ -2,7 +2,6 @@ import { Container,  Grid,  Button,makeStyles, Paper, TextField, Typography } fr
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import vietnamese from '../../img/LoginSignUp/background-menu.jpeg';
-// import { auth, provider } from '../../firebase/initFirebase';
 import { login } from '../Auth/Auth'
 
 const useStyles = makeStyles({
