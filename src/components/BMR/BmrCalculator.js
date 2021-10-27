@@ -20,13 +20,11 @@ const useStyles = makeStyles({
 
 const BmrCalculator = () => {
   const classes = useStyles();
-
   const [age, setAge] = useState(0);
   const [gender, setGender] = useState('male');
   const [height, setHeight] = useState(0);
   const [weight, setWeight] = useState(0);
   const [result, setResult] = useState(0);
-
   const calculateBMR = (event) => {
     event.preventDefault();
     if(gender === 'male') {
