@@ -26,7 +26,6 @@ const useStyles = makeStyles({
 
 const Login = () => {
   const classes = useStyles();
-
   const [form, setForm] = useState({
     email: '',
     password: '',
