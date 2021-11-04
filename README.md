@@ -13,12 +13,12 @@ Through this web app user can register their favorite recipes and check nutritio
 
 # Description
 ## What's this project's aim? 
-- make all users know their appropriate calorie they can take in a day.
-- make all users think about ingredients used for a recipe in order to improve or maintain their health.
+- Make all users know their appropriate calorie they can take in a day.
+- Make all users think about ingredients used for a recipe in order to improve or maintain their health.
 
 ## What problems does a given application solve? 
-- know what ingredient and how much they need to take in order to cook healthy dishes.
-- update ingredients according to dishes and to the health situation anytime.
+- Know what ingredient and how much they need to take in order to cook healthy dishes.
+- Update ingredients according to dishes and to the health situation anytime.
 
 # Demo
 - Sign-up
