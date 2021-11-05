@@ -70,7 +70,7 @@ const BmrCalculator = () => {
             </Container>
           </form>
           <Typography align="center" variant="h5">BMR &#61;  
-            <AnimatedNumber component="text" value={result} style={{margin: "10px", fontSize: "25px", transition: '0.8s ease-out', transitionProperty: 'background-color, color, opacity'}} frameStyle={perc => (
+            <AnimatedNumber component="text" value={result} style={{margin: "10px", fontSize: "25px", transition: '0.9s ease-out', transitionProperty: 'background-color, color, opacity'}} frameStyle={perc => (
             { opacity : perc / 100}
             )} duration={300} />
             kcal&#47;day
