@@ -1,4 +1,4 @@
-🚧 This app is still WIP 🚧
+🚧 This app is still work in progress. 🚧
 
 # Project Title
 ## Recipe-and-Calorie-Manager
