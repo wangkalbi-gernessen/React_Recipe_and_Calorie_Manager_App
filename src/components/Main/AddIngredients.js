@@ -314,7 +314,7 @@ const MenuTotalCalorieDetail = () => {
             </Container>
           </Container>
           <Container className={classes.addBtn}>
-            <Button size="large" color="secondary" variant="outlined" style={{cursor: "pointer", marginTop: "50px"}} type="submit" onClick={registerRecipe}>Add Recipe</Button>
+            <Button size="large" color="secondary" variant="contained" style={{cursor: "pointer", marginTop: "50px"}} type="submit" onClick={registerRecipe}>Add Recipe</Button>
           </Container>
         </Paper>
       </Grid>
