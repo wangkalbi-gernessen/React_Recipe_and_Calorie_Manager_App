@@ -211,7 +211,7 @@ const MenuTotalCalorieDetail = () => {
               <TableHead>
                 <TableRow>
                   {tableHeaders.map((tableHeader) => (
-                    <TableCell style={{background: "green", borderRadius: "10px", color: "white"}}>{tableHeader.title}</TableCell>
+                    <TableCell style={{background: "green", borderRadius: "10px", color: "white", textAlign: "center"}}>{tableHeader.title}</TableCell>
                   ))}
                 </TableRow>
               </TableHead>
