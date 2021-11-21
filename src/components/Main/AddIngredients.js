@@ -6,7 +6,7 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import AnimatedNumber from "react-animated-number";
 import InfoOutlinedIcon from '@material-ui/icons/InfoOutlined';
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
   content: {
     background: "#f5f5dc",
     minWidth: "100%",
@@ -33,6 +33,10 @@ const useStyles = makeStyles({
     overflowX: "scroll",
     padding: 0
   },
+  table: {
+    borderSpacing: "10px",
+    borderCollapse: "separate"
+  },
   ingredientsList: {
     width: "90%",
     maxHeight: "50%",
@@ -47,7 +51,7 @@ const useStyles = makeStyles({
     paddingBottom: "30px",
     textAlign: "center"
   }
-});
+}));
 
 const MenuTotalCalorieDetail = () => {
   const classes = useStyles();
@@ -207,11 +211,11 @@ const MenuTotalCalorieDetail = () => {
           </Container>
           {/* table of total nutrition of all ingredients */}
           <Container className={classes.totalNutritions}>
-            <Table size="small">
+            <Table size="small" classes={{root: classes.table}}>
               <TableHead>
                 <TableRow>
                   {tableHeaders.map((tableHeader) => (
-                    <TableCell style={{background: "green", borderRadius: "10px", color: "white", textAlign: "center"}}>{tableHeader.title}</TableCell>
+                    <TableCell style={{background: "green", borderRadius: "50px", color: "white", textAlign: "center"}}>{tableHeader.title}</TableCell>
                   ))}
                 </TableRow>
               </TableHead>
