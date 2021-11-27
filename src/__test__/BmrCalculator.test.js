@@ -1,5 +1,10 @@
-const bmrCalculator = require('../components/BMR/BmrCalculator');
+// import React from 'react';
+// import { render, screen } from '@testing-library/react';
+// import BmrCalculator from '../components/BMR/BmrCalculator';
 
-test('BMR Calculator Unit Testing', () => {
-  
-});
+// describe('BmrCalculator', () => {
+//   test('BMR Calculator Unit Testing', () => {
+//     render(<BmrCalculator/>);
+//     screen.debug();
+//   });
+// });
