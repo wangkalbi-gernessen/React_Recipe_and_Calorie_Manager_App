@@ -1,7 +1,7 @@
 import { RadioGroup } from "@material-ui/core";
 import { useState } from 'react';
 import { Typography, Container, Radio,FormLabel, TextField, Button, Paper, Grid, FormControlLabel, makeStyles } from "@material-ui/core";
-import { auth } from "../../firebase/initFirebase";
+// import { auth } from "../../firebase/initFirebase";
 import AnimatedNumber from 'react-animated-number';
 
 const useStyles = makeStyles({
@@ -38,13 +38,13 @@ const BmrCalculator = () => {
 
   return(
       <Grid container spacing={0} direction="column" alignItems="center" justify="center" className={classes.content}>
-        <Grid item xs={16} style={{paddingTop: "30px"}}>
+        {/* <Grid item xs={16} style={{paddingTop: "30px"}}>
           <Paper elevation={4}>
             <Container className={classes.accountId}>
               <Typography>Your account ID: <br/>{auth.currentUser.uid}</Typography>
             </Container>
           </Paper>
-        </Grid>
+        </Grid> */}
         <Grid item xs={16} style={{padding: "25px"}}>
           <Paper elevation={4} style={{padding: "10px"}}>
             <Typography variant="h4" align="center" gutterBottom="true" style={{color: "#008b8b", fontWeight: "bold", padding: "15px"}}>Calculate BMR</Typography>
