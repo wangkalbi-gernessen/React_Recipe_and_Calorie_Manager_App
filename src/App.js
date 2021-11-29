@@ -21,7 +21,6 @@ function App() {
   if(user) {
     history.push("/");
   }
-
   return (
     user ? 
     <Container className={classes.content}>

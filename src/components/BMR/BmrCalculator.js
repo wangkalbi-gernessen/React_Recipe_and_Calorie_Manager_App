@@ -50,7 +50,7 @@ const BmrCalculator = () => {
             <Typography variant="h4" align="center" gutterBottom="true" style={{color: "#008b8b", fontWeight: "bold", padding: "15px"}}>Calculate BMR</Typography>
             <form noValidate autoComplete="off" style={{width: "100%", margin: "auto", padding: "20px", textAlign: "center"}} >
             <Container className={classes.formArea}>
-              <TextField id="age" type="number" label="Age" variant="outlined"  inputProps = {{ min: 0, max: 100 }} required value={age} onChange={(e) => setAge(e.target.value)} size="large"/>
+              <TextField id="age" type="number" label="Age" variant="outlined"  inputProps = {{ min: 0, max: 100,"data-testid": "age"}} required value={age} onChange={(e) => setAge(e.target.value)} size="large"/>
             </Container>
             <Container style={{paddingTop:"10px"}}>
               <FormLabel >Gender</FormLabel>
