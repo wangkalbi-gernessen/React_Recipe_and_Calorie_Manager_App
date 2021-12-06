@@ -55,15 +55,15 @@ const BmrCalculator = () => {
             <Container style={{paddingTop:"10px"}}>
               <FormLabel >Gender</FormLabel>
               <RadioGroup>
-                <FormControlLabel value="male" control={<Radio color="primary"/>} label="Male" labelPlacement="end" checked={gender === 'male'} onClick={() => setGender('male')}/>
-                <FormControlLabel value="female" control={<Radio color="primary"/>} label="Female" labelPlacement="end" checked={gender === 'female'} onClick={() => setGender('female')}/>
+                <FormControlLabel value="male" control={<Radio color="primary" inputProps={{"data-testid": "male"}} />} label="Male" labelPlacement="end" checked={gender === 'male'} onClick={() => setGender('male')} />
+                <FormControlLabel value="female" control={<Radio color="primary" inputProps={{"data-testid": "female"}} />} label="Female" labelPlacement="end" checked={gender === 'female'} onClick={() => setGender('female')} />
               </RadioGroup>
             </Container>
             <Container style={{paddingTop:"10px"}}>
-              <TextField id="height" type="number" label="Height" size="large" variant="outlined" inputProps={{ min: "0", step: "0.01" }}  required value={height} onChange={(e) => setHeight(e.target.value)} />
+              <TextField id="height" type="number" label="Height" size="large" variant="outlined" inputProps={{ min: "0", step: "0.01", "data-testid": "height" }}  required value={height} onChange={(e) => setHeight(e.target.value)} />
             </Container>
             <Container style={{paddingTop:"10px"}}>
-              <TextField id="weight" type="number" label="Weight" size="large" variant="outlined" inputProps={{ min: "0", step: "0.01" }} required value={weight} onChange={(e) => setWeight(e.target.value)}/>
+              <TextField id="weight" type="number" label="Weight" size="large" variant="outlined" inputProps={{ min: "0", step: "0.01", "data-testid": "weight" }} required value={weight} onChange={(e) => setWeight(e.target.value)}/>
             </Container>
             <Container style={{paddingTop:"10px"}}>
               <Button type="submit" variant="contained" size="large" color="primary" style={{cursor: "pointer"}} onClick={calculateBMR}>Calculate</Button>
