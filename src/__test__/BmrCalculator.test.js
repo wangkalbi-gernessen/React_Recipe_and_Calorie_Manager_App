@@ -10,11 +10,13 @@ describe('BmrCalculator', () => {
     const female = getByTestId("female");
     const height = getByTestId("height");
     const weight = getByTestId("weight");
+    // const kcal = getByTestId("kcal");
 
     expect(age.value).toBe("0");
     expect(male.checked).toEqual(true);
     expect(female.checked).toEqual(false);
     expect(height.value).toBe("0");
     expect(weight.value).toBe("0");
+    // expect(kcal).toContain(0);
   }); 
 });

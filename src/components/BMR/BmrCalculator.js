@@ -1,7 +1,6 @@
 import { RadioGroup } from "@material-ui/core";
 import { useState } from 'react';
 import { Typography, Container, Radio,FormLabel, TextField, Button, Paper, Grid, FormControlLabel, makeStyles } from "@material-ui/core";
-// import { auth } from "../../firebase/initFirebase";
 import AnimatedNumber from 'react-animated-number';
 
 const useStyles = makeStyles({
@@ -69,7 +68,7 @@ const BmrCalculator = () => {
               <Button type="submit" variant="contained" size="large" color="primary" style={{cursor: "pointer"}} onClick={calculateBMR}>Calculate</Button>
             </Container>
           </form>
-          <Typography align="center" variant="h5">BMR &#61;  
+          <Typography align="center" variant="h5" data-testid="kcal">BMR &#61;  
             <AnimatedNumber component="text" value={result} style={{margin: "10px", fontSize: "25px", transition: '0.9s ease-out', transitionProperty: 'background-color, color, opacity'}} frameStyle={perc => (
             { opacity : perc / 100}
             )} duration={300} />
