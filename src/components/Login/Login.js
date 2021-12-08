@@ -37,7 +37,7 @@ const Login = () => {
   };
 
   return(
-    <Grid container alignItems="center" justify="center" className={classes.content}>
+    <Grid container direction="column" alignItems="center" justify="center" className={classes.content}>
       <Typography variant="h2" align="center" gutterBottom="true" style={{color: "white", fontFamily: "cursive"}}>Welcome to Recipe and Calorie Manager!!</Typography>
       <Grid item xs={11}>
         <Paper elevation={3} style={{margin: "30px"}}>
