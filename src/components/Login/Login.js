@@ -4,9 +4,12 @@ import { Link } from "react-router-dom";
 import vietnamese from '../../img/LoginSignUp/background-menu.jpeg';
 import { login } from '../Auth/Auth'
 
-const useStyles = makeStyles({
+const useStyles =makeStyles((theme) => ({
+  root: {
+    flexGlow: 1,
+  },
   content: {
-    minWidth: "100%",
+    minWidth: "100vw",
     minHeight: "100vh",  
     margin: 0,
     padding: 0,
@@ -14,15 +17,7 @@ const useStyles = makeStyles({
     backgroundRepeat: "no-repeat",
     backgroundSize: "cover"
   },
-  formArea: {
-    background: "white",
-    width: "100%",
-    height: "100%",
-    margin: 0,
-    padding: "auto",
-    opacity: "0.9",
-  }
-});
+}));
 
 const Login = () => {
   const classes = useStyles();
@@ -42,13 +37,13 @@ const Login = () => {
   };
 
   return(
-    <Grid container spacing={0}direction="column" alignItems="center" justify="center" className={classes.content}>
+    <Grid container alignItems="center" justify="center" className={classes.content}>
       <Typography variant="h2" align="center" gutterBottom="true" style={{color: "white", fontFamily: "cursive"}}>Welcome to Recipe and Calorie Manager!!</Typography>
       <Grid item xs={11}>
         <Paper elevation={3} style={{margin: "30px"}}>
           <Typography variant="h4" align="center" gutterBottom="true" style={{fontFamily: "monospace", padding: "15px"}}>Log in here</Typography>
           <form noValidate autoComplete="off" style={{width: "100%", margin: "auto", padding: "10px", textAlign: "center"}} onSubmit={handleSubmit}>
-            <Container className={classes.formArea}>
+            <Container>
               {errorMessage !== null && (
                 <Typography variant="h6" color="secondary" style={{marginBottom:"15px"}}>{errorMessage}</Typography>
               )}
