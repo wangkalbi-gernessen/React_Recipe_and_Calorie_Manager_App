@@ -1,5 +1,5 @@
 import { Container, makeStyles } from '@material-ui/core';
-import './App.css';
+import './App.scss';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { auth } from './firebase/initFirebase';
 import Application from './components/Application/Application';
