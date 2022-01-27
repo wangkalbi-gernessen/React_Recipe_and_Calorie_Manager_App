@@ -1,7 +1,10 @@
+$corePadding: 0;
+$coreMargin: 0;
+
 html,
 body {
-  padding: 0 !important;
-  margin: 0 !important;
+  padding: $corePadding;
+  margin: $coreMargin;
   min-height: 100vh;
   min-width: 100vw;
   background-color: white;
