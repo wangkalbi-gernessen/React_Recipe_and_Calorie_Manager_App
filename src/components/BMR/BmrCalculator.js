@@ -1,24 +1,10 @@
 import { RadioGroup } from "@material-ui/core";
 import { useState } from 'react';
-import { Typography, Container, Radio,FormLabel, TextField, Button, Paper, Grid, FormControlLabel, makeStyles } from "@material-ui/core";
+import { Typography, Container, Radio,FormLabel, TextField, Button, Paper, Grid, FormControlLabel } from "@material-ui/core";
 import AnimatedNumber from 'react-animated-number';
-
-const useStyles = makeStyles({
-  content: {
-    background: "#DCF9A3",
-    width: "100%",
-    minHeight: "100vh",
-    margin: 0,
-    padding: 0
-  },
-  accountId: {
-    margin: 0,  
-    padding: "5px"
-  },
-});
+import '../../styles/bmrCalculator.scss';
 
 const BmrCalculator = () => {
-  const classes = useStyles();
   const [age, setAge] = useState(0);
   const [gender, setGender] = useState('male');
   const [height, setHeight] = useState(0);
@@ -36,12 +22,12 @@ const BmrCalculator = () => {
   }
 
   return(
-      <Grid container spacing={0} direction="column" alignItems="center" justify="center" className={classes.content}>
-        <Grid item xs={16} style={{padding: "25px"}}>
+      <Grid container spacing={0} direction="column" alignItems="center" justify="center" class="content">
+        <Grid item xs={12} sm={12} md={12} xl={12} lg={12} style={{padding: "25px"}}>
           <Paper elevation={4} style={{padding: "10px"}}>
             <Typography variant="h4" align="center" gutterBottom="true" style={{color: "#008b8b", fontWeight: "bold", padding: "15px"}}>Calculate BMR</Typography>
             <form noValidate autoComplete="off" style={{width: "100%", margin: "auto", padding: "20px", textAlign: "center"}} >
-            <Container className={classes.formArea}>
+            <Container class="formArea">
               <TextField id="age" type="number" label="Age" variant="outlined"  inputProps = {{ min: 0, max: 100,"data-testid": "age"}} required value={age} onChange={(e) => setAge(e.target.value)} size="large"/>
             </Container>
             <Container style={{paddingTop:"10px"}}>
