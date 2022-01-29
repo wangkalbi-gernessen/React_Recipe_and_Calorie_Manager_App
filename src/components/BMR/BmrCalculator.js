@@ -1,10 +1,20 @@
-import { RadioGroup } from "@material-ui/core";
+import { makeStyles, RadioGroup } from "@material-ui/core";
 import { useState } from 'react';
 import { Typography, Container, Radio,FormLabel, TextField, Button, Paper, Grid, FormControlLabel } from "@material-ui/core";
 import AnimatedNumber from 'react-animated-number';
 import '../../styles/bmrCalculator.scss';
 
+const useStyle = makeStyles(theme =>({
+  gridItem: {
+    width: "90%",
+    height: "90%",
+    margin: "0 auto",
+    padding: theme.spacing(8),
+  }
+}));
+
 const BmrCalculator = () => {
+  const classes = useStyle();
   const [age, setAge] = useState(0);
   const [gender, setGender] = useState('male');
   const [height, setHeight] = useState(0);
@@ -22,10 +32,11 @@ const BmrCalculator = () => {
   }
 
   return(
-      <Grid container spacing={0} direction="column" alignItems="center" justify="center" class="content">
-        <Grid item xs={12} sm={12} md={12} xl={12} lg={12} style={{padding: "25px"}}>
+      <Grid container class="content">
+        <Grid item xs={12} sm={12} md={12} xl={12} lg={12} className={classes.gridItem} >
           <Paper elevation={4} style={{padding: "10px"}}>
-            <Typography variant="h4" align="center" gutterBottom="true" style={{color: "#008b8b", fontWeight: "bold", padding: "15px"}}>Calculate BMR</Typography>
+            <Typography variant="h4" align="center" gutterBottom="true" 
+            style={{color: "#008b8b", fontWeight: "bold", padding: "15px"}}>Calculate BMR</Typography>
             <form noValidate autoComplete="off" style={{width: "100%", margin: "auto", padding: "20px", textAlign: "center"}} >
             <Container class="formArea">
               <TextField id="age" type="number" label="Age" variant="outlined"  inputProps = {{ min: 0, max: 100,"data-testid": "age"}} required value={age} onChange={(e) => setAge(e.target.value)} size="large"/>
