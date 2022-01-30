@@ -8,7 +8,7 @@ const useStyle = makeStyles({
   content: {
     margin: 0,
     padding: 0,
-    width: "100%",
+    minWidth: "100vw"
   }
 });
 

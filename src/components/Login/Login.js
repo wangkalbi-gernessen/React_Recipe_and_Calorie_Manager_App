@@ -5,9 +5,6 @@ import vietnamese from '../../img/LoginSignUp/background-menu.jpeg';
 import { login } from '../Auth/Auth'
 
 const useStyles =makeStyles((theme) => ({
-  // root: {
-  //   flexGlow: 1,
-  // },
   content: {
     minWidth: "100vw",
     minHeight: "100vh",  
@@ -17,6 +14,14 @@ const useStyles =makeStyles((theme) => ({
     backgroundRepeat: "no-repeat",
     backgroundSize: "cover"
   },
+  item: {
+    width: "80%",
+    margin: "0 auto"
+  }, 
+  title: {
+    color: "white", 
+    fontFamily: "cursive"
+  }
 }));
 
 const Login = () => {
@@ -37,11 +42,9 @@ const Login = () => {
   };
 
   return(
-    <Grid container direction="column" alignItems="center" justify="center" className={classes.content}>
-      <Grid item xs={12} sm={12} md={12} xl={12} lg={12}>
-        <Typography variant="h2" align="center" gutterBottom="true" style={{color: "white", fontFamily: "cursive"}}>Welcome to Recipe and Calorie Manager!!</Typography>
-      </Grid>
-      <Grid item xs={12} sm={12} md={12} xl={12} lg={12}>
+    <Grid container className={classes.content} direction="column" alignItems="center" justify="center" spacing={5}>
+      <Grid item xs={12} sm={12} md={12} xl={12} lg={12} className={classes.item}>
+      <Typography variant="h2" align="center"  className={classes.title}>Welcome to Recipe and Calorie Manager!!</Typography>
         <Paper elevation={3} style={{margin: "30px"}}>
           <Typography variant="h4" align="center" gutterBottom="true" style={{fontFamily: "monospace", padding: "15px"}}>Log in here</Typography>
           <Grid container>
