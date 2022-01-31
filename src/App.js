@@ -1,4 +1,4 @@
-import { Container, makeStyles } from '@material-ui/core';
+import { Container, Grid, makeStyles } from '@material-ui/core';
 import './App.scss';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { auth } from './firebase/initFirebase';
@@ -10,7 +10,8 @@ const useStyle = makeStyles({
   content: {
     margin: 0,
     padding: 0,
-    minWidth: "100vw"
+    minWidth: "100vw",
+    minHeight: "100vh"
   }
 });
 
@@ -23,13 +24,17 @@ function App() {
   }
   return (
     user ? 
-    <Container className={classes.content}>
-      <RouterAfterLogin/>
-    </Container>
+    <Grid container>
+      <Grid item xs={12} sm={12} md={12} xl={12} lg={12} className={classes.content}>
+        <RouterAfterLogin/>
+      </Grid>
+    </Grid>
     : 
-    <Container className={classes.content}>
-      <Application/>
-    </Container>
+    <Grid container>
+      <Grid item xs={12} sm={12} md={12} xl={12} lg={12} className={classes.content}>
+        <Application/>
+      </Grid>
+    </Grid>
   );
 }
 
