@@ -32,11 +32,11 @@ const BmrCalculator = () => {
   }
 
   return(
-      <Grid container class="content">
+      <Grid container className="content">
         <Grid item xs={12} sm={12} md={12} xl={12} lg={12} className={classes.gridItem} >
-          <Paper elevation={4}  style={{padding: "10px"}}>
-            <Typography variant="h4" align="center" gutterBottom="true" 
-            style={{color: "#008b8b", fontWeight: "bold", padding: "15px"}}>Calculate BMR</Typography>
+          <Paper elevation={4} className="paper">
+            <Typography variant="h4" align="center" gutterBottom="true" className="title"
+            >Calculate BMR</Typography>
             <form noValidate autoComplete="off" style={{width: "100%", margin: "auto", padding: "20px", textAlign: "center"}} >
             <Grid container>
               <Grid item xs={12} sm={12} md={12} xl={12} lg={12}>

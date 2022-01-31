@@ -1,9 +1,19 @@
+@import "./variables.scss";
+@import "./mixins.scss";
+
 .content {
-  background: #DCF9A3;
-  min-width: 100vw;
-  min-height: 100vh;
-  margin: 0;
-  padding: 0;
+  background: $bmr-background-color;
+  @include content-base;
+}
+
+.paper {
+  padding: 10px;
+}
+
+.title {
+  color: $title-color;
+  font-weight: 900;
+  padding: 15px;
 }
 
 .accountId {

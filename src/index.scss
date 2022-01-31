@@ -1,12 +1,8 @@
-$corePadding: 0;
-$coreMargin: 0;
+@import "./styles/mixins.scss";
 
 html,
 body {
-  padding: $corePadding;
-  margin: $coreMargin;
-  min-height: 100vh;
-  min-width: 100vw;
+  @include content-base;
   background-color: white;
 }
 
