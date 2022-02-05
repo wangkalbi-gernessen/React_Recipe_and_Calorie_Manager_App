@@ -63,6 +63,7 @@ Through this web app user can register their favorite recipes and check nutritio
 
 # Technologies Used
 - JavaScript(language)
+- Sass(Extensive stylesheet to CSS)
 - React.js(JavaScript library)
 - Visual Studio Code(Code Editor)
 - Firebase (Auth, Firestore, Storage)
