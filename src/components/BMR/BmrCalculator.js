@@ -60,12 +60,12 @@ const BmrCalculator = () => {
                 <TextField id="weight" type="number" label="Weight" size="large" variant="outlined" inputProps={{ min: "0", step: "0.01", "data-testid": "weight" }} required value={weight} onChange={(e) => setWeight(e.target.value)}/>
               </Grid>
               <Grid item xs={12} sm={12} md={12} xl={12} lg={12} style={{paddingTop:"10px"}}>
-                <Button type="submit" variant="contained" size="large" color="primary" style={{cursor: "pointer"}} onClick={calculateBMR}>Calculate</Button>
+                <Button type="submit" variant="contained" size="large" color="primary" className="calculateBtn" onClick={calculateBMR}>Calculate</Button>
               </Grid>
             </Grid>
           </form>
           <Typography align="center" variant="h5" data-testid="kcal">BMR &#61;  
-            <AnimatedNumber component="text" value={result} style={{margin: "10px", fontSize: "25px", transition: '0.9s ease-out', transitionProperty: 'background-color, color, opacity'}} frameStyle={perc => (
+            <AnimatedNumber component="text" value={result} className="animatedNumber" frameStyle={perc => (
             { opacity : perc / 100}
             )} duration={300} />
             kcal&#47;day

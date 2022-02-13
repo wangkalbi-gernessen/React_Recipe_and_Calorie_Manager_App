@@ -20,3 +20,15 @@
   margin: 0; 
   padding: 5px;
 }
+
+.calculateBtn {
+  cursor: pointer;
+}
+
+.animatedNumber {
+  margin: 10px; 
+  font-size: 25px; 
+  font-weight: bold;
+  transition: 0.9s ease-out; 
+  transition-property: background-color, color, opacity;
+}
