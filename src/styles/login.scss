@@ -11,4 +11,45 @@
   &__title {
     color: white;
   }
+  &__paper {
+    margin: 30px;
+  }
+  &__here {
+    padding: 15px;
+  }
+  &__form {
+    padding: 10px; 
+    text-align: $text-align-center;
+    &_errorMessage {
+      @include errorMessage-margin(15px);
+    }
+    &_gridItem {
+      padding-top:10px;
+    }
+    &_loginBtn {
+      cursor: $cursor-pointer;
+    }
+  }
+  &__noAccount {
+    text-align: $text-align-center;
+    margin-top: 10px;
+    &_text {
+      font-weight: bold;
+    }
+    &_btnContainer {
+      @extend .login__item;
+      @extend .login__form;
+    }
+    &_btnLink {
+      text-decoration: none;
+      color: white;
+    }
+  }
+  &__passwordReset {
+    @extend .login__noAccount_btnContainer;
+    &_link {
+      @extend .login__noAccount_btnLink;
+    }
+  }
+
 }
