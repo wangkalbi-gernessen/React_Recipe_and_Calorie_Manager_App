@@ -1,31 +1,10 @@
-import { Container,  Grid,  Button,makeStyles, Paper, TextField, Typography } from "@material-ui/core";
+import { Container,  Grid,  Button, Paper, TextField, Typography } from "@material-ui/core";
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import vietnamese from '../../img/LoginSignUp/background-menu.jpeg';
-import { login } from '../Auth/Auth'
-
-const useStyles =makeStyles((theme) => ({
-  content: {
-    minWidth: "100vw",
-    minHeight: "100vh",  
-    margin: 0,
-    padding: 0,
-    backgroundImage: `url(${vietnamese})`,
-    backgroundRepeat: "no-repeat",
-    backgroundSize: "cover"
-  },
-  item: {
-    width: "100%",
-    margin: "auto"
-  }, 
-  title: {
-    color: "white", 
-    fontFamily: "cursive"
-  }
-}));
+import { login } from '../Auth/Auth';
+import '../../styles/login.scss';
 
 const Login = () => {
-  const classes = useStyles();
   const [form, setForm] = useState({
     email: '',
     password: '',
@@ -42,13 +21,13 @@ const Login = () => {
   };
 
   return(
-    <Grid container className={classes.content} direction="column" alignItems="center" justify="center">
-      <Grid item xs={10} sm={10} md={10} xl={10} lg={10} className={classes.item}>
-      <Typography variant="h2" align="center"  className={classes.title}>Welcome to Recipe and Calorie Manager!!</Typography>
+    <Grid container className="login" direction="column" alignItems="center" justify="center">
+      <Grid item xs={10} sm={10} md={10} xl={10} lg={10} className="login__item">
+      <Typography variant="h2" align="center"  className="login__title" style={{fontFamily: "cursive"}}>Welcome to Recipe and Calorie Manager!!</Typography>
         <Paper elevation={3} style={{margin: "30px"}}>
           <Typography variant="h4" align="center" gutterBottom="true" style={{fontFamily: "monospace", padding: "15px"}}>Log in here</Typography>
           <form noValidate autoComplete="off" style={{padding: "10px", textAlign: "center"}} onSubmit={handleSubmit}>
-          <Grid container>
+            <Grid container>
               <Grid item xs={12} sm={12} md={12} xl={12} lg={12}>
                 {errorMessage !== null && (
                   <Typography variant="h6" color="secondary" style={{marginBottom:"15px"}}>{errorMessage}</Typography>

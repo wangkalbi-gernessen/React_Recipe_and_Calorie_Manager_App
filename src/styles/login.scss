@@ -1,8 +1,14 @@
-// @import "./mixins.scss";
+@import "./variables.scss";
+@import "./mixins.scss";
 
-// .content {
-//   @include content-base;
-//   background-image: url('../img/LoginSignUp/background-menu.jpeg');
-//   background-repeat: no-repeat;
-//   background-size: cover;
-// }
+.login {
+  @include content-base;
+  @include background-image-settings;
+  &__item {
+    width: 100%;
+    margin: auto;
+  }
+  &__title {
+    color: white;
+  }
+}
