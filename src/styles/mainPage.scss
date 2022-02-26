@@ -1,0 +1,37 @@
+.main {
+  background: #f5f5dc;
+  min-width: 100%;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+  &__title {
+    color:#008b8b;
+    padding-top: 30px;
+  }
+  &__emailAddress {
+    font-size: 15px; 
+    padding-left: 10px;
+    padding-top: 30px;
+    font-family: cursive;
+  }
+  &__form {
+    width: 100%;
+    margin: 30px auto;
+    padding: 0;
+    text-align: center;
+    &_textField {
+      background: white; 
+      margin: 40px 20px;
+    }
+    &_radio {
+      width: 100%;
+    }
+    &_img {
+      text-align: center;
+    }
+    &_button {
+      cursor: pointer;
+      margin-top: 50px;
+    }
+  }
+}
