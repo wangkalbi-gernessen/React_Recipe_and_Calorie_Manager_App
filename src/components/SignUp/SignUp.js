@@ -2,30 +2,9 @@ import { Paper, TextField, Button, Container,  Grid,  makeStyles, Typography } f
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { register } from '../Auth/Auth';
-import japanese from '../../img/LoginSignUp/japanese-cuisine.jpeg';
-
-const useStyles = makeStyles({
-  content: {
-    width: "100%",
-    minHeight: "100vh",
-    margin: 0,
-    padding: 0,
-    backgroundImage: `url(${japanese})`,
-    backgroundRepeat: "no-repeat",
-    backgroundSize: "cover"
-  },
-  formArea: {
-    background: "white",
-    width: "100%",
-    height: "100%",
-    margin: 0,
-    padding: "auto",
-    opacity: "0.9",
-  }
-});
+import '../../styles/signUp.scss';
 
 const SignUp = () => {
-  const classes = useStyles();
   const [form, setForm] = useState({
     email: '',
     password: '',
@@ -47,28 +26,28 @@ const SignUp = () => {
   // }  
 
   return(
-    <Grid container spacing={0}direction="column" alignItems="center" justify="center" className={classes.content}>
+    <Grid container spacing={0}direction="column" alignItems="center" justify="center" className="signup">
       <Grid item xs={11}>
         <Paper elevation={3}>
-          <Typography variant="h4" align="center" gutterBottom="true" style={{color: "black", fontWeight: "bold", padding: "15px"}}>Register your account</Typography>
-          <form noValidate autoComplete="off" style={{width: "100%", margin: "auto", padding: "10px", textAlign: "center"}} onSubmit={handleSubmit}>
-            <Container className={classes.formArea}>
+          <Typography variant="h4" align="center" gutterBottom="true" className="signup__title" >Register your account</Typography>
+          <form noValidate autoComplete="off" className="signup__form" onSubmit={handleSubmit}>
+            <Container className="signup__form_container">
             {errorMessage !== null && (
-                <Typography variant="h6" color="secondary" style={{marginBottom:"15px"}}>{errorMessage}</Typography>
+                <Typography variant="h6" color="secondary" className="signup__form_errorMessage">{errorMessage}</Typography>
               )}
               <TextField id="email" type="email" label="Email Address" variant="outlined" onChange={(e) => setForm({...form, email: e.target.value})} required />
             </Container>
-            <Container style={{paddingTop:"10px"}}>
+            <Container className="signup__form_password">
               <TextField id="password" type="password" label="Password" variant="outlined" onChange={(e) => setForm({...form, password: e.target.value})} required />
             </Container>
-            <Container style={{paddingTop:"10px"}}>
-              <Button type="submit" variant="contained" size="medium" color="primary" style={{cursor: "pointer"}} >Register</Button>
+            <Container className="signup__form_signupBtnContainer">
+              <Button type="submit" variant="contained" size="medium" color="primary" className="signup__form_signupBtn">Register</Button>
             </Container>
           </form>
-          <Container style={{textAlign:"center", marginTop: "10px"}}>
-            <Typography align="center" style={{fontWeight: "bold"}}>Already have an account?</Typography>
-            <Container style={{width: "100%", margin: "auto", textAlign: "center", paddingBottom: "10px"}}>
-              <Link to="/" style={{textDecoration: "none", color: "white"}}>
+          <Container className="signup__buttons" >
+            <Typography align="center" className="signup__buttons_account">Already have an account?</Typography>
+            <Container className="signup__buttons_signBtnContainer">
+              <Link to="/" className="signup__buttons_signBtnLink">
                 <Button variant="contained" size="medium" color="primary">Sign in here</Button>
               </Link>
             </Container>
