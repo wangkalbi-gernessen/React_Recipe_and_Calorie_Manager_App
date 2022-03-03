@@ -4,7 +4,7 @@
 .signup {
   @include content-base;
   @include background-image-settings;
-  background-image: url('../img/LoginSignUp/japanese-cuisine.jpeg');
+  background-image: url('../img/LoginSignUp/japanese-cuisine.png');
   &__title {
     color: black; 
     font-weight: bold; 
