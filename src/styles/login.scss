@@ -4,7 +4,7 @@
 .login {
   @include content-base;
   @include background-image-settings;
-  background-image: url('../img/LoginSignUp/background-menu.jpeg');
+  background-image: url('../img/LoginSignUp/background-menu.png');
   &__item {
     width: 100%;
     margin: auto;
