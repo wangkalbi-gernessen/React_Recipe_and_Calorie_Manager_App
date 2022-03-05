@@ -9,8 +9,20 @@ import { useState } from "react";
 import { Switch, Route, useHistory } from "react-router-dom";
 import AddIngredients from './AddIngredients';
 import '../../styles/mainPage.scss';
+import { makeStyles } from "@material-ui/styles";
+
+const useStyles = makeStyles({
+  form: {
+    width: "100%",
+    margin: "30px auto",
+    padding: 0,
+    textAlign: "center",
+  },
+});
+
 
 const Main = () => {
+  const classes = useStyles();
   const [dishName, setDishName] = useState('');
   const [meal, setMeal] = useState('breakfast');
   const history = useHistory();
@@ -18,12 +30,13 @@ const Main = () => {
   const addRecipe = (event) => {
     history.push("/Main/AddIngredients", {dishName: dishName, meal: meal});
   }
+
   return (
     <Container className="main">
       <Typography align="center" variant="h4" className="main__title">Add New Recipe</Typography>
-      <Typography className="main__emailAddress" >Welcome, {auth.currentUser.email}</Typography>
-      <FormControl noValidate   autoComplete="off" className="main__form">
-        <Container >
+      <Typography style={{fontFamily: "cursive"}} className="main__emailAddress" >Welcome, {auth.currentUser.email}</Typography>
+      <FormControl noValidate   autoComplete="off" className={classes.form}>
+        <Container>
           <TextField  placeholder="Chicken Adobo" variant="outlined" className="main__form_textField" size="large" value={dishName} onChange={(e) => setDishName(e.target.value)}/>
           <Grid container spacing={12} justify="space-evenly" alignItems="center" className="main__form_radio">
             <RadioGroup row aria-label="position" name="position" defaultValue="Breakfast" >
